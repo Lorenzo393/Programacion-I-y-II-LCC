@@ -1,0 +1,76 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname Practica0) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;Practica 0
+; |x| es el cambio que hago para solucionar el error
+"Expresiones Aritméticas"
+"Ej 1"
+(-(* 12 5)(* 7 6))
+(/ (-(* 3 5)(* 7 4)) (+ 14 (/ 3 1)))
+(+ (cos 0.8) 0.2 (* (sin 0.5) 3.5))
+
+"Ej 2"
+(/ 1 (sin (sqrt 3)))(/ 1 (sin (sqrt 3)))
+(* (sqrt 2) (sin pi))
+(+ 3 (sqrt (- 4)))
+(* (sqrt 5) (sqrt (/ 3 (cos pi))))
+; (/ (sqrt 5) (sin (* 3 0))) error: division by zero ->> (/ (sqrt 5) (sin (* 3 |1|)))
+(/ (sqrt 5) (sin (* 3 1)))
+;(/ (+ 3) (* 2 4)) error expects at least 2 arguments, but found only 1 ->> (/ |3| (* 2 4))
+(/ 3 (* 2 4))
+(* 1 2 3 4 5 6 7 8)
+(/ 120 2 3 2 2 5)
+
+
+"Strings"
+"Ej 1"
+(string-append "Hola" " mundo")
+(string-append "Pro" "gra" "ma.")
+(number->string 1357)
+;(string-append "La respuesta es " (+ 21 21)) error: expects a string ->> (string-append "La respuesta es " (|number->string| (+ 21 21)))
+(string-append "La respuesta es " (number->string (+ 21 21)))
+(* (string-length "Hola") (string-length "Chau"))
+
+
+"Valores de verdad"
+"Ej 1"
+(not #t)
+(or #t #f)
+(and #t #f)
+(and #t (or #f (not #f)) (not #t))
+(not (= 2 (* 1 3)))
+(or (= 2 (* 1 3)) (< 4 (+ 3 2)))
+
+"Ej 2"
+(and (> pi 3) (= (+ 2 2) 5))
+
+"Ej 3"
+(> (cos 0) 0)
+(= 14 (string-length "Hola, mundo"))
+(and (< 3 pi) (> 4 pi))
+(= (sqr 5) (sqrt 625))
+(not (string=? "a" (string-ith "Ada Lovelace" 3)))
+
+
+"Imagenes"
+"Ej 1"
+(circle 10 "solid" "red")
+(rectangle 10 20 "solid" "blue")
+(rectangle 20 12 "outline" "magenta")
+(overlay (rectangle 20 20 "solid" "blue") (circle 7 "solid" "green"))
+(empty-scene 100 100)
+(place-image (circle 10 "solid" "blue") 40 80 (empty-scene 100 100))
+(+ (image-width (circle 10 "solid" "red")) (image-height (rectangle 10 20 "solid" "blue")))
+
+
+"Funciones y Constantes"
+
+;exploramos
+(string-ith "obama" 1)
+(substring "obama" 0 4)
+
+
+;(define clama (place-image (circle 20 "solid" "red") 150 150 (place-image obam 150 150 (circle 150 "solid" "blue")) ))
+
+;(rotate 30 clama)
+;(define (rotama x (lambda (action1)) (rotama (+ 30 x) (action1))))
