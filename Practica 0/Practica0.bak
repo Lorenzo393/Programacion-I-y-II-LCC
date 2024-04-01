@@ -1,6 +1,7 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname Practica0) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(require 2htdp/image)
 ;Practica 0
 ; |x| es el cambio que hago para solucionar el error
 "Expresiones Aritméticas"
@@ -64,13 +65,117 @@
 
 
 "Funciones y Constantes"
+(define P "Neptuno")
+(define 1TRES 3)
+(define CINCO (+ 1 (* 2 2)))
+(define VERDADERO #true)
+(define PUNTOROJO (circle 3 "solid" "red"))
 
-;exploramos
-(string-ith "obama" 1)
-(substring "obama" 0 4)
+"Ej 1"
+(define (sucesor x) (+ x 1))
+(define (doble x) (* x 2))
+(define (triple x) (* x 3))
+(define (x-menor-2y? x y) (< x (doble y)))
+(define (cuad-azul x) (square x "solid" "blue"))
+
+(cuad-azul (doble 10))
+(and (x-menor-2y? 2 3) (x-menor-2y? 3 4))
+(= (sucesor 1) (doble 1))
+
+"Ej 2"
+;Resuelvo haciendo el modulo de un vector en el plano (x,y)
+(define (dist-origen x y) (sqrt (+ (sqr x) (sqr y))))
+(dist-origen 4 3)
+
+"Ej 3"
+;Resuelvo haciendo vector por dos puntos y llevandolos al origen
+(define (dist-puntos a b x y) (dist-origen (- x a) (- y b)))
+(dist-puntos 1 2 4 3)
+
+"Ej 4"
+(define (vol-cubo x) (triple x))
+(vol-cubo 5)
+
+"Ej 5"
+(define (area-cubo x) (doble x))
+(area-cubo 5)
+
+"Ej 6"
+(define (metro-pie x) (* x 3.28084))
+(metro-pie 1.8288)
+
+"Ej 7"
+(define (cel-far x) (+ (* x (/ 9 5)) 32))
+(cel-far 0)
+
+"Ej 8"
+(define (posible? x y z) (and (< x (+ y z)) (< y (+ x z)) (< z (+ x y))))
+(posible? 1 1 1)
+(posible? 1 2 5)
+
+"Ej 9"
+; Una terna pitagórica es un conjunto ordenado de tres números enteros positivos a, b, c, y son solución de la ecuación a^2 + b^2 = ^c^2
+(define (pitagorica? a b c) (= (+ (sqr a) (sqr b)) (sqr c)))
+(pitagorica? 4 3 5)
+(pitagorica? 2 1 1)
+
+"Ej 10"
+(define (suma-log x y) (+ (string-length x) (string-length y)))
+(suma-log "hola" " mundo")
+
+"Ej 11"
+(define (comienzaA? x) (string=? "A" (string-ith x 0)))
+(comienzaA? "Alga")
+(comienzaA? "alga")
+
+"Ej 12"
+(define (poner- xs i) (string-append (substring xs 0 i) "-" (substring xs i (string-length xs))))
+(poner- "HolaMundo" 4)
 
 
-;(define clama (place-image (circle 20 "solid" "red") 150 150 (place-image obam 150 150 (circle 150 "solid" "blue")) ))
+(define MARCOBANDERA (empty-scene 90 60))
 
-;(rotate 30 clama)
-;(define (rotama x (lambda (action1)) (rotama (+ 30 x) (action1))))
+;Ej a
+(define PERU (place-image (rectangle 30 60 "solid" "red")
+                          15 30
+                          (place-image (rectangle 30 60 "solid" "red")
+                                       75 30
+                                       MARCOBANDERA)))
+;Ej b
+(define ITALIA (place-image (rectangle 30 60 "solid" "green")
+                          15 30
+                          (place-image (rectangle 30 60 "solid" "red")
+                                       75 30
+                                       MARCOBANDERA)))
+;Ej c
+(define (rayadav c1 c2)
+  (place-image (rectangle 30 60 "solid" c1)
+                          15 30
+                          (place-image (rectangle 30 60 "solid" c2)
+                                       75 30
+                                       MARCOBANDERA)))
+;Ej d
+(define ALEMANIA (place-image (rectangle 90 20 "solid" "black")
+               45 10
+               (place-image (rectangle 90 20 "solid" "red")
+               45 30
+               (place-image (rectangle 90 20 "solid" "yellow")
+               45 50
+               MARCOBANDERA))))
+;Ej e
+(define HOLANDA (place-image (rectangle 90 20 "solid" "red")
+               45 10
+               (place-image (rectangle 90 20 "solid" "white")
+               45 30
+               (place-image (rectangle 90 20 "solid" "blue")
+               45 50
+               MARCOBANDERA))))
+;Ej f
+(define (rayadah c1 c2 c3)
+  (place-image (rectangle 90 20 "solid" c1)
+               45 10
+               (place-image (rectangle 90 20 "solid" c2)
+               45 30
+               (place-image (rectangle 90 20 "solid" c3)
+               45 50
+               MARCOBANDERA))))
