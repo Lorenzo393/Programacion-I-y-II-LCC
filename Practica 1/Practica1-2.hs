@@ -1,3 +1,52 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname Practica1-2) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(require 2htdp/image)
+(require racket/base)
+;Practica 1 parte 2
+
+;CALCULANDO CON EXPRESIONES COND
+(define (sgn2 x) (cond [(< x 0) -1]
+                       [(= x 0) 0]
+                       [(> x 0) 1]))
+;Ej 1
+(sgn2 (- 2 3))
+(sgn2 6)
+;Ej 2
+;2
+(define (AAC x)
+  (case [(< (image-width x) (image-height x)) "Angosta"]
+        [(> (image-width x) (image-height x)) "Ancha"]
+        [else "Cuadrada"]))
+;4
+(define (ang x y z)
+  (case [(>= (+ x y z)) "No es triangulo"]
+        [(= x y z) "Equilatero"]
+        [(= x y) "Isosceles"]
+        [(= x z) "Isosceles"]
+        [(= y z) "Isosceles"]
+        [else "Escaleno"]))
+;6
+(define PC 60)
+(define PL 8)
+
+(define (precio c l)
+  (case [(>= (+ c l) 10) (+ (* l PL 0.82) (* c PC 0.82))]
+        [(and (>= l 5) (>= c 4)) (+ (* l PL 0.85) (* c PC 0.90))]
+        [(>= l 5) (+ (* l PL 0.85) (* c PC))]
+        [(>= c 4) (+ (* l PL) (* c PC 0.90))]
+        [else (+ (* l PL) (* c PC))]))
+;7
+;(define (pitagorica? a b c)
+;  (case [(= (+ (sqr a) (sqr b)) (sqr c)) #true]))
+;Ej 3
+;(pitagorica? 3 5 6)
+;(pitagorica? 3 5 4)
+;Ej 4
+(define (AAC-ultra x)
+  (case [(< (* 2 (image-width x))) (image-height x) "Muy Angosta"]
+        [(> (image-width x) (* 2 (image-height x))) "Muy ancha"]
+        [(< (image-width x) (image-height x)) "Angosta"]
+        [(> (image-width x) (image-height x)) "Ancha"]
+        [else "Cuadrada"]))
+;Ej 5

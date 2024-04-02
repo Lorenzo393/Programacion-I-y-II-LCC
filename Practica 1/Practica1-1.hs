@@ -32,6 +32,10 @@
 ;Ej 7
 (define (pitagorica? a b c)
   (if (= (+ (sqr a) (sqr b)) (sqr c)) #true #false))
+
+(define (pitagoricax? a b c)
+  (case [(= (+ (sqr a) (sqr b)) (sqr c)) #true]
+        [else #false]))
 ;Ej 8
 (define (pitagoricastr? a b c)
   (if (= (+ (sqr a) (sqr b)) (sqr c)) (string-append "Los numeros " (number->string a)
@@ -40,6 +44,7 @@
       ", "(number->string b) " y " (number->string c) " no forman una terna pitagorica")))
 ;Ej 9
 ; Tengo que saber como comprobar si un numero es entero
+
 
 ;BANDERAS
 (define MARCOBANDERA (empty-scene 90 60))
