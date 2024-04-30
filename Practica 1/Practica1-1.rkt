@@ -3,17 +3,18 @@
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname Practica1-1) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require 2htdp/image)
 (require racket/base)
+(require racket/case)
 ;Practica 1 parte 1
 
 ;REPASO DE FUNCIONES
 ;Ej 1 y 2
 (define (AAC x)
-  (case [(< (image-width x) (image-height x)) "Angosta"]
+  (cond [(< (image-width x) (image-height x)) "Angosta"]
         [(> (image-width x) (image-height x)) "Ancha"]
         [else "Cuadrada"]))
 ;Ej 3 y 4
 (define (ang x y z)
-  (case [(>= (+ x y z)) "No es triangulo"]
+  (cond [(not (= (+ x y z) 180)) "No es triangulo"]
         [(= x y z) "Equilatero"]
         [(= x y) "Isosceles"]
         [(= x z) "Isosceles"]
@@ -24,7 +25,7 @@
 (define PL 8)
 
 (define (precio c l)
-  (case [(>= (+ c l) 10) (+ (* l PL 0.82) (* c PC 0.82))]
+  (cond [(>= (+ c l) 10) (+ (* l PL 0.82) (* c PC 0.82))]
         [(and (>= l 5) (>= c 4)) (+ (* l PL 0.85) (* c PC 0.90))]
         [(>= l 5) (+ (* l PL 0.85) (* c PC))]
         [(>= c 4) (+ (* l PL) (* c PC 0.90))]
@@ -34,7 +35,7 @@
   (if (= (+ (sqr a) (sqr b)) (sqr c)) #true #false))
 
 (define (pitagoricax? a b c)
-  (case [(= (+ (sqr a) (sqr b)) (sqr c)) #true]
+  (cond [(= (+ (sqr a) (sqr b)) (sqr c)) #true]
         [else #false]))
 ;Ej 8
 (define (pitagoricastr? a b c)
