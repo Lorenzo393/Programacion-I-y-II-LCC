@@ -3,7 +3,6 @@
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname Practica1-1) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require 2htdp/image)
 (require racket/base)
-(require racket/case)
 ;Practica 1 parte 1
 
 ;REPASO DE FUNCIONES
