@@ -16,10 +16,20 @@
 (posn-y (make-posn (posn-x p) (posn-x q)))
 
 ;Ej 2
-(define (dist-origen xy)
+(define (modulo xy)
   (sqrt(+ (sqr(posn-x xy)) (sqr (posn-y xy)))))
 
-(dist-origen (make-posn (/ 6 2) 4))
-(+ (dist-origen (make-posn 12 5)) 4)
+(modulo (make-posn (/ 6 2) 4))
+(+ (modulo (make-posn 12 5)) 4)
 
 ;Ej 3
+(define (simetrica xy)
+  (make-posn (posn-y xy) (posn-x xy)))
+
+;Ej 4
+(define (distancia p1 p2)
+  (cond [(and (posn? p1) (posn? p2)) (modulo (vector-origen p1 p2))]
+        [else "Tipos incorrectos para la funcion"]))
+
+(define (vector-origen p1 p2)
+  (make-posn (- (posn-x p2) (posn-x p1)) (-(posn-y p2) (posn-y p1))))
