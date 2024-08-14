@@ -8,6 +8,7 @@
 
 ; Fabricar listas
 
+(define-struct Diablo [dia  blo])
 ; Naturales
 ; 0
 ; add1
