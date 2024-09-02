@@ -37,3 +37,25 @@ def factoriales(m):
 #factoriales(2)
 
 #Ej 5
+def farCel():
+    for i in range(0,121,10):
+        print((i-32)*5/9)
+
+#farCel()
+
+#Ej 6
+def numTriF(n):
+    for i in range(1,n+1):
+        j = 0
+        for r in range(1 , i+1):
+            j = j + r
+        print(i," - ",j)
+
+#numTriF(5)
+
+def numTriS(n):
+    for i in range(1,n+1):
+        print(i ," - ",(i*(i+1))/2)
+
+#numTriS(5)
+# La version del bucle for anidado realiza mas operaciones
