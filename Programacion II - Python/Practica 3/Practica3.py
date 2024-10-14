@@ -40,3 +40,24 @@ def ordenadaR(l):
 #print(ordenadaR(['a','b','c','d','e']))
 #print(ordenadaR([]))
 #print(ordenadaR([1,2,3,6,4]))
+
+# Ej 5
+
+# Ej 6
+def elimina_duplicado(l):
+    l.sort()
+    aux = l[0]
+    r = [l[0]]
+    for i in range(len(l)):
+        if aux != l[i]:
+            r.append(l[i])
+            aux = l[i]
+    return r
+
+#print(elimina_duplicado([64,234,1,1,2,3,4,5,6,6,6,1,4,6]))
+
+# Ej 7
+def cant_duplicados(l):
+    return len(elimina_duplicado(l))
+
+#print(cant_duplicados([64,234,1,1,2,3,4,5,6,6,6,1,4,6]))
