@@ -1,4 +1,5 @@
-# Ej 1 y 2
+# EJERCICIOS
+#Ej 1 y 2
 def pares(n):
     if n > 1:
         print(n * 2)
@@ -11,7 +12,7 @@ def pares(n):
  # 1. && 2. Esta misma solucion sirve para cualquiera de los dos ejercicios y 
  # para cualquier n natural
 
-# Ej 3
+#Ej 3
 def paresm(n , m):
     if n > 1:
         if (m % 2) == 0:
@@ -26,7 +27,7 @@ def paresm(n , m):
 #paresm(5 , 5)
  # En este caso no pude ya que estas dos funciones trabajan de distinta manera
 
-# Ej 4 y 5
+#Ej 4 y 5
 def spn(n):
     if n == 0:
         return 0
@@ -36,7 +37,7 @@ def spn(n):
 #print(spn(50))
 #print(spn(34))
 
-# Ej 6
+#Ej 6
 def spnm(n , m):
     if n > m:
         return 0
@@ -46,21 +47,21 @@ def spnm(n , m):
 #print(spnm(0 , 50))
 #print(spnm(10 , 20))
 
-# Ej 7
+#Ej 7
 def duplica():
     name = input("Ingrese un nombre: ")
     return name*2
 
 #print(duplica())
 
-# Ej 8
+#Ej 8
 def multstr(n):
     name = input("Ingrese un nombre: ")
     return name*n
 
 #print(multstr(4))
 
-# Ej 9
+#Ej 9
 
 def suma(x , y):
     return x + y
@@ -90,14 +91,3 @@ def calculador():
         print(divide(x , y))
     else:
         calculador()
-
-
-
-
-
-
-
-
-
-
-

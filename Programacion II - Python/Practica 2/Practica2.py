@@ -1,3 +1,4 @@
+# FOR
 #Ej 1
 def d10a20():
     for i in range(10,21):
@@ -59,6 +60,7 @@ def numTriS(n):
 #numTriS(5)
 # La version del bucle for anidado realiza mas operaciones
 
+# WHILE
 #Ej 7
 def numPos():
     i = int(input("Ingrese un numero positivo: "))
@@ -169,6 +171,7 @@ def esPotenciaDeDos(n):
         return True
     return False
 
+# RANDOM
 #Ej 14
 from random import *
 
