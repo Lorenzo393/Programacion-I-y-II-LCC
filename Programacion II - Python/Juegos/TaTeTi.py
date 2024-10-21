@@ -1,7 +1,13 @@
+from random import randrange
+# randrange(x)      -> Genera un numero aleatorio entero entre 0 y x-1
+
+
+
 def iniciar_tablero():
-    tablero = ["-"]*9
+    tablero = [["-","-","-"],["-","-","-"],["-","-","-"]]
     return tablero
 
-def main():
-    tablero = iniciar_tablero()
-    print(tablero)
+def mostrar_tablero(tablero):
+    for i in tablero:
+        print(i)
+            

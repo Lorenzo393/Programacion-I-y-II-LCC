@@ -53,24 +53,32 @@ def cant_duplicados(l):
     return len(elimina_duplicado(l))
 
 #Ej 8 AVANZAR
-def busquedaDicotomica(l):
-    palabra = input("Ingrese la palabra a buscar: ")
+from math import floor
+from math import ceil
+
+def busquedaDicotomica(l , palabra):
+    l.sort()
     ini = 0
-    fin = len(l)
-    mid = (ini + fin) / 2
-    i = 6
-
-    while palabra != l[mid]:
+    fin = len(l)-1
+    mid = floor((ini+fin)/2)
+    contador = 1
+    while l[mid] != palabra and (fin-ini) != 1:
+        contador += 1
         if palabra > l[mid]:
-            ini = mid
+            ini = mid+1
         if palabra < l[mid]:
-            fin = mid
-        mid = (ini + fin) / 2
+            fin = mid - 1
+        mid = floor((ini+fin)/2)
 
-# from math import *
-# floor()
-# ceil()
-
+    print("lista:",l)
+    print("palabra:",palabra)
+    print("operaciones:",contador)
+    if l[fin] == palabra or l[ini] == palabra or l[mid] == palabra:
+        return True
+    return False
+    
+    
+#print(busquedaDicotomica([1,2,3,7,9,4,8,84,25,79,262,234,723,4384,22,14,63,13,53,15,16,17,18],17))
 
 # CADENAS
 #Ej 9
@@ -161,6 +169,7 @@ def barajaFrancesa():
                     t = (j,"C")
             print(t)
 
+# Terminar
 def poker(c1,c2,c3,c4,c5):
     contador = 0
 
@@ -183,6 +192,6 @@ def sumaTiempo(t1,t2):
     suma_tiempo = (h , min , seg)
     print(suma_tiempo)
 
-sumaTiempo((2,30,45),(5,31,27))
+#sumaTiempo((2,30,45),(5,31,27))
 
 #Ej 15
