@@ -1,3 +1,6 @@
+# USAR TESTEO
+# USAR CASOS DE ERROR
+
 from random import randrange
 # randrange(x)      -> Genera un numero aleatorio entero entre 0 y x-1
 

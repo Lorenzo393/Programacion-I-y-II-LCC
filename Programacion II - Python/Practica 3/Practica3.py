@@ -195,3 +195,72 @@ def sumaTiempo(t1,t2):
 #sumaTiempo((2,30,45),(5,31,27))
 
 #Ej 15
+# fecha: (dia,mes,año)
+
+# 31 dias: 1 - 3 - 5 - 7 - 8 - 10 - 12 
+# 30 dias: 4 - 6 - 9 - 11
+# 28/29 dias : 2
+
+# REDUCIR LA CANTIDAD DE IF HACIENDO UNA LISTA CON LOS MESES 31 30 y 28/29 y usando
+# mes in listaDeMeses31
+
+def diaSiguiente(t):
+    dia = t[0] + 1
+    mes = t[1]
+    año = t[2]
+    
+    if (mes == 1 or mes == 3 or mes == 5 or mes == 7 or mes == 8 or mes == 10) and dia > 31:
+        mes += 1
+        dia = 1
+    if (mes == 4 or mes == 6 or mes == 9 or mes == 11) and dia > 30:
+        mes += 1
+        dia = 1
+    if mes == 2:
+        if año % 4 == 0 and dia > 29:
+            mes += 1
+            dia = 1
+        elif dia > 28:
+            mes += 1
+            dia = 1
+    if mes == 12 and dia > 31:
+        año += 1
+        mes = 1
+        dia = 1
+    diaSig = (dia,mes,año)
+    return diaSig
+
+#Ej 16
+def diaSiguienteT(t):
+    diaSig = diaSiguiente(t)
+    mesTraducido = traducirMes(diaSig[1])
+    diaSigT = (diaSig[0],mesTraducido,diaSig[2])
+    return diaSigT
+
+# CAMBIAR A UNA FUNCION MAS CORTA
+def traducirMes(m):
+    if m == 1:
+        m = "ene"
+    if m == 2:
+        m = "feb"
+    if m == 3:
+        m = "mar"
+    if m == 4:
+        m = "abr"
+    if m == 5:
+        m = "may"
+    if m == 6:
+        m = "jun"
+    if m == 7:
+        m = "jul"
+    if m == 8:
+        m = "ago"
+    if m == 9:
+        m = "sep"
+    if m == 10:
+        m = "oct"
+    if m == 11:
+        m = "nov"
+    if m == 12:
+        m = "dic"
+    return m
+
