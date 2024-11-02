@@ -171,8 +171,16 @@ def barajaFrancesa():
 
 # Terminar
 def poker(c1,c2,c3,c4,c5):
+    lista_numeros = [c1[0],c2[0],c3[0],c4[0],c5[0]]
     contador = 0
 
+    for i in range(0,len(lista_numeros)-1):
+        if lista_numeros[i] == lista_numeros[i+1]:
+            contador += 1
+
+    if contador >= 4:
+        return True
+    return False
 
 #Ej 14
 # Represento al tiempo mediante una tupla
@@ -239,4 +247,17 @@ def traducirMes(m):
     traduccion = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"]
     return traduccion[m-1]
 
-print(diaSiguienteT((31,12,2012)))
+#Ej 17
+# domino = (numero , numero)
+
+def encajar(d1 , d2):
+    if d1[0] == d2[0] or d1[0] == d2[1] or d1[1] == d2[0] or d1[1] == d2[1]:
+        return True
+    return False
+
+def encajarCadena(s):
+    listaDomino = list(s)
+    d1 = (listaDomino[0],listaDomino[2])
+    d2 = (listaDomino[4],listaDomino[6])
+    res = encajar(d1,d2)
+    return res
