@@ -110,14 +110,60 @@ if (Edad > 64) printf ("Seguridad Social");
 else if (Edad < 18) printf ("Exento");
 else printf("Imposible");
 -- 2 comparaciones menos
-
 */
-int main(){
 
+//Ej 9
+void numeros100(){
+    int i = 1;
+    while (i <= 100){
+        printf("%d\n",i);
+        i++;
+    }
+}
+
+//Ej 10
+void numerosImpares100(){
+    int i = 1;
+    while (i <= 100){
+        if(i % 2 != 0) printf("%d\n", i);
+        i++;
+    }
+}
+
+//Ej 11
+void entre(){
+    int v1, v2;
+
+    printf("Ingrese los valores: ");
+    scanf("%d%d",&v1,&v2);
+    
+    while (v1 > v2){
+        printf("Error: el primer valor debe ser menor al segundo\n");
+        printf("Ingrese nuevamente los valores: ");
+        scanf("%d%d",&v1,&v2);
+    }
+
+    int i = v1;
+
+    while (i <= v2){
+        printf("%d\n",i);
+        i++;
+    }
+}
+
+
+
+
+
+int main(){
     //temperatura();
     //notasAlumnos();
     //singoZodiacal();
     //esBisiesto();
+    //numeros100();
+    //numerosImpares100();
+    //entre();
+
 
 return 0;
 }
