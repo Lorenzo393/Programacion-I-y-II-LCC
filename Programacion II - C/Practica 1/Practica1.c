@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 /*
- Ej 1: ¿Cuál es la salida del siguiente programa?
+ Ej 1: ¿Cual es la salida del siguiente programa?
 int main () {
     int a , b , c , d =6 , e ;
     a = b = 3;
@@ -15,7 +15,7 @@ return 0;
 //LA SALIDA ES: retorna 0 y printea el resultado de c y e: 15 y 7
 
 
- Ej 2: ¿Cuál es la salida del siguiente programa?
+ Ej 2: ¿Cual es la salida del siguiente programa?
 int main () {
     int a , b , c , d =6 , e ;
     a = 3;
@@ -43,21 +43,81 @@ return 0;
 LA SALIDA ES: retorna 0 y printea de distintas maneras los 2 numeros solicitados y su suma
 */
 
-// Ej 4:
+//Ej 4:
 void temperatura(){
     float temperatura;
     printf("Ingrese la temperatura del agua: ");
-    scanf("%f", &temperatura);
+    scanf("%f",&temperatura);
     if (temperatura <= 0) printf("Estado: solido");
     else if (temperatura >= 100) printf("Estado: gaseoso");
     else printf("Estado: liquido");
 }
 
+//Ej 5
+void notasAlumnos(){
+    int nota;
+    printf("Ingrese la nota del alumno: ");
+    scanf("%d",&nota);
+    if (nota == 10) printf("Sobresaliente");
+    else if (nota == 9) printf("Distinguido");
+    else if (nota == 8) printf("Muy bueno");
+    else if (nota == 7) printf("Bueno");
+    else if (nota == 6) printf("Aprobado");
+    else if(nota >= 0 && nota <= 5) printf("Insuficiente");
+    else printf("Nota Ingresada no valida");
+}
 
+//Ej 6
+void singoZodiacal(){
+    int dia, mes;
+    printf("Ingrese el dia y mes de nacimiento: ");
+    scanf("%d%d",&dia,&mes);
 
+    if ((dia >= 21 && mes == 1) || (dia <= 19 && mes == 2)) printf("Acuario");
+    else if ((dia >= 20 && mes == 2) || (dia <= 20 && mes == 3)) printf("Piscis");
+    else if ((dia >= 21 && mes == 3) || (dia <= 21 && mes == 4)) printf("Aries");
+    else if ((dia >= 22 && mes == 4) || (dia <= 21 && mes == 5)) printf("Tauro");
+    else if ((dia >= 22 && mes == 5) || (dia <= 21 && mes == 6)) printf("Geminis");
+    else if ((dia >= 22 && mes == 6) || (dia <= 22 && mes == 7)) printf("Cancer");
+    else if ((dia >= 23 && mes == 7) || (dia <= 22 && mes == 8)) printf("Leo");
+    else if ((dia >= 23 && mes == 8) || (dia <= 21 && mes == 9)) printf("Virgo");
+    else if ((dia >= 22 && mes == 9) || (dia <= 21 && mes == 10)) printf("Libra");
+    else if ((dia >= 22 && mes == 10) || (dia <= 20 && mes == 11)) printf("Escorpio");
+    else if ((dia >= 21 && mes == 11) || (dia <= 19 && mes == 12)) printf("Sagitario");
+    else if ((dia >= 20 && mes == 12) || (dia <= 20 && mes == 1)) printf("Capricornio");
+    else printf("Datos ingresador erroneos");
+}
+
+//Ej 7
+void esBisiesto(){
+    int year;
+    printf("Ingrese el year: ");
+    scanf("%d",&year);
+
+    if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) printf("Year bisiesto");
+    else printf("No es year bisiesto");
+}
+
+/*
+Ej 8: Simplifique el siguiente codigo de forma que sean necesarias menos 
+comparaciones.
+
+if (Edad > 64) printf ("Seguridad Social") ;
+if (Edad < 18) printf ("Exento") ;
+if ((Edad >= 18) && (Edad < 65) ) printf ("Imposible") ;
+
+if (Edad > 64) printf ("Seguridad Social");
+else if (Edad < 18) printf ("Exento");
+else printf("Imposible");
+-- 2 comparaciones menos
+
+*/
 int main(){
 
-    temperatura();
+    //temperatura();
+    //notasAlumnos();
+    //singoZodiacal();
+    //esBisiesto();
 
 return 0;
 }
