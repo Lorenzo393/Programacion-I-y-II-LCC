@@ -2,6 +2,8 @@
 #include <stdio.h>
 
 /*
+// ENTRADA/SALIDA
+ 
  Ej 1: ¿Cual es la salida del siguiente programa?
 int main () {
     int a , b , c , d =6 , e ;
@@ -43,6 +45,7 @@ return 0;
 LA SALIDA ES: retorna 0 y printea de distintas maneras los 2 numeros solicitados y su suma
 */
 
+// SELECCION
 //Ej 4:
 void temperatura(){
     float temperatura;
@@ -112,6 +115,7 @@ else printf("Imposible");
 -- 2 comparaciones menos
 */
 
+// BUCLE WHILE
 //Ej 9
 void numeros100(){
     int i = 1;
@@ -133,27 +137,88 @@ void numerosImpares100(){
 //Ej 11
 void entre(){
     int v1, v2;
-
     printf("Ingrese los valores: ");
     scanf("%d%d",&v1,&v2);
-    
     while (v1 > v2){
         printf("Error: el primer valor debe ser menor al segundo\n");
         printf("Ingrese nuevamente los valores: ");
         scanf("%d%d",&v1,&v2);
     }
-
     int i = v1;
-
     while (i <= v2){
         printf("%d\n",i);
         i++;
     }
 }
 
+//Ej 12
+void primo(){
+    int numero,divisores = 0 ,i = 1;
+    printf("Ingrese el numero: ");
+    scanf("%d",&numero);
+    while(numero > 1 && i <= numero){
+        if (numero % i == 0){
+            divisores++;
+        }
+        i++;
+    }
+    if(divisores == 2){
+        printf("El numero es primo");
+    }
+    else{
+        printf("El numero no es primo");
+    }
+}
 
+//Ej 13
+void factorial(){
+    double numero;
+    printf("Ingrese el numero: ");
+    scanf("%lf",&numero);
+    int i = numero - 1;
+    while(i > 0){
+        numero = numero * i;
+        i--;
+    }
+    printf("Su factorial es %0.1lf",numero);
+}
 
+//Ej 14
+void pacientes(){
+    int nPacientes,nIngresados,nOperados;
+    int edad,edadIngresados,edadOperados;
+    nPacientes = nIngresados = nOperados = 0;
+    edad = edadIngresados = edadOperados = 0;
+    float indice;
 
+    printf("Ingrese el numero de pacientes: ");
+    scanf("%d",&nPacientes);
+    int i = nPacientes;
+
+    while(i > 0){
+        int aux;
+        printf("Ingrese la edad y el indice del paciente: ");
+        scanf("%d%f",&aux,&indice);
+        edad = edad + aux;
+        if(indice > 0.9){
+            edadOperados = edadOperados + aux;
+            nIngresados++;
+        }
+        else if (indice > 0.6){
+            edadIngresados = edadIngresados + aux;
+            nOperados++;
+        }
+        i--;
+    }
+    if(nPacientes == 0) nPacientes = 1;
+    if(nIngresados == 0) nIngresados = 1;
+    if(nOperados == 0) nOperados = 1;
+
+    printf("\nLa cantidad de pacientes: %d",nPacientes);
+    printf("\nEl promedio de edad general: %0.1f",(float) edad/nPacientes);
+    printf("\nEl promedio de la edad ingresados: %0.1f",(float) edadIngresados/nIngresados);
+    printf("\nEl promedio de la edad operados: %0.1f",(float) edadOperados/nOperados);
+}
 
 int main(){
     //temperatura();
@@ -163,7 +228,9 @@ int main(){
     //numeros100();
     //numerosImpares100();
     //entre();
-
+    //primo();
+    //factorial();
+    //pacientes();
 
 return 0;
 }
