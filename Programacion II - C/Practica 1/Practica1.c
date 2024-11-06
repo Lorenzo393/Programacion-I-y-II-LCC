@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 /*
 // ENTRADA/SALIDA
@@ -220,6 +221,55 @@ void pacientes(){
     printf("\nEl promedio de la edad operados: %0.1f",(float) edadOperados/nOperados);
 }
 
+//Ej 15
+int maximo(int x,int y){
+    if (x >= y){
+        return x;
+    }
+    return y;
+}
+
+int maximo4(){
+    int v1,v2,v3,v4;
+    printf("Ingrese los 4 numeros: ");
+    scanf("%d%d%d%d",&v1,&v2,&v3,&v4); 
+    v1 = maximo(v1,v2);
+    v2 = maximo(v3,v4);
+    v3 = maximo(v1,v2);
+    return v3;
+}
+
+//Ej 16
+int esTriangulo(int l1,int l2,int l3){
+    if(l1 > l2+l3) return 0;
+    if(l2 > l1+l3) return 0;
+    if(l3 > l1+l2) return 0;
+    return 1;
+}
+
+//Ej 17
+
+int max3(int v1,int v2,int v3){
+    
+    return 0;
+}
+
+
+int esTriRectangulo(int l1,int l2,int l3){
+    
+
+    return 0;
+}
+
+//Ej 18
+
+
+//Ej 19
+
+
+
+
+
 int main(){
     //temperatura();
     //notasAlumnos();
@@ -231,6 +281,9 @@ int main(){
     //primo();
     //factorial();
     //pacientes();
-
-return 0;
+    //int x = maximo4();
+    //int x = esTriangulo(x,y,z);
+    //int x = esRectangulo();
+    
+    return 0;
 }
