@@ -3,7 +3,7 @@
 #include <math.h>
 
 /*
-// ENTRADA/SALIDA
+    ENTRADA/SALIDA
  
  Ej 1: ¿Cual es la salida del siguiente programa?
 int main () {
