@@ -248,27 +248,49 @@ int esTriangulo(int l1,int l2,int l3){
 }
 
 //Ej 17
-
 int max3(int v1,int v2,int v3){
-    
-    return 0;
+    int max = 0;
+    if(v1 > v2){
+        if(v1 > v3) max = 1;
+    }
+    else if(v2 > v3) max = 2;
+    else max = 3;
+    return max;
 }
 
-
 int esTriRectangulo(int l1,int l2,int l3){
+    int max = max3(l1,l2,l3);
     
-
+    if(max == 1){
+        if(pow(l1,2) == pow(l2,2) + pow(l3,2)) return 1;
+    }
+    if(max == 2){
+        if(pow(l2,2) == pow(l1,2) + pow(l3,2)) return 1;
+    }
+    if(max == 3){
+        if(pow(l3,2) == pow(l1,2) + pow(l2,2)) return 1;
+    }
     return 0;
 }
 
 //Ej 18
-
+int pascuas(int year){
+    int a = year % 19;
+    int b = year % 4;
+    int c = year % 7;
+    int d =  (19 * a + 24) % 30;
+    int e = (2 * b + 4 * c + 6 * d + 5) % 7;
+    int n = (22 + d + e);
+    if(n > 31) n = n - 31;
+    return n;
+}
 
 //Ej 19
-
-
-
-
+int fibonacci(int n){
+    if(n == 0) return 0;
+    if(n == 1) return 1;
+    else return fibonacci(n-1) + fibonacci(n-2);
+}
 
 int main(){
     //temperatura();
@@ -282,8 +304,9 @@ int main(){
     //factorial();
     //pacientes();
     //int x = maximo4();
-    //int x = esTriangulo(x,y,z);
-    //int x = esRectangulo();
-    
+    //int x = esTriangulo(l1,l2,l3);
+    //int x = esTriRectangulo(l1,l2,l3);
+    //int x = pascuas(year);
+    //int x = fibonacci(n);
     return 0;
 }
