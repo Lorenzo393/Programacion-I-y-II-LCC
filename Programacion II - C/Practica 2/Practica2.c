@@ -1,7 +1,11 @@
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include <math.h>
 
+#define numeroSecreto 250
+
+// SWITCH
 //Ej 1
 void caraOpuesta(){
     int dado;
@@ -61,6 +65,7 @@ void habitaciones(){
     }
 }
 
+// FOR
 //Ej 3
 void bucle1(){
     float suma = 0;
@@ -138,6 +143,58 @@ linea y hace esto "y" veces. Si no estan en el rango [1,20] imprime un mensaje d
 */
 
 //Ej 6
+void adivinarNumero(){
+    int n = -1;
+    for(int intentos = 15; intentos > 0 && n != numeroSecreto ; intentos--){
+        printf("Ingrese el numero secreto: ");
+        scanf("%d",&n);
+        if(n > numeroSecreto) printf("El numero secreto es menor\n");
+        if(n < numeroSecreto) printf("El numero secreto es mayor\n");
+    }
+}
+
+//Ej 7
+char convLetra(int p){
+    char letra;
+    if(p == 5) letra = 'T';
+    if(p == 4) letra = 's';
+    if(p == 3) letra = 'R';
+    if(p == 2) letra = 'q';
+    if(p == 1) letra = 'P';
+    return letra;
+}
+
+// Solucionar ejercicio, bucle tiene que aparecer progresivamente
+void texto(){
+    char bucle[] = {'b','u','c','l','e','\0'};
+    char letra;
+    for(int i = 5 ; i > 0 ; i--){
+        letra = convLetra(i);
+        printf("%s %d %c\n",bucle,i,letra);
+    }
+}
+
+//Ej 8
+void collatz(){
+    int valor,pasos = 0;
+    printf("Ingrese el valor inicial: ");
+    scanf("%d",&valor);
+    printf("El valor inicial es %d\n",valor);
+    for(; valor != 1 ; pasos++){
+        if(valor % 2 == 0) valor = valor/2;
+        else valor = ((valor*3) + 1);
+        printf("El siguiente valor es %d\n",valor); 
+    }
+    if(pasos == 0) printf("\nERROR");
+    else printf("\nValor final %d, numero de pasos %d",valor,pasos);
+
+}
+
+// ARRAYS
+//Ej 9
+
+
+
 
 
 int main(){
@@ -148,6 +205,9 @@ int main(){
     //bucle3();
     //bucle4();
     //ternasPit();
+    //adivinarNumero();
+    //texto(); -----------------
+    //collatz();
 
 
     return 0;
