@@ -192,7 +192,40 @@ void collatz(){
 
 // ARRAYS
 //Ej 9
+void ascendente100(){
+    int array[100];
+    for(int i = 1 ; i <= 100 ; i++){
+        array[i] = i;
+        printf(" %d ",array[i]);
+    }
+}
 
+//Ej 10
+void pares100200(){
+    int array[100];
+    for(int i = 200 , j = 0 ; i >= 100 ; i--){
+        if(i % 2 == 0){
+            array[j] = i;
+            printf(" %d ",array[j]);
+            j++;
+        }
+    }
+}
+
+//Ej 11
+void multiplos3(){
+    int array[50];
+    for(int i = 50 , j = 0; i > 0 ; i-- , j++){
+        array[j] = i * 3;
+        printf(" %d ",array[j]);
+    }
+}
+
+//Ej 12
+void busqueda10(){
+    int array[10];
+    
+}
 
 
 
@@ -208,7 +241,9 @@ int main(){
     //adivinarNumero();
     //texto(); -----------------
     //collatz();
-
+    //ascendente100();
+    //pares100200();
+    //multiplos3();
 
     return 0;
 }
