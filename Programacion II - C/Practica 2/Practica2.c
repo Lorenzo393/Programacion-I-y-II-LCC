@@ -223,12 +223,78 @@ void multiplos3(){
 
 //Ej 12
 void busqueda10(){
-    int array[10];
-    
+    int array[10],n,pos = -1;
+    for(int i = 0 ; i < 10 ; i++){
+        printf("Ingrese el %d elemento: ",i+1);
+        scanf("%d",&array[i]);
+    }
+    printf("Ingrese el numero a buscar: ");
+    scanf("%d",&n);
+    printf("\n");
+    for(int i = 0 , j = 0 ; i < 10 && j != 1; i++){
+        if(array[i] == n){
+            pos = i;
+            j = 1;
+        }
+    }
+    if(pos == -1) printf("El numero no esta en el arreglo: %d",pos);
+    else printf("El numero esta en el arreglo: %d",pos);
 }
 
+//Ej 13
+void mayor30(){
+    int n, bandera = 1,suma = 0;
+    printf("Ingrese la cantidad de numeros: ");
+    scanf("%d",&n);
+    if(n < 5 || n > 100) bandera = 0;
+    int array[n];
+    for(int i = 0 ; i < n && bandera ; i++){
+        printf("Ingrese el %d numero: ",i+1);
+        scanf("%d",&array[i]);
+        suma = suma + array[i];
+    }
+    if(bandera == 0) printf("ERROR");
+    else if(suma >= 30) printf("La suma de numeros es mayor que 30");
+    else printf("La suma de numeros es menor de 30");
+}
 
+//Ej 14 HACER
+void hastaNeg(){
+    int array[100];
+    int cant = 0;
+    for(int i = 0, bandera = 1 ; bandera ; i++ , cant++){
+        printf("Ingrese el %d numero: ",i+1);
+        scanf("%d",&array[i]);
+        if(array[i] < 0){
+            bandera = 0;
+            cant--;
+        }
+    }
+}
 
+//Ej 14 extra
+void hastaNegMayor(){
+    int array[100],mayor[] = {-1,0};
+    int cant = 0,cantMayor = 0;
+    for(int i = 0, bandera = 1 ; bandera ; i++ , cant++){
+        printf("Ingrese el %d numero: ",i+1);
+        scanf("%d",&array[i]);
+        if(array[i] < 0){
+            bandera = 0;
+            cant--;
+        }
+        else if(array[i] >= 0 && array[i] <= 99 && array[i] > mayor[0]){
+            mayor[0] = array[i];
+            mayor[1] = i;
+        }
+    }
+    printf("%d\n",cant);
+    for(int i = mayor[1] ; i < cant ; i++){
+        if(array[i] == mayor[0]) cantMayor++;
+    }
+
+    printf("El mayor entre 0 y 99 es %d y aparece %d veces",mayor[0],cantMayor);
+}
 
 int main(){
     //caraOpuesta();
@@ -244,6 +310,10 @@ int main(){
     //ascendente100();
     //pares100200();
     //multiplos3();
+    //busqueda10();
+    //mayor30();
+    hastaNeg();
+    //hastaNegMayor();
 
     return 0;
 }
