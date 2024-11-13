@@ -298,6 +298,45 @@ void hastaNegMayor(){
     printf("El mayor entre 0 y 99 es %d y aparece %d veces",mayor[0],cantMayor);
 }
 
+//Ej 15
+int sumaArr(int array[100],int cant){
+    int suma = 0;
+    for(int i = 0 ; i < cant ; i++) suma = suma + array[i];
+    printf("La suma total es: %d",suma);
+    return suma;
+}
+
+//Ej 16
+int prodArr2(int array[100],int cant){
+    int prod = 1;
+    for(int i = 0 ; i < cant ; i += 2) prod = prod * array[i];
+    printf("El producto de los indices pares es: %d",prod);
+    return prod;
+}
+
+/* Ej 17
+# include<stdio.h>
+# define N = 1000;
+int main(){
+    int i , j , a[N+1]; //Declaracion de dos enteros y un arreglo de ( completar ) componentes
+    for(a[1] = 0 , i = 2; i <= N ; i ++){ //Llena el arreglo con todos 1s salvo el la pos 1 que es 0 y el la pos 0 que es basura
+        a[i] = 1;
+    }
+    for(i = 2; i <= N/2; i ++){//For anidado que va llenando de 0s el array a en las posiciones i*j hasta 500 en caso de i y 1000/i en el caso de j
+        for(j = 2; j <= N /i , j ++){
+            a[i*j] = 0;
+        }
+    }
+    for (i = 1; i <= N ; i ++) {//For que printea el valor de i cuando en el array en esa posicion el valor es distinto de 0
+        if(a[i]){
+            printf (" %d ", i );
+        }
+    }
+    printf ("\n");  //Salto de linea
+    return 0;       //Retorna 0
+}
+*/
+
 int main(){
     //caraOpuesta();
     //habitaciones();
@@ -307,7 +346,7 @@ int main(){
     //bucle4();
     //ternasPit();
     //adivinarNumero();
-    texto();
+    //texto();
     //collatz();
     //ascendente100();
     //pares100200();
@@ -316,6 +355,16 @@ int main(){
     //mayor30();
     //hastaNeg(); --------------
     //hastaNegMayor();
+
+    //int array[] = {1,2,3,4,5,6,7,8,9,10};
+    //int leng = 10;
+    //sumaArr(array,leng);
+
+    //int array[] = {1,2,3,4,5,6,7,8,9,10};
+    //int leng = 10;
+    //prodArr2(array,leng);
+
+
 
     return 0;
 }
