@@ -337,6 +337,40 @@ int main(){
 }
 */
 
+// CADENAS DE CARACTERES
+//Ej 18
+int existCar(char cadena[],char c){
+    int car = 1;
+    for(int i = 0 ; cadena[i] != '\0' ; i++){
+        if(cadena[i] == c) car = 0;
+    }
+    return car;
+}
+
+//Ej 19
+int cantCar(char cadena[],char c){
+    int cant = 0;
+    for(int i = 0 ; cadena[i] != '\0' ; i++){
+        if(cadena[i] == c) cant += 1;
+    }
+    return cant;
+}
+
+//Ej 20 PREGUNTAR POR QUE EN LA SALIDA TENGO UN ARROBA
+void reverse(){
+    char cadena[100];
+    printf("Ingrese la cadena a invertir: ");
+    scanf("%s",cadena);
+    char cadenaInv[strlen(cadena)+1];
+    cadenaInv[strlen(cadenaInv)] = '\0';
+
+    for(int i = (strlen(cadena) -1) , j = 0 ; i >= 0 ; i-- , j++){
+        cadenaInv[j] = cadena[i];
+    }
+    printf("La cadena invertida es: %s",cadenaInv);
+    printf("\nSu tamano es de: %d",strlen(cadenaInv));
+}
+
 int main(){
     //caraOpuesta();
     //habitaciones();
@@ -355,15 +389,15 @@ int main(){
     //mayor30();
     //hastaNeg(); --------------
     //hastaNegMayor();
-
-    //int array[] = {1,2,3,4,5,6,7,8,9,10};
-    //int leng = 10;
-    //sumaArr(array,leng);
-
-    //int array[] = {1,2,3,4,5,6,7,8,9,10};
-    //int leng = 10;
-    //prodArr2(array,leng);
-
+    //int array[];
+    //int x = sumaArr(array,leng);
+    //int array[];
+    //int x = prodArr2(array,leng);
+    //int x = existCar("str",'car');
+    //int x = cantCar("str",'car');
+    //reverse(); ----------
+    
+    
 
 
     return 0;
