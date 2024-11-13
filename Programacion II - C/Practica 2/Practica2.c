@@ -164,13 +164,15 @@ char convLetra(int p){
     return letra;
 }
 
-// Solucionar ejercicio, bucle tiene que aparecer progresivamente
 void texto(){
-    char bucle[] = {'b','u','c','l','e','\0'};
+    char bucle[10] = {'b','u','c','l','e','\0'};
     char letra;
-    for(int i = 5 ; i > 0 ; i--){
+    for(int i = 5 , j = 1 ; i > 0 ; i-- , j++){
         letra = convLetra(i);
+        bucle[6] = bucle[j];
+        bucle[j] = '\0';
         printf("%s %d %c\n",bucle,i,letra);
+        bucle[j] = bucle[6];
     }
 }
 
@@ -305,14 +307,14 @@ int main(){
     //bucle4();
     //ternasPit();
     //adivinarNumero();
-    //texto(); -----------------
+    texto();
     //collatz();
     //ascendente100();
     //pares100200();
     //multiplos3();
     //busqueda10();
     //mayor30();
-    hastaNeg();
+    //hastaNeg(); --------------
     //hastaNegMayor();
 
     return 0;
