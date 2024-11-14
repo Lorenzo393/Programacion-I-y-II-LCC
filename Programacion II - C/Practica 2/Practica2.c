@@ -294,7 +294,6 @@ void hastaNegMayor(){
     for(int i = mayor[1] ; i < cant ; i++){
         if(array[i] == mayor[0]) cantMayor++;
     }
-
     printf("El mayor entre 0 y 99 es %d y aparece %d veces",mayor[0],cantMayor);
 }
 
@@ -356,20 +355,35 @@ int cantCar(char cadena[],char c){
     return cant;
 }
 
-//Ej 20 PREGUNTAR POR QUE EN LA SALIDA TENGO UN ARROBA
+//Ej 20
 void reverse(){
     char cadena[100];
     printf("Ingrese la cadena a invertir: ");
     scanf("%s",cadena);
     char cadenaInv[strlen(cadena)+1];
-    cadenaInv[strlen(cadenaInv)] = '\0';
-
+    cadenaInv[strlen(cadena)] = '\0';
     for(int i = (strlen(cadena) -1) , j = 0 ; i >= 0 ; i-- , j++){
         cadenaInv[j] = cadena[i];
     }
     printf("La cadena invertida es: %s",cadenaInv);
     printf("\nSu tamano es de: %d",strlen(cadenaInv));
 }
+
+//Ej 21
+void capicua(char cadena[]){
+    int bandera = 1;
+    char cadRev[strlen(cadena)+1];
+    cadRev[strlen(cadena)] = '\0';
+    for(int i = (strlen(cadena) -1) , j = 0 ; i >= 0 ; i-- , j++){
+        cadRev[j] = cadena[i];
+    }
+    for(int i = 0 ; i < strlen(cadena) && bandera ; i++){
+        if(cadena[i] != cadRev[i]) bandera = 0;
+    }
+    if(bandera) printf("Es capicua");
+    else printf("No es capicua");
+}
+
 
 int main(){
     //caraOpuesta();
@@ -395,8 +409,8 @@ int main(){
     //int x = prodArr2(array,leng);
     //int x = existCar("str",'car');
     //int x = cantCar("str",'car');
-    //reverse(); ----------
-    
+    //reverse();
+    //capicua("str");
     
 
 
