@@ -384,6 +384,22 @@ void capicua(char cadena[]){
     else printf("No es capicua");
 }
 
+//Ej 22
+void pangrama(char cadena[]){
+    char alfabeto[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    //cadena = sort(cadena);
+    printf("%s %s",alfabeto,cadena);
+}
+
+//Ej 23
+void contenida(char cad1[],char cad2[]){
+
+    for(int i = 0 , j = 0 ; i <= strlen(cad1) ; j++){
+        if(cad1[i] == cad2[j])
+    }
+
+}
+
 
 int main(){
     //caraOpuesta();
@@ -411,7 +427,8 @@ int main(){
     //int x = cantCar("str",'car');
     //reverse();
     //capicua("str");
-    
+    //pangrama("obamaneitor");
+    contenida("universo","nigga");
 
 
     return 0;
