@@ -1,4 +1,13 @@
 # LISTAS Y SECUENCIAS
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #Ej 1
 def apariciones(l,x):
     cant = x
