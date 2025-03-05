@@ -1,0 +1,10 @@
+Bananas,1,Huevos,1,4738
+Queso untable,1,Lentejas,3,4621
+Queso untable,1,Suavizante,1,1573
+Aceite de oliva,1,Leche,3,11585
+Galletitas,1,Lentejas,1,4102
+Lavandina,1,Aceite de girasol,1,8264
+Manzanas,1,Aceite de oliva,3,37880
+Dulce de leche,1,Lavandina,2,15357
+Servilletas,1,Cafe,2,11093
+Mermelada,1,Cafe,2,9865
