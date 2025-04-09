@@ -81,7 +81,7 @@ void recorre(VisitorFunc f,int arr[],int len){
     }
 }
 
-//EJ 9 VOLVER A PENSAR EL D
+//EJ 9
 /*
     a)
     # include <stdio.h>
@@ -134,7 +134,7 @@ void recorre(VisitorFunc f,int arr[],int len){
         for( i = 0; i < 5; i ++) printf ("%d,", punt [i]) ;
 
         return 0;
-    }//IMPRIME [1,9,7,11,5] VOLVER A PENSAR
+    }//IMPRIME [1,9,7,11,5]
 
     e)
     # include <stdio.h>
@@ -153,7 +153,7 @@ void recorre(VisitorFunc f,int arr[],int len){
         printf ("%d %d %d", x , y , z);
 
         return 0;
-    }
+    }//IMPRIME 5 15 15
 
     f) 
     #include <stdio.h>
@@ -167,7 +167,7 @@ void recorre(VisitorFunc f,int arr[],int len){
     printf ("%d\n", *ptr);
 
     return 0;
-    }
+    }//SEGMENTATION FAULT
 
     g) # include <stdio.h>
     int main() {
@@ -175,22 +175,126 @@ void recorre(VisitorFunc f,int arr[],int len){
         char textoB [30] = "El Cuarteto de Nos";
         char *p = textoA;
         char *q = textoB;
-        printf ("textoA: %s\ ntextoB : %s\n", textoA , textoB);
-        while(*p ++ = *q ++);
+        printf ("textoA: %s\n textoB: %s\n", textoA , textoB);
+        while(*p++ = *q++);
         printf("while (*p++ = *q++) ;\n");
-        printf("textoA : %s\ ntextoB : %s\n", textoA , textoB);
+        printf("textoA: %s\n textoB: %s\n", textoA , textoB);
 
         return 0;
-    }
+    }// IMPRIME textoA Y textoB Y DESPUES while(*p++ = *q++); textoB y textoB
 */
 
+//EJ 10
+/*
+#include <stdlib.h>
+#include <stdio.h>
 
+char *copiar_cadena(char *cad, int longitud){
+    char *a = malloc(sizeof(char)*longitud);
+    a = cad;
 
+    return a;
+}
 
+int main(){
+    char a[10] = "hola";
+    char *b = copiar_cadena(a,10);
+    printf("%s %s\n",a,b);
+    b[0] = 's';
+    printf("%s %s\n",a,b);
 
+    return 0;
+}//PERDIDA DE MEMORIA EN a=cad TAMBIEN NO SE COPIA LA CADENA REAL SOLO SE APUNTA A ELLA
+ //SI HAY MODIFICACIONES EN LA CADENA SE MODIFICARIA EN LOS DOS
+*/
 
+//EJ 11
+/*
+a) #include <stdio.h>
+void nullify (int* a ){
+    a = NULL;
 
+}
+int main () {
+    int a[67];
+    a[0] = 123;
+    printf("%d\n", a [0]);
+    nullify(a);
+    printf("%d\n", a [0]);
+    return 0;
+}//IMPRIME 123 123
 
+b) #include <stdio.h>
+int main () {
+    char *ptr = "hola mundo";
+    ptr[0] = 's';
+    printf ("%s\n", ptr);
+    return 0;
+}//NO IMPRIME NADA
+*/
+
+//EJ 12
+typedef struct{
+    float x;
+    float y;
+}Punto;
+
+void medio(Punto a , Punto b){
+    printf("El medio es: %f %f",(a.x+b.x)/2,(a.y+b.y)/2);
+}
+
+//EJ 13
+#define SIZE_MAZO 48
+
+typedef enum{
+    ESPADA,
+    BASTO,
+    COPA,
+    ORO
+}Palo;
+
+typedef struct{
+    int nCarta;
+    Palo palo;
+}Carta;
+
+typedef Carta Mazo[SIZE_MAZO];
+
+void llenar(Mazo mazo){ // ERROR EN n %12 arreglar
+    for(int i = 0 , n = 1, p = 0; i < SIZE_MAZO ; i++){
+        Carta carta;
+        if(n % 12 == 0){
+            n = 1;
+            p++;
+        }
+        carta.nCarta = n;
+        if(p == 0) carta.palo = ESPADA;
+        if(p == 1) carta.palo = BASTO;
+        if(p == 2) carta.palo = COPA;
+        if(p == 3) carta.palo = ORO;
+        
+        mazo[i] = carta;
+        n++;
+    }
+    for(int i = 0 ; i < SIZE_MAZO ; i++){
+        printf("%i-",mazo[i].nCarta);
+        switch(mazo[i].palo){
+            case 0:
+            printf("ESPADA");
+            break;
+            case 1:
+            printf("BASTO");
+            break;
+            case 2:
+            printf("COPA");
+            break;
+            case 3:
+            printf("ORO");
+            break;
+        }
+        printf("\n");
+    }
+}
 
 
 
@@ -206,6 +310,10 @@ int main(){
     //a = apply(sucesor,a);
     //apply_in(sucesor,a);
     //recorre(imprimir,arr,len);
+    //medio(a,b);
+    Mazo mazo;
+    llenar(mazo);
+    
 
     return 0;
 }
