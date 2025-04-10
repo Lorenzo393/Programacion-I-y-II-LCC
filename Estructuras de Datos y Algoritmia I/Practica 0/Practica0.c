@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <time.h>
 
 //EJ 1
 void imprimir_direcciones_memoria(){
@@ -260,40 +261,82 @@ typedef struct{
 
 typedef Carta Mazo[SIZE_MAZO];
 
-void llenar(Mazo mazo){ // ERROR EN n %12 arreglar
+void mostrar_mazo(Mazo mazo){
+    for(int i = 0 ; i < SIZE_MAZO ; i++){
+        printf("%i-",mazo[i].nCarta);
+        if(mazo[i].palo == ESPADA) printf("ESPADA");
+        else if(mazo[i].palo == BASTO) printf("BASTO");
+        else if(mazo[i].palo == COPA) printf("COPA");
+        else if(mazo[i].palo == ORO) printf("ORO");
+        printf("\n");
+    }
+}
+
+void mostrar_carta(Carta carta){
+    printf("\n\n");
+    printf("%i-",carta.nCarta);
+    if(carta.palo == ESPADA) printf("ESPADA");
+    else if(carta.palo == BASTO) printf("BASTO");
+    else if(carta.palo == COPA) printf("COPA");
+    else if(carta.palo == ORO) printf("ORO");
+}
+
+void llenar(Mazo mazo){
     for(int i = 0 , n = 1, p = 0; i < SIZE_MAZO ; i++){
-        Carta carta;
-        if(n % 12 == 0){
+        if(n % 13 == 0){
             n = 1;
             p++;
         }
-        carta.nCarta = n;
-        if(p == 0) carta.palo = ESPADA;
-        if(p == 1) carta.palo = BASTO;
-        if(p == 2) carta.palo = COPA;
-        if(p == 3) carta.palo = ORO;
-        
-        mazo[i] = carta;
+        mazo[i].nCarta = n;
+        if(p == 0) mazo[i].palo = ESPADA;
+        if(p == 1) mazo[i].palo = BASTO;
+        if(p == 2) mazo[i].palo = COPA;
+        if(p == 3) mazo[i].palo = ORO;
         n++;
     }
-    for(int i = 0 ; i < SIZE_MAZO ; i++){
-        printf("%i-",mazo[i].nCarta);
-        switch(mazo[i].palo){
-            case 0:
-            printf("ESPADA");
-            break;
-            case 1:
-            printf("BASTO");
-            break;
-            case 2:
-            printf("COPA");
-            break;
-            case 3:
-            printf("ORO");
-            break;
-        }
-        printf("\n");
-    }
+    mostrar_mazo(mazo);
+}
+
+Carta azar(Mazo mazo){
+    int random = rand() % 48;
+    return mazo[random];
+}
+
+//EJ 14
+typedef struct{
+    char *nombre, *telefono;
+    unsigned int edad;
+}Contacto;
+
+typedef struct{
+    Contacto *contacto;
+    int cantContactos;
+}Agenda;
+
+void mostrar_contacto(Contacto *contacto){
+    printf("%s\n",contacto->nombre);
+    printf("%s\n",contacto->telefono);
+    printf("%i\n",contacto->edad);
+}
+
+Contacto crear_contacto(){
+    Contacto contacto;
+    printf("Ingrese el nombre: ");
+    contacto.nombre = get_new_line();
+    getchar();
+
+    printf("Ingrese el telefono:");
+    contacto.telefono = get_new_line();
+    getchar();
+
+    printf("Ingrese la edad: ");
+    scanf("%i",&contacto.edad);
+    return contacto;
+}
+
+void actualiza_edad(Contacto *contacto){
+    printf("Actualize la edad: ");
+    scanf("%i",&contacto->edad);
 }
 
 
@@ -301,6 +344,7 @@ void llenar(Mazo mazo){ // ERROR EN n %12 arreglar
 
 
 int main(){
+    srand(time(NULL));
     //imprimir_direcciones_memoria();
     //set_first(arr);
     //set_in(p);
@@ -311,8 +355,13 @@ int main(){
     //apply_in(sucesor,a);
     //recorre(imprimir,arr,len);
     //medio(a,b);
-    Mazo mazo;
-    llenar(mazo);
+    
+    //llenar(mazo);
+    //carta = azar(mazo);
+    Contacto contacto = crear_contacto();
+    mostrar_contacto(&contacto);
+    actualiza_edad(&contacto);
+    mostrar_contacto(&contacto);
     
 
     return 0;
