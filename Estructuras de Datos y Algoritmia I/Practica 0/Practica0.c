@@ -303,25 +303,35 @@ Carta azar(Mazo mazo){
 }
 
 //EJ 14
-typedef struct{
+#define CANT_CONTACTOS 10
+
+typedef struct _contacto{
     char *nombre, *telefono;
     unsigned int edad;
 }Contacto;
 
-typedef struct{
-    Contacto *contacto;
-    int cantContactos;
+typedef struct _agenda{
+    Contacto contacto[CANT_CONTACTOS];
+    int cantContactos; //Poner inta cantContactos = 0 da error. Ver porque
 }Agenda;
 
-void mostrar_contacto(Contacto *contacto){
-    printf("%s\n",contacto->nombre);
-    printf("%s\n",contacto->telefono);
+void imprimir_contacto(Contacto *contacto){
+    printf("%s-",contacto->nombre);
+    printf("%s-",contacto->telefono);
     printf("%i\n",contacto->edad);
+}
+
+void imprimir_agenda(Agenda *agenda){
+    for(int i = 0 ; i < agenda->cantContactos ; i++){
+        Contacto contacto = agenda->contacto[i];
+        imprimir_contacto(&contacto);
+    }
 }
 
 Contacto crear_contacto(){
     Contacto contacto;
-    printf("Ingrese el nombre: ");
+
+    printf("\nIngrese el nombre: ");
     contacto.nombre = get_new_line();
     getchar();
 
@@ -331,15 +341,42 @@ Contacto crear_contacto(){
 
     printf("Ingrese la edad: ");
     scanf("%i",&contacto.edad);
+    getchar();
+
     return contacto;
 }
 
-void actualiza_edad(Contacto *contacto){
+void actualiza_edad(Contacto *contacto){//Si, sino no se actualizara el dato
     printf("Actualize la edad: ");
     scanf("%i",&contacto->edad);
 }
 
+void alta_contacto(Agenda *agenda){
+    Contacto contacto = crear_contacto();
+    agenda->contacto[agenda->cantContactos] = contacto;
+    agenda->cantContactos++;
+}
 
+void modificar_edad(Agenda *agenda){
+    if(agenda->cantContactos != 0){
+        char nombre[100];
+        printf("Ingrese el nombre: ");
+        scanf("%s",nombre);
+        int bandera = 1;
+        int i = 0;
+
+        while(i < agenda->cantContactos && bandera){
+            Contacto contacto = agenda->contacto[i];
+            if(strcmp(nombre,contacto.nombre) == 0) bandera = 0;
+            else i++;
+        }
+        if(bandera == 0) actualiza_edad(&(agenda->contacto[i]));
+        else printf("El nombre ingresado no existe\n");
+    }
+    else printf("No existen contactos");
+}
+
+double prom(Agenda *agenda); //Promedio de edad de las personas de la agenda
 
 
 
@@ -358,10 +395,15 @@ int main(){
     
     //llenar(mazo);
     //carta = azar(mazo);
-    Contacto contacto = crear_contacto();
-    mostrar_contacto(&contacto);
-    actualiza_edad(&contacto);
-    mostrar_contacto(&contacto);
+    Agenda agenda;
+    agenda.cantContactos = 0;
+
+    alta_contacto(&agenda);
+    alta_contacto(&agenda);
+    modificar_edad(&agenda);
+    imprimir_agenda(&agenda);
+    printf("Cant: %i",agenda.cantContactos);
+    
     
 
     return 0;
