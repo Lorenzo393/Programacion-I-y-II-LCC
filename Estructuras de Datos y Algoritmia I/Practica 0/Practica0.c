@@ -41,15 +41,25 @@ void swap(int *a, int *b){
 // Si el programa no puede reservar el espacio solicitado retornara NULL
 
 //EJ 6
-char *get_new_line(){
-    char aux[100];
-    scanf("%[^\n]",aux);
-    char *linea = malloc(sizeof(char)*strlen(aux)+1);
-    strcpy(linea,aux);
-    linea[strlen(aux)+1] = '\0';
-
+#define READSIZE 10
+char *get_new_line() {
+    char buffer[READSIZE + 1], *linea = NULL, *ptr = NULL;
+    size_t largoTotal = 0, largoActual;
+    int seguir = 1;
+    while (seguir) {
+      fgets(buffer, READSIZE + 1, stdin);
+      ptr = strchr(buffer, '\n');
+      if (ptr != NULL) {
+        *ptr = '\0';
+        seguir = 0;
+      }
+      largoActual = strlen(buffer);
+      linea = realloc(linea, sizeof(char) * (largoTotal + largoActual + 1));
+      strcpy(linea + largoTotal, buffer);
+      largoTotal += largoActual;
+    }
     return linea;
-}
+  }
 
 //EJ 7
 void reservar_memoria_error(){
@@ -333,22 +343,21 @@ Contacto crear_contacto(){
 
     printf("\nIngrese el nombre: ");
     contacto.nombre = get_new_line();
-    getchar();
+    // SOLUCIONAR QUE SE SALTEA LA LINEA
 
     printf("Ingrese el telefono:");
     contacto.telefono = get_new_line();
-    getchar();
+    
 
     printf("Ingrese la edad: ");
-    scanf("%i",&contacto.edad);
-    getchar();
+    scanf("%u",&contacto.edad);
 
     return contacto;
 }
 
 void actualiza_edad(Contacto *contacto){//Si, sino no se actualizara el dato
     printf("Actualize la edad: ");
-    scanf("%i",&contacto->edad);
+    scanf("%u",&contacto->edad);
 }
 
 void alta_contacto(Agenda *agenda){
@@ -376,7 +385,17 @@ void modificar_edad(Agenda *agenda){
     else printf("No existen contactos");
 }
 
-double prom(Agenda *agenda); //Promedio de edad de las personas de la agenda
+double prom(Agenda *agenda){
+    double promedio = 0;
+    for(int i = 0 ; i < agenda->cantContactos ; i++){
+        Contacto contacto = agenda->contacto[i];
+        promedio = promedio + contacto.edad;
+    }
+
+    return promedio/agenda->cantContactos;
+}
+
+//EJ 15
 
 
 
@@ -397,12 +416,15 @@ int main(){
     //carta = azar(mazo);
     Agenda agenda;
     agenda.cantContactos = 0;
+    double promedio;
 
     alta_contacto(&agenda);
     alta_contacto(&agenda);
     modificar_edad(&agenda);
     imprimir_agenda(&agenda);
+    promedio = prom(&agenda);
     printf("Cant: %i",agenda.cantContactos);
+    printf("\nPromedio edad: %lf",promedio);
     
     
 
