@@ -30,60 +30,39 @@ void quitar_terminador(char buffer[]){
     buffer[largoLinea] = '\0';
 }
 
-/*
-void leer_archivo_legacy(FILE* file){
-    char buffer[100];
-    
-    for(int i = 0 , largoLinea = 0; fgets(buffer,100,file) != NULL ; i++){
-        largoLinea = strlen(buffer) - 1;
-        buffer[largoLinea] = '\0';
-        printf("\nline %i: %s", i+1 ,buffer);
-    }
-    
-    if((fgets(buffer,100,file)) == NULL) printf("EOF");
-    else printf("Nai");
+char *copiar_cadena(char buffer[],int bufferIndex){
+    char *cadena;
+    cadena = malloc((sizeof(char)*bufferIndex)+1);
+    strncpy(cadena,buffer,bufferIndex);
+    cadena[bufferIndex] = '\0';
+    return cadena;
 }
-*/
+
+void copiar_cadena_2(char aux[],char buffer[],int bufferIndex){
+    int auxIndex = 0;
+    for(; buffer[bufferIndex] != '\n' ; auxIndex++, bufferIndex++) aux[auxIndex] = buffer[bufferIndex];
+    aux[auxIndex] = '\0';
+}
 
 
 Articulo cargar_articulo(char buffer[]){
     Articulo articulo;
     int bufferIndex = 0;
-
-    printf("1-");
     while(buffer[bufferIndex] != ',') bufferIndex++;
-    printf("%s %i-", buffer , bufferIndex);
-    articulo.nombre = malloc((sizeof(char) * bufferIndex) + 1); // ACA ESTA EL ERROR, NO SE PORQUE
-    printf("2.1-");
-    strcpy(articulo.nombre,buffer);
-    printf("2.2-");
-    articulo.nombre[bufferIndex] = '\0';
-    printf("2.3-");
+    articulo.nombre = copiar_cadena(buffer , bufferIndex);
     bufferIndex++;
-    printf("3-");
-    
     char aux[10];
-    int auxIndex;
-    for(auxIndex = 0 ; buffer[bufferIndex] != '\n' ; auxIndex++, bufferIndex++){
-        aux[auxIndex] = buffer[bufferIndex];
-    }
-    printf("4-");
-    aux[auxIndex] = '\0';
+    copiar_cadena_2(aux , buffer , bufferIndex);
+    articulo.precio = atoi(aux);
 
-    int precio = atoi(aux);
-    articulo.precio = precio;
-    printf("5-");
     return articulo;
 }
 
 void leer_archivo(FILE* file, ListaArticulos listaArticulos){
     char buffer[100];
     int i = 0;
-    printf("Gola");
-    printf("\n");
     while(linea_archivo(buffer,file) != NULL){
         if(listaArticulos.cantArticulos < listaArticulos.capacidad){
-            printf("putola");
             listaArticulos.articulos[listaArticulos.cantArticulos] = cargar_articulo(buffer);
             listaArticulos.cantArticulos++;
             quitar_terminador(buffer);
@@ -93,7 +72,6 @@ void leer_archivo(FILE* file, ListaArticulos listaArticulos){
         else{
             //Agregar mas memoria con un realoc
         }
-        printf("\nzi\n");
     }
     
     if((fgets(buffer,100,file)) == NULL) printf("EOF");
@@ -113,7 +91,7 @@ int main(){
     FILE* fileArticulos = fopen("articulos.txt","r");
     if(fileArticulos == NULL){
         printf("Error al leer el archivo articulos.txt");
-        fclose(fileArticulos);
+        return 1;
     }
 
     ListaArticulos listaArticulos = inicializar_ListaArticulos();
