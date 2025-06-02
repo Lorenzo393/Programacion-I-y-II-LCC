@@ -21,13 +21,23 @@ typedef struct _ListaArticulos{
 }ListaArticulos;
 
 
-char *linea_archivo(char buffer[], FILE *file){
-    return fgets(buffer,LARGO_LINEA,file);
-}
+
 
 void quitar_terminador(char buffer[]){
     int largoLinea = strlen(buffer) - 1;
     buffer[largoLinea] = '\0';
+}
+
+void mostrar_estructura(ListaArticulos listaArticulos){
+    printf("\nCant: %i",listaArticulos.cantArticulos);
+    printf("\nCap: %i",listaArticulos.capacidad);
+    for(int i = 0 ; i < listaArticulos.cantArticulos ; i++){
+        printf("\n%i %i | %s %i",i,i+1,listaArticulos.articulos[i].nombre,listaArticulos.articulos[i].precio);
+    }
+}
+
+char *linea_archivo(char buffer[], FILE *file){
+    return fgets(buffer,LARGO_LINEA,file);
 }
 
 char *copiar_cadena(char buffer[],int bufferIndex){
@@ -44,7 +54,6 @@ void copiar_cadena_2(char aux[],char buffer[],int bufferIndex){
     aux[auxIndex] = '\0';
 }
 
-
 Articulo cargar_articulo(char buffer[]){
     Articulo articulo;
     int bufferIndex = 0;
@@ -58,24 +67,27 @@ Articulo cargar_articulo(char buffer[]){
     return articulo;
 }
 
-void leer_archivo(FILE* file, ListaArticulos listaArticulos){
+ListaArticulos cargar_ListaArticulos(FILE* file, ListaArticulos listaArticulos){
     char buffer[100];
-    int i = 0;
     while(linea_archivo(buffer,file) != NULL){
         if(listaArticulos.cantArticulos < listaArticulos.capacidad){
             listaArticulos.articulos[listaArticulos.cantArticulos] = cargar_articulo(buffer);
             listaArticulos.cantArticulos++;
-            quitar_terminador(buffer);
-            printf("\nfile %i %i %s ---- %s %i",listaArticulos.cantArticulos, listaArticulos.capacidad , buffer , listaArticulos.articulos[i].nombre,listaArticulos.articulos[i].precio);
-            i++;
         }
         else{
-            //Agregar mas memoria con un realoc
+            listaArticulos.articulos = realloc(listaArticulos.articulos,(sizeof(Articulo) * (listaArticulos.capacidad*2)));
+            listaArticulos.capacidad = listaArticulos.capacidad * 2;
+            
+            listaArticulos.articulos[listaArticulos.cantArticulos] = cargar_articulo(buffer);
+            listaArticulos.cantArticulos++;
         }
     }
     
-    if((fgets(buffer,100,file)) == NULL) printf("EOF");
+    if((fgets(buffer,100,file)) == NULL) printf(" EOF");
     else printf("Nai");
+    printf("\ncant: %i cap:%i",listaArticulos.cantArticulos,listaArticulos.capacidad);
+
+    return listaArticulos;
 }
 
 
@@ -95,10 +107,10 @@ int main(){
     }
 
     ListaArticulos listaArticulos = inicializar_ListaArticulos();
-
-    leer_archivo(fileArticulos,listaArticulos);
+    listaArticulos = cargar_ListaArticulos(fileArticulos,listaArticulos);
     fclose(fileArticulos);
-    
+
+    mostrar_estructura(listaArticulos);
 
 
     //int cantPromociones = 0;
