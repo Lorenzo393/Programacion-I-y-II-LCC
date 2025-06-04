@@ -38,12 +38,24 @@ void quitar_terminador(char buffer[]){
     buffer[largoLinea] = '\0';
 }
 
-void mostrar_estructura(ListaArticulos listaArticulos){
+void mostrar_ListaArticulos(ListaArticulos listaArticulos){
     for(int i = 0 ; i < listaArticulos.cantArticulos ; i++){
         printf("\n%i %i | %s %i",listaArticulos.articulos[i].nArticulo,(listaArticulos.articulos[i].nArticulo)+1,listaArticulos.articulos[i].nombre,listaArticulos.articulos[i].precio);
     }
     printf("\nCant: %i",listaArticulos.cantArticulos);
     printf("\nCap: %i",listaArticulos.capacidad);
+}
+
+void mostrar_ListaPromociones(ListaPromociones listaPromociones){
+    printf("Cantidad de Promociones: %i",listaPromociones.cantPromociones);
+    for(int i = 0 ; i < listaPromociones.cantPromociones ; i++){
+        printf("\nPromocion %i",i+1);
+        printf("\nArticulo 1:");
+        printf("%s %i",listaPromociones.articulosPromo[i].nombre1, listaPromociones.articulosPromo[i].cant1);
+        printf("\nArticulo 2:");
+        printf("%s %i",listaPromociones.articulosPromo[i].nombre2,listaPromociones.articulosPromo[i].cant2);
+        printf("\nPrecio Final: %i\n",listaPromociones.articulosPromo[i].precio);
+    }
 }
 
 char *linea_archivo(char buffer[], FILE *file){
@@ -64,7 +76,7 @@ void copiar_cadena_2(char aux[], char buffer[], int bufferIndex){
     aux[auxIndex] = '\0';
 }
 
-Articulo cargar_articulo(char buffer[]){
+Articulo cargar_Articulo(char buffer[]){
     Articulo articulo;
     int bufferIndex = 0;
     while(buffer[bufferIndex] != ',') bufferIndex++;
@@ -81,7 +93,7 @@ ListaArticulos cargar_ListaArticulos(FILE* file, ListaArticulos listaArticulos){
     char buffer[100];
     while(linea_archivo(buffer,file) != NULL){
         if(listaArticulos.cantArticulos < listaArticulos.capacidad){
-            listaArticulos.articulos[listaArticulos.cantArticulos] = cargar_articulo(buffer);
+            listaArticulos.articulos[listaArticulos.cantArticulos] = cargar_Articulo(buffer);
             listaArticulos.articulos[listaArticulos.cantArticulos].nArticulo = listaArticulos.cantArticulos;
             listaArticulos.cantArticulos++;
         }
@@ -89,7 +101,7 @@ ListaArticulos cargar_ListaArticulos(FILE* file, ListaArticulos listaArticulos){
             listaArticulos.articulos = realloc(listaArticulos.articulos,(sizeof(Articulo) * (listaArticulos.capacidad*2)));
             listaArticulos.capacidad = listaArticulos.capacidad * 2;
             
-            listaArticulos.articulos[listaArticulos.cantArticulos] = cargar_articulo(buffer);
+            listaArticulos.articulos[listaArticulos.cantArticulos] = cargar_Articulo(buffer);
             listaArticulos.articulos[listaArticulos.cantArticulos].nArticulo = listaArticulos.cantArticulos;
             listaArticulos.cantArticulos++;
         }
@@ -111,22 +123,41 @@ Articulo articulo_random(ListaArticulos listaArticulos , Articulo *articulo){
     return articuloPromo;
 }
 
-void cargar_ListaPromociones(ListaArticulos listaArticulos, ListaPromociones listaPromociones){
+int cant_articulos_random(){
+    return (rand() % CANT_MAX_ARTICULOS_PROMO) + 1;
+}
+
+int precio_rebajado(int precio1, int precio2, int cant1, int cant2){
+    int precioMax = (precio1 * cant1) + (precio2 * cant2);
+    int precioDescuento = rand() % precioMax;
+    if(precioDescuento == 0) precioDescuento += 100;
+    if(precioDescuento == (precioMax - 1)) precioDescuento -= 100;
+    return precioDescuento;
+}
+
+ArticuloPromo cargar_ArticuloPromo(Articulo articulo1, Articulo articulo2, int cant1, int cant2){
+    ArticuloPromo articuloPromo;
+    articuloPromo.nombre1 = articulo1.nombre;
+    articuloPromo.nombre2 = articulo2.nombre;
+    articuloPromo.cant1 = cant1;
+    articuloPromo.cant2 = cant2;
+    articuloPromo.precio = precio_rebajado(articulo1.precio,articulo2.precio,cant1,cant2);
+
+    return articuloPromo;
+}
+
+ListaPromociones cargar_ListaPromociones(ListaArticulos listaArticulos, ListaPromociones listaPromociones){
     listaPromociones.articulosPromo = malloc(sizeof(ArticuloPromo) * listaPromociones.cantPromociones);
-    printf("Cantidad de Promociones: %i",listaPromociones.cantPromociones);
     for(int i = 0 ; i < listaPromociones.cantPromociones ; i++){
         Articulo articulo1 = articulo_random(listaArticulos,NULL);
         Articulo articulo2 = articulo_random(listaArticulos,&articulo1);
-        int precio1 = articulo1.precio;
-        int precio2 = articulo2.precio;
-        int nArt1 = articulo1.nArticulo;
-        int nArt2 = articulo2.nArticulo;
-        
-        printf("\nPromocion %i: | %i - %s %i | %i - %s %i |",i+1,nArt1,articulo1.nombre,precio1,nArt2,articulo2.nombre,precio2);
+        int cant1 = cant_articulos_random();
+        int cant2 = cant_articulos_random();
+
+        listaPromociones.articulosPromo[i] = cargar_ArticuloPromo(articulo1,articulo2,cant1,cant2);        
     }
+    return listaPromociones;
 }
-
-
 
 ListaArticulos inicializar_ListaArticulos(){
     ListaArticulos listaArticulos;
@@ -152,15 +183,18 @@ int main(){
 
     ListaArticulos listaArticulos = inicializar_ListaArticulos();
     listaArticulos = cargar_ListaArticulos(fileArticulos,listaArticulos);
-    mostrar_estructura(listaArticulos);
+    mostrar_ListaArticulos(listaArticulos);
     fclose(fileArticulos);
 
     ListaPromociones listaPromociones = inicializar_ListaPromociones();
     printf("\n\nIngrese la cantidad de promociones: ");
     scanf("%i",&listaPromociones.cantPromociones);
     printf("\n");
-    cargar_ListaPromociones(listaArticulos,listaPromociones);
+    listaPromociones = cargar_ListaPromociones(listaArticulos,listaPromociones);
+    
+    mostrar_ListaPromociones(listaPromociones);
 
+    //CARGAR DATOS EN EL ARCHIVO
     
     
 return 0;
