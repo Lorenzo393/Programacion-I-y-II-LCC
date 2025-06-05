@@ -1,0 +1,5 @@
+Bananas,1,Leche,2,6032
+Mermelada,1,Salchichas,3,11026
+Papel higienico,1,Lavandina,1,10295
+Papel higienico,2,Arroz,3,5649
+Aceite de girasol,1,Galletitas,3,136

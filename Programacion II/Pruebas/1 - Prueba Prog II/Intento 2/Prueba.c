@@ -3,9 +3,6 @@
 #include <stdio.h>
 #include <time.h>
 
-// fgets toma el /n
-// fgets devuelve null cuando es el final del archivo o hay un error
-
 #define LARGO_LINEA 100
 #define CANT_ARTICULOS_BASE 10
 #define CANT_MAX_ARTICULOS_PROMO 3
@@ -49,12 +46,10 @@ void mostrar_ListaArticulos(ListaArticulos listaArticulos){
 void mostrar_ListaPromociones(ListaPromociones listaPromociones){
     printf("Cantidad de Promociones: %i",listaPromociones.cantPromociones);
     for(int i = 0 ; i < listaPromociones.cantPromociones ; i++){
-        printf("\nPromocion %i",i+1);
-        printf("\nArticulo 1:");
-        printf("%s %i",listaPromociones.articulosPromo[i].nombre1, listaPromociones.articulosPromo[i].cant1);
-        printf("\nArticulo 2:");
-        printf("%s %i",listaPromociones.articulosPromo[i].nombre2,listaPromociones.articulosPromo[i].cant2);
-        printf("\nPrecio Final: %i\n",listaPromociones.articulosPromo[i].precio);
+        printf("\nPromocion %i| ",i+1);
+        printf("%s,%i,",listaPromociones.articulosPromo[i].nombre1, listaPromociones.articulosPromo[i].cant1);
+        printf("%s,%i,",listaPromociones.articulosPromo[i].nombre2,listaPromociones.articulosPromo[i].cant2);
+        printf("%i",listaPromociones.articulosPromo[i].precio);
     }
 }
 
@@ -137,8 +132,11 @@ int precio_rebajado(int precio1, int precio2, int cant1, int cant2){
 
 ArticuloPromo cargar_ArticuloPromo(Articulo articulo1, Articulo articulo2, int cant1, int cant2){
     ArticuloPromo articuloPromo;
-    articuloPromo.nombre1 = articulo1.nombre;
-    articuloPromo.nombre2 = articulo2.nombre;
+    
+    articuloPromo.nombre1 = malloc((sizeof(char)*strlen(articulo1.nombre))+1);
+    strcpy(articuloPromo.nombre1,articulo1.nombre);
+    articuloPromo.nombre2 = malloc((sizeof(char)*strlen(articulo2.nombre))+1);
+    strcpy(articuloPromo.nombre2,articulo2.nombre); //Esto lo hago para que articuloPromo.nombrex no comparta el mismo espacio de memoria que articulox.nombre | No hacer articuloPromo.nomnbrex = articulox.nombre
     articuloPromo.cant1 = cant1;
     articuloPromo.cant2 = cant2;
     articuloPromo.precio = precio_rebajado(articulo1.precio,articulo2.precio,cant1,cant2);
@@ -159,6 +157,30 @@ ListaPromociones cargar_ListaPromociones(ListaArticulos listaArticulos, ListaPro
     return listaPromociones;
 }
 
+void cargar_promociones_archivo(FILE *file, ListaPromociones listaPromociones){
+    for(int i = 0 ; i < listaPromociones.cantPromociones ; i++){
+        fprintf(file,"%s,%i,%s,%i,%i\n",listaPromociones.articulosPromo[i].nombre1,listaPromociones.articulosPromo[i].cant1,listaPromociones.articulosPromo[i].nombre2,listaPromociones.articulosPromo[i].cant2,listaPromociones.articulosPromo[i].precio);
+    }
+}
+
+void free_ListaArticulos(ListaArticulos *listaArticulos){
+    for(int i = 0 ; i < listaArticulos->cantArticulos ; i++){
+        free(listaArticulos->articulos[i].nombre);
+    }
+    free(listaArticulos->articulos);
+    listaArticulos->cantArticulos = 0;
+    listaArticulos->capacidad = 0;
+}
+
+void free_ListaPromociones(ListaPromociones *listaPromociones){
+    for(int i = 0 ; i < listaPromociones->cantPromociones ; i++){
+        free(listaPromociones->articulosPromo[i].nombre1);
+        free(listaPromociones->articulosPromo[i].nombre2);
+    }
+    free(listaPromociones->articulosPromo);
+    listaPromociones->cantPromociones = 0;
+}
+
 ListaArticulos inicializar_ListaArticulos(){
     ListaArticulos listaArticulos;
     listaArticulos.articulos = malloc(sizeof(Articulo) * CANT_ARTICULOS_BASE);
@@ -175,9 +197,10 @@ ListaPromociones inicializar_ListaPromociones(){
 
 int main(){
     srand(time(NULL));
+
     FILE* fileArticulos = fopen("articulos.txt","r");
     if(fileArticulos == NULL){
-        printf("Error al leer el archivo articulos.txt");
+        printf("Error al leer el archivo \"articulos.txt\" ");
         return 1;
     }
 
@@ -189,25 +212,22 @@ int main(){
     ListaPromociones listaPromociones = inicializar_ListaPromociones();
     printf("\n\nIngrese la cantidad de promociones: ");
     scanf("%i",&listaPromociones.cantPromociones);
-    printf("\n");
     listaPromociones = cargar_ListaPromociones(listaArticulos,listaPromociones);
-    
     mostrar_ListaPromociones(listaPromociones);
 
-    //CARGAR DATOS EN EL ARCHIVO
-    
-    
+    FILE * filePromociones = fopen("promociones.txt","w");
+    if(filePromociones == NULL){
+        printf("Error al escribir en archivo \"promociones.txt\" ");
+        return 1;
+    }
+
+    cargar_promociones_archivo(filePromociones,listaPromociones);
+    fclose(filePromociones);
+
+    free_ListaArticulos(&listaArticulos);
+    free_ListaPromociones(&listaPromociones);
+
+    printf("\nEND");
+
 return 0;
 }
-
-
-
-/* FUNCIONA
-    ListaArticulos listaArticulos = inicializar_ListaArticulos();
-    Articulo articulo;
-    articulo.nombre = "obama";
-    articulo.precio = 1200;
-    listaArticulos.articulos[0] = articulo;
-    printf("cantArticulos: %i",listaArticulos.cantArticulos);
-    printf("\narticulo 1: %s %i",listaArticulos.articulos[0].nombre,listaArticulos.articulos[0].precio);
-    */
