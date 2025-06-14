@@ -332,7 +332,7 @@ SAN GABRIEL
 SANTA TERESA                                      
 PEJIBAYE                                          
 SANTO TOMAS                                       
-PEÑAS BLANCAS                                     
+PEï¿½AS BLANCAS                                     
 AGUILA ABAJO                                      
 SAN PABLO                                         
 ZAPOTE                                            
@@ -537,7 +537,7 @@ VOLIO
 ALTO VILLEGAS                                         
 CONCEPCION                                            
 SAN ANTONIO DE ZAPOTAL                                
-SAN ISIDRO DE PEÑAS BLANCAS                           
+SAN ISIDRO DE PEï¿½AS BLANCAS                           
 CARRERA BUENA                                         
 BOLIVAR                                  
 LA ESPERANZA                                          
@@ -550,7 +550,7 @@ GUARIA
 SECTOR LOS ANGELES                                    
 CATARATA                                              
 VALLE AZUL                                            
-BAJO ZUÑIGA                                           
+BAJO ZUï¿½IGA                                           
 SOCORRO                                               
 LA GUARIA                                             
 ANGOSTURA                                             
@@ -573,7 +573,7 @@ TACARES
 RINCON DE ARIAS                                          
 LA ARENA                                  
 CALLE RODRIGUEZ                                          
-CATALUÑA                                                 
+CATALUï¿½A                                                 
 PUENTE DE PIEDRA                                         
 RINCON DE SALAS                                          
 LOS ANGELES DE BOLIVAR                                   
@@ -635,7 +635,7 @@ SAN ANTONIO DE BARRANCA
 CIRRI SUR                                               
 LLANO BONITO O CIRRI NORTE                              
 SAN ROQUE                                               
-CAÑUELA ARRIBA                                          
+CAï¿½UELA ARRIBA                                          
 SAN JERONIMO                                            
 LOS ROBLES                                              
 SAN FRANCISCO                            
@@ -766,7 +766,7 @@ SAN CRISTOBAL
 C.P. NELSON MANDELA                                  
 H.A. SAN VICENTE DE PAUL                             
 ABUNDANCIA                                           
-SAN JOSE DE LA MONTAÑA                               
+SAN JOSE DE LA MONTAï¿½A                               
 SAN PABLO                                            
 CONCEPCION                                           
 EL CORTE                               
@@ -823,7 +823,7 @@ SANTA ROSA
 VILLANUEVA                                                
 PORVENIR                                                  
 NAZARETH                                                  
-MORENO CAÑAS                                              
+MORENO CAï¿½AS                                              
 COLONIA BLANCA                                            
 LLANO AZUL                                                
 SAN RAFAEL O CHIMURRIA ABAJO                              
@@ -840,7 +840,7 @@ RIO NEGRO
 HIGUERON                                 
 LOS CHILES                                           
 ARCO IRIS                                            
-CAÑO NEGRO                                           
+CAï¿½O NEGRO                                           
 SAN JOSE DEL AMPARO                                  
 PORVENIR DE SAN JORGE                                
 MEDIO QUESO                                          
@@ -884,7 +884,7 @@ SANTA RITA
 SANTA ISABEL                                         
 LA VICTORIA                             
 SAN VICENTE                                          
-LA ESPAÑOLITA                                        
+LA ESPAï¿½OLITA                                        
 PATA DE GALLO                  
 OCCIDENTAL                                               
 ORIENTAL                                                 
@@ -960,7 +960,7 @@ YERBABUENA
 LINDA VISTA                                             
 SAN FRANCISCO                                           
 LA CIMA                                                 
-JUAN VIÑAS                                               
+JUAN VIï¿½AS                                               
 ALTO VICTORIA                                            
 SANTA MARTA                                              
 EL NARANJO                                               
@@ -1024,11 +1024,11 @@ EL CARMEN
 SAUCE                                                  
 JICOTEA                                                
 SAN RAFAEL                                             
-SIMIRIÑAC                                      
+SIMIRIï¿½AC                                      
 ALTO PACUARE ARRIBA                           
 JAKI                   
-BOLORI ÑAC                              
-NIMARI-ÑAC                                 
+BOLORI ï¿½AC                              
+NIMARI-ï¿½AC                                 
 NAMALDI                                                
 TSIPIRI                           
 AZUL                                                   
@@ -1074,7 +1074,7 @@ TOBOSI
 BARRIO NUEVO                                           
 TABLON                                                 
 PATIO DE AGUA                                          
-CAÑON                                
+CAï¿½ON                                
 PURIRES                                
 CARAGRAL                                               
 LA CANGREJA                                            
@@ -1096,7 +1096,7 @@ SAN RAFAEL DE VARABLANCA
 GUARARI                                                  
 BARVA                                                      
 SAN PEDRO                                                  
-SAN JOSE DE LA MONTAÑA                                     
+SAN JOSE DE LA MONTAï¿½A                                     
 SAN PABLO                                                  
 SAN ROQUE                                                  
 SANTA LUCIA                                                
@@ -1142,7 +1142,7 @@ CONCEPCION
 SANTA ELENA                                           
 SANTA CECILIA                                
 C.P. SAN ISIDRO JUVENIL ZURQUI                        
-H.A. SEÑORA DE LOS ANGELES                            
+H.A. SEï¿½ORA DE LOS ANGELES                            
 SAN ANTONIO                                                
 LA RIBERA                                                  
 LA ASUNCION                                                
@@ -1200,10 +1200,10 @@ RANCHO CHILAMATE
 H.A. SAN AGUSTIN                                       
 LIBERIA                                               
 GUARDIA                                               
-CAÑAS DULCES                                          
+CAï¿½AS DULCES                                          
 QUEBRADA GRANDE O GARCIA FLAMENCO                     
 CURUBANDE                                             
-BUENAVISTA DE CAÑAS DULCES                            
+BUENAVISTA DE CAï¿½AS DULCES                            
 IRIGARAY                                              
 LAS LILAS                                             
 CERECEDA                                  
@@ -1254,12 +1254,12 @@ ZAPOTE
 POZO DE AGUA                                           
 BOCAS DE NOSARA                                        
 EL ROBLAR                                              
-EL CAÑAL                                               
+EL CAï¿½AL                                               
 NAMBI                                                  
 CUAJINIQUIL                                            
 FLORIDA                                                
 MORACIA                                                
-RIO MONTAÑA                                            
+RIO MONTAï¿½A                                            
 TERCIOPELO                                             
 TALOLINGA                                              
 CURIME                                                 
@@ -1285,10 +1285,10 @@ DELICIAS DE GARZA
 EL FLOR                                      
 MATAMBUGUITO                                           
 CASITAS                                                
-GARCIMUÑOZ                                             
+GARCIMUï¿½OZ                                             
 ACOYAPA                                                
 H.A. SAN BLAS                                          
-MONTAÑITA                                              
+MONTAï¿½ITA                                              
 RIO GRANDE                                             
 SANTA CRUZ                                         
 ARADO                                              
@@ -1318,7 +1318,7 @@ SAN JUANILLO
 VISTAMAR                                
 POTRERO                                            
 OSTIONAL                                           
-SAN JOSE DE LA MONTAÑA                             
+SAN JOSE DE LA MONTAï¿½A                             
 EL SOCORRO                                         
 PALMARES                                           
 LORENA                                             
@@ -1333,7 +1333,7 @@ ORTEGA
 TALOLINGUITA                                       
 SAN PEDRO                                          
 GUAITIL                                            
-H.A. NUESTRA SEÑORA DEL ROSARIO                    
+H.A. NUESTRA SEï¿½ORA DEL ROSARIO                    
 CHIRCO                                             
 BAGACES                                               
 MONTANO                                               
@@ -1363,7 +1363,7 @@ SANTA ANA
 SANTO DOMINGO                                        
 LOS PLANES                                           
 EL COCO                                              
-RIO CAÑAS NUEVO                                      
+RIO CAï¿½AS NUEVO                                      
 LA GUINEA                                            
 CORRALILLO                                           
 PANAMA O CACIQUE                                     
@@ -1374,7 +1374,7 @@ SANTA RITA
 LIBERTAD                                    
 PASO TEMPISQUE                      
 ALTOS DEL ROBLE                                      
-CAÑAS                                                   
+CAï¿½AS                                                   
 HIGUERON ABAJO                                          
 PALMIRA                                                 
 BEBEDERO                                  
@@ -1391,7 +1391,7 @@ JABILLA ABAJO
 SAN MARTIN                                              
 LAS PALMAS                                              
 H.A MARY BLANCO                                         
-URB. LAS CAÑAS                                          
+URB. LAS CAï¿½AS                                          
 LAS JUNTAS                                          
 SANTA LUCIA                                         
 LA SIERRA                               
@@ -1411,17 +1411,17 @@ HIGUERILLAS
 MATAPALO                                            
 BARRIO JESUS                                        
 RANCHO ANIA O LOURDES                       
-CAÑITAS                                             
-COYOLITO DE ABANGARES O LA PEÑA                     
+CAï¿½ITAS                                             
+COYOLITO DE ABANGARES O LA PEï¿½A                     
 TORNOS                                              
 H.A. SAN JORGE                                      
 RAIZAL                                              
 LA CONCHA                              
-PEÑAS BLANCAS                                       
+PEï¿½AS BLANCAS                                       
 TILARAN                                               
 QUEBRADA GRANDE                                       
 SAN RAMON                                             
-CABECERAS DE CAÑAS                                    
+CABECERAS DE CAï¿½AS                                    
 TRONADORA                                             
 AGUACATE                                 
 LOS ANGELES                             
@@ -1506,7 +1506,7 @@ CHOMES
 SARMIENTO                                             
 LAGARTO SUR                                           
 LEPANTO                                               
-MONTAÑA GRANDE                                        
+MONTAï¿½A GRANDE                                        
 JICARAL                                               
 PAQUERA                                               
 TAMBOR                                                
@@ -1595,7 +1595,7 @@ MATA DE LIMON
 JUANILAMA                                             
 SALINAS                                               
 MACACONA                                              
-PEÑA BLANCA                                           
+PEï¿½A BLANCA                                           
 MESETAS ABAJO                                         
 SAN RAFAEL                                            
 GUADALUPE O MARATON                                   
@@ -1603,7 +1603,7 @@ EL BARON
 MOJON                                                 
 SAN JERONIMO                                          
 CERRILLOS                                             
-MARAÑONAL                              
+MARAï¿½ONAL                              
 PARAISO O BRUSELAS                                    
 H.A. CARLOS VENEGAS                                   
 TIVIVES                                               
@@ -1654,10 +1654,10 @@ LA PUNA
 COLORADO                                         
 EL CARMEN                                        
 CONVENTO                                         
-CAÑAS                                            
+CAï¿½AS                                            
 SAN CARLOS                                       
 SHAMBA                                           
-CAÑO BRAVO                                       
+CAï¿½O BRAVO                                       
 SANTA CRUZ                                       
 PALMITAL                                         
 MIRAMAR                                         
@@ -1702,7 +1702,7 @@ MIRAMAR
 JALACA                                      
 SINAI                                                     
 RANCHO QUEMADO O DELICIAS                                 
-CAÑABLANCAL                                               
+CAï¿½ABLANCAL                                               
 EL PROGRESO                                               
 FINCA GUANACASTE                           
 H.A. PALMAR SUR                                           
@@ -1736,8 +1736,8 @@ H.A. QUEPOS
 GOLFITO                                               
 PUERTO JIMENEZ                                        
 LA PALMA O INDEPENDENCIA                              
-CAÑAZA DE JIMENEZ                                     
-VILLA BRICEÑO                                  
+CAï¿½AZA DE JIMENEZ                                     
+VILLA BRICEï¿½O                                  
 CONTE DE PAVON                                        
 FLORIDA                                       
 ZANCUDO                                
@@ -1752,14 +1752,14 @@ UNION DE COTO NORTE
 VALLE DE LOS CEDROS O SAN MIGUEL                      
 KILOMETRO 16                                          
 BAHIA DE PAVON                       
-LA PEÑA DE BURICA                                     
+LA PEï¿½A DE BURICA                                     
 CARACOL NORTE                                 
 GUAYMI DE BURICA                                      
 ALTO CONTE                              
 VIQUILLAS                                             
 PROGRESO DE CONTEBURICA                               
 CACAO                                                 
-RESIDENCIAL UREÑA                                     
+RESIDENCIAL UREï¿½A                                     
 ESCUADRA                                              
 LAGARTO                                    
 KILOMETRO 20                                          
@@ -1780,7 +1780,7 @@ LIMONCITO DEL OESTE
 LA UNION DE LIMONCITO                               
 SAN RAFAEL DE LIMONCITO                             
 SABANILLA                                           
-CAÑAS GORDAS                                        
+CAï¿½AS GORDAS                                        
 COPAL                                               
 SAN FRANCISCO DE AGUA BUENA                         
 EL VALLE                                            
@@ -1847,7 +1847,7 @@ BAJO LOS INDIOS
 COTO CUARENTA Y DOS                                
 COTO CUARENTA Y SIETE                              
 ABROJO NORTE                        
-CAMPIÑA                                            
+CAMPIï¿½A                                            
 LA CUESTA                                          
 LAUREL                                             
 CANOAS                                             
@@ -1968,7 +1968,7 @@ LA FORTUNA
 LLANO BONITO                                                
 ASTUA PIRIE                                                 
 PROGRESO                                                    
-SAN FRANCISCO DE CAÑO SECO                                  
+SAN FRANCISCO DE CAï¿½O SECO                                  
 LINDA VISTA                                                 
 BUENOS AIRES                                                
 SAN MARTIN                                                  
@@ -2117,7 +2117,7 @@ SANTO DOMINGO
 MOSCU                                                    
 SINGAPUR                                              
 BERNA                                                    
-PUERTO ESPAÑA                                
+PUERTO ESPAï¿½A                                
 MONTEVIDEO                                             
 CARACAS                                              
 NUEVA DELHI                                              
