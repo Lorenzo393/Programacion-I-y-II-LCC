@@ -51,6 +51,12 @@ void quitar_terminador(char buffer[]){
     buffer[strlen(buffer)-1] = '\0';
 }
 
+int recorrer_cadena(char buffer[]){
+    int largo = strlen(buffer) - 1;
+    while((buffer[largo] == '\n' || buffer[largo] == ' ') && largo > 0) largo--;
+    return largo + 1;
+}
+
 char *cargar_cadena_coma(int indiceBuffer, char buffer[]){
     char aux[SIZE_BUFFER_BASE];
     int indiceAux;
@@ -67,10 +73,11 @@ char *cargar_cadena_coma(int indiceBuffer, char buffer[]){
 }
 
 char *cargar_cadena_saltoLinea(char buffer[]){
-    quitar_terminador(buffer);
-    char *cadena = malloc(sizeof(char) * strlen(buffer) + 1);
-    strcpy(cadena,buffer);
-    cadena[strlen(cadena)] = '\0';
+    int largo = recorrer_cadena(buffer);
+
+    char *cadena = malloc(sizeof(char) * (largo + 1));
+    strncpy(cadena,buffer,largo);
+    cadena[largo] = '\0';
 
     return cadena;
 }
@@ -242,8 +249,8 @@ int main(){
         return 1;
     }
     imprimir_datos_archivo(fileSalida,listaPersonas);
-    free_ListaPersonas(&listaPersonas);
     fclose(fileSalida);
+    free_ListaPersonas(&listaPersonas);
 
     return 0;
 }
