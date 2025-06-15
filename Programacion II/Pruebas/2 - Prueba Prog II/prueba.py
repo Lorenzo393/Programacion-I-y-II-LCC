@@ -21,17 +21,42 @@ def quitar_terminador(cadena):
 def cargar_datos_lista(file):
     lista = []
     for linea in file.readlines():
-        lista.append(quitar_terminador(linea))
+        lista.append(quitar_terminador(linea).split(","))
     return lista
 
-def file_diccionarios(file):
+def lista_listaTupla(lista):
+    listaTupla = []
+    for (nom,ape,gen,eda,genI,loc) in lista:
+        tupla = (nom,ape,gen,int(eda),genI,loc)
+        listaTupla.append(tupla)
+    return listaTupla
+    
+def filtro_diccionario(listaTupla):
+    dicPersonas = {"0-10":[],"11-14":[],"15-17":[],"18-99":[]}
+    for (nom,ape,gen,eda,genI,loc) in listaTupla:
+        if(eda <= 10):
+            dicPersonas["0-10"].append((nom,ape,gen,eda,genI,loc))
+        elif(eda <= 14):
+            dicPersonas["11-14"].append((nom,ape,gen,eda,genI,loc))
+        elif(eda <= 17):
+            dicPersonas["15-17"].append((nom,ape,gen,eda,genI,loc))
+        elif(eda <= 99):
+            dicPersonas[18-99].append((nom,ape,gen,eda,genI,loc))
+    return dicPersonas
+
+def file_filtro_edad(file):
     listaFile = cargar_datos_lista(file)
-    return listaFile
+    listaTupla = lista_listaTupla(listaFile)
+    dicPersonas = filtro_diccionario(listaTupla)
+    return dicPersonas
 
 def main():
     file = open("salida.txt","r")
-    dicPersonas = file_diccionarios(file)
+    dicPersonas = file_filtro_edad(file)
     file.close()
-    print(dicPersonas[0],"|",len(dicPersonas[0]))
+    
+    
+    
+   
 
 main()
