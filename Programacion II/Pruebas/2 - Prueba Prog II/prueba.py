@@ -32,16 +32,16 @@ def lista_listaTupla(lista):
     return listaTupla
     
 def filtro_diccionario(listaTupla):
-    dicPersonas = {"0-10":[],"11-14":[],"15-17":[],"18-99":[]}
+    dicPersonas = {(0,10):[],(11,14):[],(15,17):[],(18,99):[]}
     for (nom,ape,gen,eda,genI,loc) in listaTupla:
         if(eda <= 10):
-            dicPersonas["0-10"].append((nom,ape,gen,eda,genI,loc))
+            dicPersonas[(0,10)].append((nom,ape,gen,eda,genI,loc))
         elif(eda <= 14):
-            dicPersonas["11-14"].append((nom,ape,gen,eda,genI,loc))
+            dicPersonas[(11,14)].append((nom,ape,gen,eda,genI,loc))
         elif(eda <= 17):
-            dicPersonas["15-17"].append((nom,ape,gen,eda,genI,loc))
+            dicPersonas[(15,17)].append((nom,ape,gen,eda,genI,loc))
         elif(eda <= 99):
-            dicPersonas[18-99].append((nom,ape,gen,eda,genI,loc))
+            dicPersonas[(18,99)].append((nom,ape,gen,eda,genI,loc))
     return dicPersonas
 
 def file_filtro_edad(file):
@@ -54,6 +54,7 @@ def main():
     file = open("salida.txt","r")
     dicPersonas = file_filtro_edad(file)
     file.close()
+    print(dicPersonas)
     
     
     
