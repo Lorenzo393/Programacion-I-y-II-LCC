@@ -3,6 +3,7 @@ Programacion I
 Analisis Matematico I
 Algebra y Geometria I
 Lenguajes Formales y Computabilidad
+Lenguajes Formales y Computabilidad
 Programacion II
 Lenguajes formales y computabilidad
 Programacion I
