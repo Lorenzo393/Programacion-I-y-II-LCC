@@ -7,14 +7,16 @@
 #define MULT_MATERIAS 2
 #define BUFFER_SIZE 100
 
+// 0 false - !0 true
+
 typedef struct _materia{
     char *nombre;
     int diasMateria;
 }Materia;
 
 typedef struct _aulas{
+    int *cantMaterias;
     int cantAulas;
-    int cantMaterias;
     int capacidad;
     Materia *materias;
 } Aula;
@@ -26,7 +28,7 @@ typedef struct _aulas{
 
 void mostrar_aula(Aula aula){
     printf("%i\n",aula.cantAulas);
-    for(int i = 0 ; i < aula.cantMaterias ; i++){
+    for(int i = 0 ; i < *(aula.cantMaterias) ; i++){
         printf("%s\n",aula.materias[i].nombre);
     }
 }
@@ -54,52 +56,57 @@ char *cargar_cadena(char buffer[]){
     return cadena;
 }
 
-Materia *borrar_copias(Aula aula){
-    /*
-    for(int i = 0 ; i < aula.cantMaterias ; i++){
-        int flag = 1;
-        for(int idx1 = 0, idx2 = 0; flag ;){
-            if
-        }
+Materia *reordenar_cadena(int cadenaComp, int cantMaterias, Materia *materias){
+    if(!(cadenaComp == cantMaterias)){
+        while(cadenaComp < (cantMaterias - 1)){
+                materias[cadenaComp] = materias[cadenaComp + 1];
+                cadenaComp++;
+            }
     }
-    */
-    return aula.materias;
+    return materias;
 }
 
-Aula cargar_materias(FILE * materias, Aula aula){
+void borrar_copias(Materia *materias, int *cantMaterias){
+    for(int cadenaBase = 0 ; cadenaBase < (*cantMaterias) ; cadenaBase++){ 
+        for(int cadenaComp = (cadenaBase + 1); cadenaComp < (*cantMaterias) ;){
+            if(!strcmpi(materias[cadenaBase].nombre,materias[cadenaComp].nombre)){
+                materias = reordenar_cadena(cadenaComp, (*cantMaterias), materias);
+                (*cantMaterias) -= 1;
+            }
+            else{
+                cadenaComp++;
+            }
+        }
+    }
+}
+
+Aula cargar_materias(FILE *materias, Aula aula){
     char buffer[BUFFER_SIZE];
     while(fgets(buffer,sizeof(buffer),materias) != NULL){
-        if(aula.cantMaterias < aula.capacidad){
-            aula.materias[aula.cantMaterias].nombre = cargar_cadena(buffer);
-            aula.cantMaterias++;
+        if(*(aula.cantMaterias) < aula.capacidad){
+            aula.materias[*(aula.cantMaterias)].nombre = cargar_cadena(buffer);
+            *(aula.cantMaterias) += 1;
         }
         else{
             aula.materias = realloc(aula.materias,sizeof(Materia) * (aula.capacidad * MULT_MATERIAS));
-            aula.materias[aula.cantMaterias].nombre = cargar_cadena(buffer);
-            aula.cantMaterias++;
+            aula.materias[*(aula.cantMaterias)].nombre = cargar_cadena(buffer);
+            *(aula.cantMaterias) += 1;
         }
     }
-    aula.materias = borrar_copias(aula);
     return aula;
 }
 
-
-void cargar_datos(FILE *materias, Aula aula){
+Aula cargar_datos(FILE *materias, Aula aula){
     aula.cantAulas = cargar_cantAulas(materias);
     aula = cargar_materias(materias, aula);
-    mostrar_aula(aula);
-    
-    
-    
-    
-    
-
+    return aula;
 }
 
 Aula inicializar_aulas(){
     Aula aulas;
     aulas.cantAulas = 0;
-    aulas.cantMaterias = 0;
+    aulas.cantMaterias = malloc(sizeof(int));
+    *(aulas.cantMaterias) = 0;
     aulas.materias = malloc(sizeof(Materia) * CANT_MATERIAS_BASE);
     aulas.capacidad = CANT_MATERIAS_BASE;
     return aulas;
@@ -108,8 +115,14 @@ Aula inicializar_aulas(){
 int main(){
     Aula aula = inicializar_aulas();
     FILE *materias = fopen("materias.txt","r");
-    cargar_datos(materias,aula);
+    aula = cargar_datos(materias,aula);
     fclose(materias);
+
+    borrar_copias(aula.materias, aula.cantMaterias);
+    
+    mostrar_aula(aula);
+
+    
 
     return 0;
 }
