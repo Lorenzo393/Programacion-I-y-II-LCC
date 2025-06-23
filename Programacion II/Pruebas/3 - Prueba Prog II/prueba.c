@@ -11,7 +11,8 @@
 
 typedef struct _materia{
     char *nombre;
-    int diasMateria;
+    char **dias;
+    int cantDias;
 }Materia;
 
 typedef struct _aulas{
@@ -27,9 +28,12 @@ typedef struct _aulas{
 // 1 - 4 horas duracion de materias
 
 void mostrar_aula(Aula aula){
-    printf("%i\n",aula.cantAulas);
+    printf("\n%i\n",aula.cantAulas);
     for(int i = 0 ; i < *(aula.cantMaterias) ; i++){
-        printf("%s\n",aula.materias[i].nombre);
+        printf("%s-%i\n",aula.materias[i].nombre,aula.materias[i].cantDias);
+        for(int j = 0 ; j < aula.materias[i].cantDias ; j++){
+            printf("%s\n",aula.materias[i].dias[j]);
+        }
     }
 }
 
@@ -70,6 +74,7 @@ void borrar_copias(Materia *materias, int *cantMaterias){
     for(int cadenaBase = 0 ; cadenaBase < (*cantMaterias) ; cadenaBase++){ 
         for(int cadenaComp = (cadenaBase + 1); cadenaComp < (*cantMaterias) ;){
             if(!strcmpi(materias[cadenaBase].nombre,materias[cadenaComp].nombre)){
+                printf("Materia repetida: %i-%s | %i-%s\n",(cadenaBase+1),materias[cadenaBase].nombre,(cadenaComp+1),materias[cadenaComp].nombre);
                 materias = reordenar_cadena(cadenaComp, (*cantMaterias), materias);
                 (*cantMaterias) -= 1;
             }
@@ -102,6 +107,62 @@ Aula cargar_datos(FILE *materias, Aula aula){
     return aula;
 }
 
+Materia *cant_dias_materias(Materia *materias, int cantMaterias){
+    for(int i = 0 ; i < cantMaterias ; i++){
+        materias[i].cantDias = ((rand() % 3) + 1);
+    }
+    return materias;
+}
+
+char *fijo_dias(int diaRandom){ // 0 - lunes | 1 - martes | 2 - miercoles | 3 - jueves | 4 - viernes
+    char *dia;
+    switch(diaRandom){
+        case 0:
+            dia = malloc(sizeof(char) * strlen("Lunes") + 1);
+            strcpy(dia,"Lunes");
+            dia[strlen(dia)] = '\0';
+            break;
+        case 1:
+            dia = malloc(sizeof(char) * strlen("Martes") + 1);
+            strcpy(dia,"Martes");
+            dia[strlen(dia)] = '\0';
+            break;
+        case 2:
+            dia = malloc(sizeof(char) * strlen("Miercoles") + 1);
+            strcpy(dia,"Miercoles");
+            dia[strlen(dia)] = '\0';
+            break;
+        case 3:
+            dia = malloc(sizeof(char) * strlen("Jueves") + 1);
+            strcpy(dia,"Jueves");
+            dia[strlen(dia)] = '\0';
+            break;
+        case 4:
+            dia = malloc(sizeof(char) * strlen("Viernes") + 1);
+            strcpy(dia,"Viernes");
+            dia[strlen(dia)] = '\0';
+            break;
+    }
+    return dia;
+}
+
+char **random_dias(int cantDias){
+    char **dias = malloc(sizeof(char *) * cantDias);
+    for(int i = 0 ; i < cantDias ; i++){
+        dias[i] = fijo_dias(rand() % 5);
+    }
+    return dias;
+}
+
+Materia *asignar_dias_materias(Materia *materias, int cantMaterias){
+    for(int i = 0 ; i < cantMaterias ; i++){
+        for(int j = 0 ; j < materias[i].cantDias ; j++){
+            materias[i].dias = random_dias(materias[i].cantDias);
+        }
+    }
+    return materias;
+}
+
 Aula inicializar_aulas(){
     Aula aulas;
     aulas.cantAulas = 0;
@@ -113,12 +174,15 @@ Aula inicializar_aulas(){
 }
 
 int main(){
+    srand(time(NULL));
     Aula aula = inicializar_aulas();
     FILE *materias = fopen("materias.txt","r");
     aula = cargar_datos(materias,aula);
     fclose(materias);
 
     borrar_copias(aula.materias, aula.cantMaterias);
+    aula.materias = cant_dias_materias(aula.materias, *(aula.cantMaterias));
+    aula.materias = asignar_dias_materias(aula.materias, *(aula.cantMaterias));
     
     mostrar_aula(aula);
 
