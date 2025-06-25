@@ -4,6 +4,12 @@
 #include <time.h>
 
 #define CANT_MATERIAS_BASE 5
+#define HORA_INICIO_HORA_FIN 2
+#define HORA_MIN 8
+#define HORA_MAX 19
+#define CANT_HORAS_CLASES 12
+#define MAX_HORAS 4
+#define MIN_HORAS 1
 #define MULT_MATERIAS 2
 #define BUFFER_SIZE 100
 
@@ -12,6 +18,7 @@
 typedef struct _materia{
     char *nombre;
     char **dias;
+    int **horas;
     int cantDias;
 }Materia;
 
@@ -32,7 +39,7 @@ void mostrar_aula(Aula aula){
     for(int i = 0 ; i < *(aula.cantMaterias) ; i++){
         printf("%s-%i\n",aula.materias[i].nombre,aula.materias[i].cantDias);
         for(int j = 0 ; j < aula.materias[i].cantDias ; j++){
-            printf("%s\n",aula.materias[i].dias[j]);
+            printf("%s %i a %i\n",aula.materias[i].dias[j],aula.materias[i].horas[i][0],aula.materias[i].horas[i][1]);
         }
     }
 }
@@ -163,6 +170,35 @@ Materia *asignar_dias_materias(Materia *materias, int cantMaterias){
     return materias;
 }
 
+int calcular_hora_inicio(){
+    return HORA_MIN + (rand() % CANT_HORAS_CLASES);
+}
+
+int calcular_hora_fin(int horaInicio){
+    int horaFinal = horaInicio + (MIN_HORAS + (rand() % MAX_HORAS));
+    if(horaFinal > HORA_MAX) horaFinal = HORA_MAX;
+    return horaFinal;
+}
+
+int **random_horas(int cantDias){
+    int **horas = malloc(sizeof(int *) * cantDias);
+    for(int i = 0 ; i < cantDias ; i++){
+        horas[i] = malloc(sizeof(int) * HORA_INICIO_HORA_FIN); // HORA INICIO - HORA FIN
+        horas[i][0] = calcular_hora_inicio(); // 8 - 19
+        horas[i][1] = calcular_hora_fin(horas[i][0]); // 4 horas max SOLUCIONAR EXCESO DE LAS HORAS MAXIMAS
+    }
+    return horas;
+}
+
+Materia *asignar_hora_materias(Materia *materias, int cantMaterias){
+    for(int i = 0 ; i < cantMaterias ; i++){
+        for(int j = 0 ; j < materias[i].cantDias ; j++){
+            materias[i].horas = random_horas(materias[i].cantDias);
+        }
+    }
+    return materias;
+}
+
 Aula inicializar_aulas(){
     Aula aulas;
     aulas.cantAulas = 0;
@@ -183,7 +219,7 @@ int main(){
     borrar_copias(aula.materias, aula.cantMaterias);
     aula.materias = cant_dias_materias(aula.materias, *(aula.cantMaterias));
     aula.materias = asignar_dias_materias(aula.materias, *(aula.cantMaterias));
-    
+    aula.materias = asignar_hora_materias(aula.materias, *(aula.cantMaterias));
     mostrar_aula(aula);
 
     
