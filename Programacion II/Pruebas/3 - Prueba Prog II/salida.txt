@@ -1,0 +1,17 @@
+3
+Programacion I
+Viernes 11 a 15
+Analisis Matematico I
+Jueves 18 a 19
+Miercoles 14 a 18
+Jueves 13 a 15
+Algebra y Geometria I
+Miercoles 11 a 15
+Lenguajes Formales y Computabilidad
+Martes 10 a 14
+Viernes 16 a 17
+Viernes 10 a 11
+Programacion II
+Lunes 8 a 11
+Jueves 13 a 15
+Miercoles 12 a 14

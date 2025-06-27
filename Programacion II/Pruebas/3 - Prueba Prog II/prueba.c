@@ -7,7 +7,7 @@
 #define HORA_INICIO_HORA_FIN 2
 #define HORA_MIN 8
 #define HORA_MAX 19
-#define CANT_HORAS_CLASES 12
+#define CANT_HORAS_CLASES 11
 #define MAX_HORAS 4
 #define MIN_HORAS 1
 #define MULT_MATERIAS 2
@@ -39,7 +39,7 @@ void mostrar_aula(Aula aula){
     for(int i = 0 ; i < *(aula.cantMaterias) ; i++){
         printf("%s-%i\n",aula.materias[i].nombre,aula.materias[i].cantDias);
         for(int j = 0 ; j < aula.materias[i].cantDias ; j++){
-            printf("%s %i a %i\n",aula.materias[i].dias[j],aula.materias[i].horas[i][0],aula.materias[i].horas[i][1]);
+            printf("%s %i a %i\n",aula.materias[i].dias[j],aula.materias[i].horas[j][0],aula.materias[i].horas[j][1]);
         }
     }
 }
@@ -163,40 +163,57 @@ char **random_dias(int cantDias){
 
 Materia *asignar_dias_materias(Materia *materias, int cantMaterias){
     for(int i = 0 ; i < cantMaterias ; i++){
-        for(int j = 0 ; j < materias[i].cantDias ; j++){
-            materias[i].dias = random_dias(materias[i].cantDias);
-        }
+        materias[i].dias = random_dias(materias[i].cantDias);  
     }
     return materias;
 }
 
-int calcular_hora_inicio(){
-    return HORA_MIN + (rand() % CANT_HORAS_CLASES);
-}
-
-int calcular_hora_fin(int horaInicio){
-    int horaFinal = horaInicio + (MIN_HORAS + (rand() % MAX_HORAS));
-    if(horaFinal > HORA_MAX) horaFinal = HORA_MAX;
-    return horaFinal;
+int *calcular_horas(){
+    int *horas = malloc(sizeof(int) * HORA_INICIO_HORA_FIN);    // Hora Inicio - Hora Fin - Hora inicio != 19 ya que minimo tienen que durar 1 hora
+    horas[0] = HORA_MIN + rand() % CANT_HORAS_CLASES;           // horario de clases 8 - 19
+    horas[1] = horas[0] + (MIN_HORAS + rand() % MAX_HORAS);     // 4 horas max duracion de clase
+    if(horas[1] > HORA_MAX) horas[1] = HORA_MAX;
+    return horas;
 }
 
 int **random_horas(int cantDias){
     int **horas = malloc(sizeof(int *) * cantDias);
     for(int i = 0 ; i < cantDias ; i++){
-        horas[i] = malloc(sizeof(int) * HORA_INICIO_HORA_FIN); // HORA INICIO - HORA FIN
-        horas[i][0] = calcular_hora_inicio(); // 8 - 19
-        horas[i][1] = calcular_hora_fin(horas[i][0]); // 4 horas max SOLUCIONAR EXCESO DE LAS HORAS MAXIMAS
+        horas[i] = calcular_horas();
     }
     return horas;
 }
 
 Materia *asignar_hora_materias(Materia *materias, int cantMaterias){
     for(int i = 0 ; i < cantMaterias ; i++){
-        for(int j = 0 ; j < materias[i].cantDias ; j++){
-            materias[i].horas = random_horas(materias[i].cantDias);
-        }
+        materias[i].horas = random_horas(materias[i].cantDias);
     }
     return materias;
+}
+
+void imprimir_salida(FILE *salida, Aula aula){
+    fprintf(salida, "%i\n",aula.cantAulas);
+    for(int i = 0 ; i < *(aula.cantMaterias) ; i++){
+        fprintf(salida, "%s\n",aula.materias[i].nombre);
+        for(int j = 0 ; j < aula.materias[i].cantDias ; j++){
+            fprintf(salida, "%s %i a %i\n",aula.materias[i].dias[j],aula.materias[i].horas[j][0],aula.materias[i].horas[j][1]);
+        }
+    }
+}
+
+void free_aula(Aula *aula){
+    for(int i = 0 ; i < *(aula->cantMaterias) ; i++){
+        free(aula->materias[i].nombre);
+        free(aula->materias[i].horas[0]);
+        free(aula->materias[i].horas[1]);
+        for(int j = 0 ; j < aula->materias[i].cantDias ; j++){
+            free(aula->materias[j].dias);
+            free(aula->materias[j].horas[0]);
+            free(aula->materias[j].horas[1]);
+        }
+    }
+    free(aula->materias);
+    free(aula->cantMaterias);
 }
 
 Aula inicializar_aulas(){
@@ -220,9 +237,13 @@ int main(){
     aula.materias = cant_dias_materias(aula.materias, *(aula.cantMaterias));
     aula.materias = asignar_dias_materias(aula.materias, *(aula.cantMaterias));
     aula.materias = asignar_hora_materias(aula.materias, *(aula.cantMaterias));
-    mostrar_aula(aula);
 
-    
+    FILE *salida = fopen("salida.txt","w");
+    imprimir_salida(salida,aula);
+    fclose(salida);
+
+    mostrar_aula(aula);
+    free_aula(&aula);
 
     return 0;
 }
