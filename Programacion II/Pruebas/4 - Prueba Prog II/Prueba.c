@@ -5,32 +5,31 @@
 
 #define MAX_CATEGORIAS 7
 
-typedef enum {
-    Nombres,
-    Colores,
-    Animales,
-    Comidas,
-    FloresyPlantas,
-    Frutas,
-    NombresDePaises
-}Categorias;
+typedef struct _Tuti{
+    int cantCategorias;
+    char **categorias;      //cantCategorias * lenCategoria
+}Tuti;
 
-int numero_categoria(){
-    int cantCateg;
-    printf("Ingrese el numero de categorias(max %d): ",MAX_CATEGORIAS);
-    scanf("%d",&cantCateg);
-    while(cantCateg < 1 || cantCateg > 7){
-        printf("Error: Ingrese nuevamente el numero de categorias(max %d): ",MAX_CATEGORIAS);
-        scanf("%d",&cantCateg);
-    }
-    return cantCateg;
+Tuti inicializar_Tuti(int cantCategorias){
+    Tuti tuti;
+    tuti.cantCategorias = cantCategorias;
+    tuti.categorias = malloc(sizeof(char*) * cantCategorias);
+    return tuti;
 }
 
+int ingresar_categorias(){
+    int cantCategorias = 0;
+    printf("Ingrese la cantidad de categorias: ");
+    scanf("%i",&cantCategorias);
+    return cantCategorias;
+}
 
 int main(){
     srand(time(NULL));
+    Tuti tuti = inicializar_Tuti(ingresar_categorias());
 
-    int cantCateg = numero_categoria();
+    printf("CantCategorias: %i",tuti.cantCategorias);
+    
     
 
     return 0;
