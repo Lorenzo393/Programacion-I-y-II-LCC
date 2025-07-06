@@ -7,10 +7,16 @@
 #define hola 1
 #define DIV(x,y) x/y
 
+#ifdef hola
+#endif
+
+
 int main()INICIO
 
     float x = 1, y = 2;
     printf("%f",DIV((x+y),(y+y)));
+
+    
 
 
     return 0;

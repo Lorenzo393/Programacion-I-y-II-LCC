@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define SIZE_BUFFER 10
+#define STR(s) STR2(s)
+#define STR2(s) #s
+
+
 void mostrar_array_int(int arr[], int len){
     for(int i = 0 ; i < len ; i++){
         printf("%i\n",arr[i]);
@@ -55,6 +60,85 @@ void swap(int *a, int *b){
     b = aux;
 }
 
+// EJ 6
+char *get_new_line_1(){
+    char buffer[SIZE_BUFFER + 1];
+
+    printf("Ingrese texto: ");
+    scanf("%"STR(SIZE_BUFFER)"[^\n]",buffer);
+    char *line = malloc(sizeof(char) * strlen(buffer) + 1);
+    strcpy(line,buffer);
+    line[strlen(line)] = '\0';
+    return line;
+}
+
+char *get_new_line_2(){
+    char buffer[SIZE_BUFFER + 1];
+    int i = 0;
+    printf("Ingrese texto: ");
+    do {
+        buffer[i] = getchar();
+        i++;
+    }
+    while(buffer[i-1] != '\n' && i < SIZE_BUFFER);
+    buffer[i] = '\0';
+    char *line = malloc(sizeof(char) * strlen(buffer) + 1);
+    strcpy(line,buffer);
+    line[strlen(line)] = '\0';
+    return line;
+}
+
+char *get_new_line_3(){
+    char buffer[SIZE_BUFFER + 1];
+    printf("Ingrese texto: ");
+    fgets(buffer , SIZE_BUFFER + 1 , stdin);
+
+    char *ptr = strchr(buffer,'\n');
+    if(ptr != NULL) *ptr = '\0';
+
+    char *line = malloc(sizeof(char) * strlen(buffer) + 1);
+    strcpy(line,buffer);
+    line[strlen(line)] = '\0';
+    return line;
+}
+
+/*
+char *get_new_line_4(){ //%m no es parte del estandar de c, y no me anda encima
+    char *line;
+    printf("Ingrese texto: ");
+    scanf("%m[^\n]",&line);
+    return line;
+}
+*/
+
+// EJ 8
+int suma_5(int n){
+    return n + 5;
+}
+
+int apply(int (*func)(int),int n){
+    return suma_5(n);
+}
+
+void apply_n(int (*func)(int),int *n){
+    *n = func(*n);
+}
+
+typedef void (*VisitorFunc)(int);
+
+void imprimir(int n){
+    printf("%i\n",n);
+}
+
+void recorre(VisitorFunc f, int array[],int len){
+    for(int i = 0 ; i < len ; i++){
+        f(array[i]);
+    }
+}
+
+// EJ 12
+
+
 int main(){
     // EJ 1
     //imprimir_direccion_memoria_1();
@@ -80,6 +164,28 @@ int main(){
     //printf("%i %i",*a,*b);
     //free(a);
     //free(b);
+
+    // EJ 6
+    //char *line = get_new_line_3();
+    //printf("%s",line);
+    //free(line);
+
+    // EJ 8
+    //int x = 5;
+    //x = apply(suma_5,x);
+    //printf("%i",x);
+
+    //int *y = malloc(sizeof(int));
+    //*y = 5;
+    //apply_n(suma_5,y);
+    //printf("%i",*y);
+    //free(y);
+
+    //int array[] = {1,2,3,4,5};
+    //int len = 5;
+    //recorre(imprimir,array,len);
+
+    
 
     return 0;
 }
