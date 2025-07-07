@@ -137,7 +137,101 @@ void recorre(VisitorFunc f, int array[],int len){
 }
 
 // EJ 12
+typedef struct _Punto{
+    float x;
+    float y;
+} Punto;
 
+Punto punto_medio(Punto punto1,Punto punto2){
+    Punto puntoMedio;
+    puntoMedio.x = (punto1.x + punto2.x) / 2;
+    puntoMedio.y = (punto1.y + punto2.y) / 2;
+    return puntoMedio;
+}
+
+// EJ 13
+#define SIZE_BARAJA 48
+#define CANT_PALOS 4
+
+typedef enum _Palo{
+    Copa,
+    Oro,
+    Basto,
+    Espada
+} Palo;
+
+typedef struct _Carta{
+    int numero;
+    Palo palo;
+} Carta;
+
+typedef struct _Baraja{
+    Carta carta[SIZE_BARAJA];
+} Baraja;
+
+Palo devolver_palo(int nPalo){
+    Palo palo;
+    switch(nPalo){
+        case 0:
+            palo = Copa;
+            break;
+        case 1:
+            palo = Oro;
+            break;
+        case 2:
+            palo = Basto;
+            break;
+        case 3:
+            palo = Espada;
+            break;
+    }
+    return palo;
+}
+
+
+void llenar(Baraja *baraja){
+    int nCarta = 1, nPalo = 0;
+    for(int i = 0 ; i < SIZE_BARAJA ; i++){
+        baraja->carta[i].palo = devolver_palo(nPalo);
+        baraja->carta[i].numero = nCarta;
+        if(((i + 1) % (SIZE_BARAJA / CANT_PALOS))== 0){
+            nPalo++;
+            nCarta = 1;
+        }
+        else{
+            nCarta++;
+        }
+    }
+}
+
+void char_palo(char textPalo[], Palo palo){
+    switch(palo){
+        case Copa:
+            strcpy(textPalo,"Copa");
+            textPalo[strlen("Copa")] = '\0';
+            break;
+        case Oro:
+            strcpy(textPalo,"Oro");
+            textPalo[strlen("Oro")] = '\0';
+            break;
+        case Basto:
+            strcpy(textPalo,"Baston");
+            textPalo[strlen("Baston")] = '\0';
+            break;
+        case Espada:
+            strcpy(textPalo,"Espada");
+            textPalo[strlen("Espada")] = '\0';
+            break;
+    }
+}
+
+void mostrar_baraja(Baraja baraja){
+    for(int i = 0 ; i < SIZE_BARAJA ; i++){
+        char textPalo[SIZE_BUFFER + 1];
+        char_palo(textPalo, baraja.carta[i].palo);
+        printf("|%i %s|\n",baraja.carta[i].numero,textPalo);
+    }
+}
 
 int main(){
     // EJ 1
@@ -174,16 +268,30 @@ int main(){
     //int x = 5;
     //x = apply(suma_5,x);
     //printf("%i",x);
-
+    // -
     //int *y = malloc(sizeof(int));
     //*y = 5;
     //apply_n(suma_5,y);
     //printf("%i",*y);
     //free(y);
-
+    // -
     //int array[] = {1,2,3,4,5};
     //int len = 5;
     //recorre(imprimir,array,len);
+
+    // EJ 12
+    //Punto punto1,punto2,puntoMedio;
+    //punto1.x = 1;
+    //punto1.y = 3;
+    //punto2.x = 4;
+    //punto2.y = 6;
+    //puntoMedio = punto_medio(punto1,punto2);
+    //printf("%f %f",puntoMedio.x,puntoMedio.y);
+
+    Baraja *baraja = malloc(sizeof(Baraja));
+    llenar(baraja);
+    mostrar_baraja(*baraja);
+    free(baraja);
 
     
 
