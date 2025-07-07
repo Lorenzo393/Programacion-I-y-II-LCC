@@ -1,8 +1,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
-#define SIZE_BUFFER 10
+#define SIZE_BUFFER 20
 #define STR(s) STR2(s)
 #define STR2(s) #s
 
@@ -63,8 +64,6 @@ void swap(int *a, int *b){
 // EJ 6
 char *get_new_line_1(){
     char buffer[SIZE_BUFFER + 1];
-
-    printf("Ingrese texto: ");
     scanf("%"STR(SIZE_BUFFER)"[^\n]",buffer);
     char *line = malloc(sizeof(char) * strlen(buffer) + 1);
     strcpy(line,buffer);
@@ -72,10 +71,10 @@ char *get_new_line_1(){
     return line;
 }
 
-char *get_new_line_2(){
+char *get_new_line_2(){ //Guarda el salto de linea en la cadena
     char buffer[SIZE_BUFFER + 1];
     int i = 0;
-    printf("Ingrese texto: ");
+
     do {
         buffer[i] = getchar();
         i++;
@@ -90,7 +89,7 @@ char *get_new_line_2(){
 
 char *get_new_line_3(){
     char buffer[SIZE_BUFFER + 1];
-    printf("Ingrese texto: ");
+
     fgets(buffer , SIZE_BUFFER + 1 , stdin);
 
     char *ptr = strchr(buffer,'\n');
@@ -188,7 +187,6 @@ Palo devolver_palo(int nPalo){
     return palo;
 }
 
-
 void llenar(Baraja *baraja){
     int nCarta = 1, nPalo = 0;
     for(int i = 0 ; i < SIZE_BARAJA ; i++){
@@ -225,6 +223,10 @@ void char_palo(char textPalo[], Palo palo){
     }
 }
 
+Carta azar(Baraja baraja){
+    return baraja.carta[rand() % SIZE_BARAJA];
+}
+
 void mostrar_baraja(Baraja baraja){
     for(int i = 0 ; i < SIZE_BARAJA ; i++){
         char textPalo[SIZE_BUFFER + 1];
@@ -233,7 +235,85 @@ void mostrar_baraja(Baraja baraja){
     }
 }
 
+// EJ 14
+typedef struct _Contacto{
+    char *nombre, *telefono;
+    unsigned int edad;
+} Contacto;
+
+typedef struct _Agenda{
+    Contacto *contactos;
+    int cantContactos;
+} Agenda;
+
+Contacto crear_contacto(){
+    Contacto contacto;
+    printf("Ingrese el nombre: ");
+    contacto.nombre = get_new_line_3();
+    
+    printf("Ingrese el numero de telefono: ");
+    contacto.telefono = get_new_line_3();
+    
+    printf("Ingrese la edad: ");
+    scanf("%u",&contacto.edad);
+    getchar();
+
+    return contacto;
+}
+
+Agenda crear_agenda(){
+    Agenda agenda;
+    agenda.cantContactos = 0;
+    agenda.contactos = NULL;
+    return agenda;
+}
+
+void mostrar_contacto(Contacto contacto){
+    printf("|%s - %s - %i|\n",contacto.nombre,contacto.telefono,contacto.edad);
+}
+
+void mostrar_agenda(Agenda agenda){
+    for(int i = 0 ; i < agenda.cantContactos ; i++){
+        mostrar_contacto(agenda.contactos[i]);
+    }
+}
+
+void actualizar_edad(Contacto *contacto){
+    printf("Ingrese la nueva edad: ");
+    scanf("%u",&contacto->edad);
+}
+
+void alta_contacto(Agenda *agenda){
+    agenda->cantContactos++;
+    agenda->contactos = realloc(agenda->contactos,(sizeof(Contacto) * (agenda->cantContactos)));
+    agenda->contactos[(agenda->cantContactos) - 1] = crear_contacto();
+}
+
+void modificar_agenda(Agenda *agenda){
+    int i = 0, flag = 1;
+
+    printf("Ingrese el nombre a buscar: ");
+    char *nombre = get_new_line_3();
+
+    while(flag && i < agenda->cantContactos){
+        if(strcmp(agenda->contactos[i].nombre, nombre) == 0) flag = 0;
+        else i++;
+    }
+    
+    if(!flag) actualizar_edad(&(agenda->contactos[i]));
+    else printf("\nEl nombre ingresado no esta en los contactos\n");
+}
+
+double prom(Agenda agenda){
+    double promedio = 0;
+    for(int i = 0 ; i < agenda.cantContactos ; i++){
+        promedio += agenda.contactos[i].edad;
+    }
+    return promedio / agenda.cantContactos;
+}
+
 int main(){
+    srand(time(NULL));
     // EJ 1
     //imprimir_direccion_memoria_1();
 
@@ -288,12 +368,26 @@ int main(){
     //puntoMedio = punto_medio(punto1,punto2);
     //printf("%f %f",puntoMedio.x,puntoMedio.y);
 
-    Baraja *baraja = malloc(sizeof(Baraja));
-    llenar(baraja);
-    mostrar_baraja(*baraja);
-    free(baraja);
+    // EJ 13
+    //Baraja *baraja = malloc(sizeof(Baraja));
+    //llenar(baraja);
+    //mostrar_baraja(*baraja);
+    // -
+    //Carta carta = azar(*baraja);
+    //char textPalo[SIZE_BUFFER];
+    //char_palo(textPalo,carta.palo);
+    //printf("\n%i %s",carta.numero,textPalo);
+    //free(baraja);
 
+    // EJ 14
+    //Agenda agenda = crear_agenda();
+    //alta_contacto(&agenda);
+    //alta_contacto(&agenda);
+    //alta_contacto(&agenda);
+    // -
+    //modificar_agenda(&agenda);
+    //mostrar_agenda(agenda);
+    //printf("%lf",prom(agenda));
     
-
     return 0;
 }
