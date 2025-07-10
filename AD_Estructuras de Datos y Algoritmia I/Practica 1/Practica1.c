@@ -41,6 +41,8 @@ float mediana(float arreglo[], int len){
 }
 
 //EJ 2
+#define MAX_SIZE 100
+
 int string_len(char *str){
     int len = 0;
     while(str[len] != '\0') len++;
@@ -100,7 +102,7 @@ int string_subcadena(char *str1, char *str2){
     while(flag && i < string_len(str1)){
         if(str1[i] == str2[0]){
             char *aux = malloc(sizeof(char) * (string_len(str2) + 1));
-            strcpy(aux,&(str1[i]));
+            strncpy(aux,&(str1[i]),string_len(str2));
             aux[string_len(str2)] = '\0';
             printf("%s - %s - %s\n",str1,str2,aux);
             if(string_compare(aux,str2) == 0){
@@ -111,10 +113,27 @@ int string_subcadena(char *str1, char *str2){
         }
         i++;
     }
-    return ocurrencia++;
+    return (ocurrencia + 1);
 }
 
-//void string_unir(char *arregloStrings[], int n, char *sep, char *res){}
+int largo_cadenas(char *arregloStrings[],int n, char sep[]){
+    int lenCadenas = 0;
+    for(int i = 0 ; i < n ; i++){
+        lenCadenas += string_len(arregloStrings[i]);
+    }
+    lenCadenas += string_len(sep) * (n - 1);
+    return lenCadenas;
+}
+
+void string_unir(char *arregloStrings[], int n, char *sep, char *res){
+    int lenRes = largo_cadenas(arregloStrings,n,sep);
+    res = realloc(res,sizeof(char) * (lenRes + 1));
+    for(int i = 0 ; i < n ; i++){
+        string_concat(res,arregloStrings[i],MAX_SIZE);
+        string_concat(res,sep,MAX_SIZE);
+    }
+    res[lenRes] = '\0';
+}
 
 //EJ 3
 typedef struct {
@@ -152,12 +171,22 @@ int main(){
     //int comp = string_compare(str1,str2);
     //printf("%i",comp);
     // -
-    char *str1 = malloc(sizeof(char)*(strlen("holaputoobama")+1));
-    char *str2 = malloc(sizeof(char)*(strlen("obama")+1));
-    strcpy(str1,"holaputoobama");
-    strcpy(str2,"obama");
-    int coincidencia = string_subcadena(str1,str2);
-    printf("%i",coincidencia);
+    //char *str1 = malloc(sizeof(char)*(strlen("pobamaobama")+1));
+    //char *str2 = malloc(sizeof(char)*(strlen("obama")+1));
+    //strcpy(str1,"pobamaobama");
+    //strcpy(str2,"obama");
+    //int coincidencia = string_subcadena(str1,str2);
+    //printf("%i",coincidencia);
+    // -
+    //char *res = malloc(sizeof(char));
+    //char *arregloCadenas[] = {"hola","weon","como","estay","chuchatumare"};
+    //int cantCadenas = 5;
+    //char sep[] = {" "};
+    //string_unir(arregloCadenas,cantCadenas,sep,res);
+    //printf("%s - %i - \"%s\" - %s",arregloCadenas[0],cantCadenas,sep,res);
+    // QUEDA EL EJERCICIO 2G
 
+    // EJ 3
+    
 
 }
