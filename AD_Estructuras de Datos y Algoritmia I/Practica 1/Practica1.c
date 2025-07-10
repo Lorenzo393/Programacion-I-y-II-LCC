@@ -55,6 +55,73 @@ void string_reverse(char *str){
     }
 }
 
+int string_concat(char *str1, char *str2, int max){
+    int lenStr1 = string_len(str1);
+    int lenStr2 = string_len(str2);
+    int cantCopiados = 0;
+    //printf("%i - %i - %i\n",lenStr1,lenStr2,lenStr1Str2);
+    if((lenStr1 + lenStr2) < max){
+        //str1 = realloc(str1,sizeof(char) * (lenStr1Str2 + 1)); NO SE QUE HACER ACA SI LO REALOCO FALLA
+        for(int i = lenStr1, j = 0 ; j < lenStr2 ; i++, j++){
+            str1[i] = str2[j];
+            cantCopiados++;
+        }
+        str1[(lenStr1 + lenStr2)] = '\0';
+    }
+    return cantCopiados;
+}
+
+int string_compare(char *str1, char *str2){
+    int lenStr1 = string_len(str1);
+    int lenStr2 = string_len(str2);
+    if(lenStr1 > lenStr2) return 1;
+    else if(lenStr1 < lenStr2) return -1;
+    else if (lenStr1 == lenStr2){
+        int valorStr1 = 0, valorStr2 = 0;
+        int flag = 1;
+        for(int i = 0 ; i < lenStr1 ; i++){
+            if(str1[i] != str2[i]){
+                flag = 0;
+                valorStr1 += str1[i];
+                valorStr2 += str2[i];
+            }
+        }
+        if(flag) return 0;
+        else if(valorStr1 > valorStr2) return 1;
+        else if(valorStr1 < valorStr2) return -1;
+    }
+    return -2;
+}
+
+int string_subcadena(char *str1, char *str2){
+    int ocurrencia = -1;
+    int flag = 1;
+    int i = 0;
+    while(flag && i < string_len(str1)){
+        if(str1[i] == str2[0]){
+            char *aux = malloc(sizeof(char) * (string_len(str2) + 1));
+            strcpy(aux,&(str1[i]));
+            aux[string_len(str2)] = '\0';
+            printf("%s - %s - %s\n",str1,str2,aux);
+            if(string_compare(aux,str2) == 0){
+                ocurrencia = i;
+                flag = 0;
+            }
+            free(aux);
+        }
+        i++;
+    }
+    return ocurrencia++;
+}
+
+//void string_unir(char *arregloStrings[], int n, char *sep, char *res){}
+
+//EJ 3
+typedef struct {
+    int* direccion;
+    int capacidad;
+} ArregloEnteros;
+
 int main(){
     // EJ 1
     //float arreglo[] = {7.4,4,2,1,5,7,4.3};
@@ -64,15 +131,33 @@ int main(){
     //mostrar_arreglo(arreglo,len);
     
     // EJ 2
-    //int len = string_len("hola puta");
+    //int len = string_len("hola ----");
     //printf("%i",len);
     // -
-    //char cadena[] = {"hola perra"};
+    //char cadena[] = {"hola -----"};
     //string_reverse(cadena);
     //printf("%s",cadena);
     // -
-
-
+    //char *str1 = malloc(sizeof(char)*(strlen("hola")+1));
+    //char *str2 = malloc(sizeof(char)*(strlen("obama")+1));
+    //strcpy(str1,"hola");
+    //strcpy(str2,"obama");
+    //int cantCopias = string_concat(str1,str2,20);
+    //printf("%s - %s - %i",str1,str2,cantCopias);
+    // -
+    //char *str1 = malloc(sizeof(char)*(strlen("hola")+1));
+    //char *str2 = malloc(sizeof(char)*(strlen("obama")+1));
+    //strcpy(str1,"holaa");
+    //strcpy(str2,"holaa");
+    //int comp = string_compare(str1,str2);
+    //printf("%i",comp);
+    // -
+    char *str1 = malloc(sizeof(char)*(strlen("holaputoobama")+1));
+    char *str2 = malloc(sizeof(char)*(strlen("obama")+1));
+    strcpy(str1,"holaputoobama");
+    strcpy(str2,"obama");
+    int coincidencia = string_subcadena(str1,str2);
+    printf("%i",coincidencia);
 
 
 }
