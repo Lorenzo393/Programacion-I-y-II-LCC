@@ -141,6 +141,43 @@ typedef struct {
     int capacidad;
 } ArregloEnteros;
 
+ArregloEnteros *arreglo_enteros_crear(int capacidad){
+    ArregloEnteros *arreglo = malloc(sizeof(ArregloEnteros));
+    arreglo->direccion = malloc(sizeof(int) * capacidad);
+    arreglo->capacidad = capacidad;
+    return arreglo;
+}
+
+void arreglo_enteros_destruir(ArregloEnteros *arreglo){
+    free(arreglo->direccion);
+    free(arreglo);
+}
+
+int arreglo_enteros_leer(ArregloEnteros *arreglo, int pos){
+    return arreglo->direccion[pos];
+}
+
+void arreglo_enteros_escribir(ArregloEnteros *arreglo, int pos, int dato){
+    arreglo->direccion[pos] = dato;
+}
+
+int arreglo_enteros_capacidad(ArregloEnteros *arreglo){
+    return arreglo->capacidad;
+}
+
+void arreglo_enteros_imprimir(ArregloEnteros *arreglo){
+    for(int i = 0 ; i < arreglo_enteros_capacidad(arreglo) ; i++){
+        printf("%i\n",arreglo_enteros_leer(arreglo,i));
+    }
+}
+
+//EJ 4
+
+
+
+
+
+
 int main(){
     // EJ 1
     //float arreglo[] = {7.4,4,2,1,5,7,4.3};
@@ -187,6 +224,15 @@ int main(){
     // QUEDA EL EJERCICIO 2G
 
     // EJ 3
-    
+    //ArregloEnteros *arreglo = arreglo_enteros_crear(5);
+    //arreglo_enteros_escribir(arreglo,0,1);
+    //arreglo_enteros_escribir(arreglo,1,2);
+    //arreglo_enteros_escribir(arreglo,2,3);
+    //arreglo_enteros_escribir(arreglo,3,4);
+    //arreglo_enteros_escribir(arreglo,4,5);
+    //arreglo_enteros_imprimir(arreglo);
+    //arreglo_enteros_destruir(arreglo);
+
+    // EJ 4
 
 }
