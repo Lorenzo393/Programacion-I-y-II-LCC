@@ -136,6 +136,8 @@ void string_unir(char *arregloStrings[], int n, char *sep, char *res){
 }
 
 //EJ 3
+#define MIN_POS 0
+
 typedef struct {
     int* direccion;
     int capacidad;
@@ -153,16 +155,16 @@ void arreglo_enteros_destruir(ArregloEnteros *arreglo){
     free(arreglo);
 }
 
+int arreglo_enteros_capacidad(ArregloEnteros *arreglo){
+    return arreglo->capacidad;
+}
+
 int arreglo_enteros_leer(ArregloEnteros *arreglo, int pos){
     return arreglo->direccion[pos];
 }
 
 void arreglo_enteros_escribir(ArregloEnteros *arreglo, int pos, int dato){
     arreglo->direccion[pos] = dato;
-}
-
-int arreglo_enteros_capacidad(ArregloEnteros *arreglo){
-    return arreglo->capacidad;
 }
 
 void arreglo_enteros_imprimir(ArregloEnteros *arreglo){
@@ -172,10 +174,25 @@ void arreglo_enteros_imprimir(ArregloEnteros *arreglo){
 }
 
 //EJ 4
+void arreglo_enteros_ajustar(ArregloEnteros *arreglo, int capacidad){
+    arreglo->direccion = realloc(arreglo->direccion,sizeof(int) * capacidad);
+    arreglo->capacidad = capacidad;
+}
 
+void arreglo_enteros_insertar(ArregloEnteros *arreglo, int pos, int dato){
+    arreglo_enteros_ajustar(arreglo,(arreglo_enteros_capacidad(arreglo) + 1));
+    for(int i = (arreglo_enteros_capacidad(arreglo) - 1) ; i > pos ; i--){
+        arreglo_enteros_escribir(arreglo,i,arreglo_enteros_leer(arreglo,i-1));
+    }
+    arreglo_enteros_escribir(arreglo,pos,dato);
+}
 
-
-
+void arreglo_enteros_eliminar(ArregloEnteros *arreglo, int pos){
+    for(int i = pos ; i < (arreglo_enteros_capacidad(arreglo) - 1) ; i++){
+        arreglo_enteros_escribir(arreglo,i,arreglo_enteros_leer(arreglo,i+1));
+    }
+    arreglo_enteros_ajustar(arreglo,(arreglo_enteros_capacidad(arreglo) - 1));
+}
 
 
 int main(){
@@ -234,5 +251,19 @@ int main(){
     //arreglo_enteros_destruir(arreglo);
 
     // EJ 4
+    //ArregloEnteros *arreglo = arreglo_enteros_crear(5);
+    //arreglo_enteros_escribir(arreglo,0,7);
+    //arreglo_enteros_escribir(arreglo,1,9);
+    //arreglo_enteros_escribir(arreglo,2,3);
+    //arreglo_enteros_escribir(arreglo,3,5);
+    //arreglo_enteros_escribir(arreglo,4,2);
+    //arreglo_enteros_imprimir(arreglo);
+    //printf("\n");
+    //arreglo_enteros_insertar(arreglo,1,1);
+    //arreglo_enteros_imprimir(arreglo);
+    //printf("\n");
+    //arreglo_enteros_eliminar(arreglo,2);
+    //arreglo_enteros_imprimir(arreglo);
+    //arreglo_enteros_destruir(arreglo);
 
 }
