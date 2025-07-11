@@ -42,6 +42,22 @@ size_t matriz_num_columnas(Matriz* matriz) {
 void matriz_mostrar(Matriz *matriz){
     printf("Matriz UNI: ");
     for(int i = 0 ; i < matriz_num_filas(matriz) * matriz_num_columnas(matriz) ; i++){
-    printf("%.2lf ",matriz->direccion[i]);
+        if(i % matriz_num_columnas(matriz) == 0) printf("\n");
+        printf("%.2lf ",matriz->direccion[i]);
     }
+    printf("\n");
+}
+
+void matriz_intercambiar_filas(Matriz *matriz, size_t fil1, size_t fil2){
+    for(int i = 0 ; i < matriz_num_columnas(matriz) ; i++){
+        double aux1 = matriz_leer(matriz,fil1,i);
+        matriz_escribir(matriz,fil1,i,matriz_leer(matriz,fil2,i));
+        matriz_escribir(matriz,fil2,i,aux1);
+    }
+}
+
+void matriz_insertar_fila(Matriz *matriz, size_t fil, double fila[]){
+  for(int i = 0 ; i < matriz_num_columnas(matriz) ; i++){
+    matriz_escribir(matriz,fil,i,fila[i]);
+  }
 }

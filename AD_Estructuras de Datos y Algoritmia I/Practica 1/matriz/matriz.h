@@ -46,12 +46,12 @@ void matriz_mostrar(Matriz *matriz);
 /*
 ** Intercambia dos filas dadas
 */
-Matriz *matriz_intercambiar_filas(Matriz *matriz, size_t fil1, size_t fil2);
+void matriz_intercambiar_filas(Matriz *matriz, size_t fil1, size_t fil2);
 
 /*
 ** Agrega una nueva fila en una posicion dada
 */
-Matriz *matriz_insertar_fila(Matriz *matriz, size_t fil); 
+void matriz_insertar_fila(Matriz *matriz, size_t fil, double fila[]); 
 // Falta el argumento de agregar una nueva fila
 
 #endif /* __MATRIZ_H__ */

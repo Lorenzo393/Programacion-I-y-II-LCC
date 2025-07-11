@@ -264,13 +264,18 @@ int main(){
     //arreglo_enteros_destruir(arreglo);
 
     // EJ 5
-    Matriz *matriz = matriz_crear(2,3);
-    matriz_escribir(matriz,0,0,1);
-    matriz_escribir(matriz,0,1,2);
-    matriz_escribir(matriz,0,2,3);
-    matriz_escribir(matriz,1,0,4);
-    matriz_escribir(matriz,1,1,5);
-    matriz_escribir(matriz,1,2,6);
-    matriz_mostrar(matriz);
-    matriz_destruir(matriz);
+    //Matriz *matriz = matriz_crear(2,3);
+    //matriz_escribir(matriz,0,0,1);
+    //matriz_escribir(matriz,0,1,2);
+    //matriz_escribir(matriz,0,2,3);
+    //matriz_escribir(matriz,1,0,4);
+    //matriz_escribir(matriz,1,1,5);
+    //matriz_escribir(matriz,1,2,6);
+    //matriz_mostrar(matriz);
+    //matriz_intercambiar_filas(matriz,0,1);
+    //matriz_mostrar(matriz);
+    //double fila[] = {9,8,7};
+    //matriz_insertar_fila(matriz,1,fila);
+    //matriz_mostrar(matriz);
+    //matriz_destruir(matriz);
 }
