@@ -38,4 +38,20 @@ size_t matriz_num_filas(Matriz* matriz);
 */
 size_t matriz_num_columnas(Matriz* matriz);
 
+/*
+** Imprime la matriz completa en pantalla
+*/
+void matriz_mostrar(Matriz *matriz);
+
+/*
+** Intercambia dos filas dadas
+*/
+Matriz *matriz_intercambiar_filas(Matriz *matriz, size_t fil1, size_t fil2);
+
+/*
+** Agrega una nueva fila en una posicion dada
+*/
+Matriz *matriz_insertar_fila(Matriz *matriz, size_t fil); 
+// Falta el argumento de agregar una nueva fila
+
 #endif /* __MATRIZ_H__ */

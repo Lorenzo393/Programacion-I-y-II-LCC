@@ -1,7 +1,4 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <time.h>
+#include "matriz/matriz.h"
 
 //EJ 1
 void mostrar_arreglo(float arreglo[], int len){
@@ -266,4 +263,14 @@ int main(){
     //arreglo_enteros_imprimir(arreglo);
     //arreglo_enteros_destruir(arreglo);
 
+    // EJ 5
+    Matriz *matriz = matriz_crear(2,3);
+    matriz_escribir(matriz,0,0,1);
+    matriz_escribir(matriz,0,1,2);
+    matriz_escribir(matriz,0,2,3);
+    matriz_escribir(matriz,1,0,4);
+    matriz_escribir(matriz,1,1,5);
+    matriz_escribir(matriz,1,2,6);
+    matriz_mostrar(matriz);
+    matriz_destruir(matriz);
 }
