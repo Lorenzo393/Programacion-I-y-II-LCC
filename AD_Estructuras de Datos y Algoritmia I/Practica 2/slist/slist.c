@@ -1,5 +1,5 @@
 #include "slist.h"
-#include <stdlib.h>
+
 
 SList slist_crear() {
   return NULL;
@@ -46,3 +46,57 @@ void slist_recorrer(SList lista, FuncionVisitante visit) {
     visit(nodo->dato);
 }
 
+int slist_longitud(SList lista){
+  int len = 0;
+  while(lista != NULL){
+    lista = lista->sig;
+    len++;
+  }
+  return len; 
+}
+
+void slist_concatenar(SList lista1, SList lista2){
+  while(lista2 != NULL){
+    lista1 = slist_agregar_final(lista1, lista2->dato);
+    lista2 = lista2->sig;
+  }
+}
+
+SList slist_insertar(SList lista, int pos, int dato){
+  if(pos < 1) return slist_agregar_inicio(lista,dato);
+
+  SNodo *nuevoNodo = malloc(sizeof(SNodo));
+  nuevoNodo->dato = dato;
+  nuevoNodo->sig = NULL;
+  
+  if(lista == NULL) return nuevoNodo;
+
+  SNodo *nodoAnterior = lista;
+  for(int i = 0 ; i < (pos - 1) && nodoAnterior->sig != NULL ; nodoAnterior = nodoAnterior->sig , i++);
+
+  SNodo *aux = nodoAnterior->sig;
+  nodoAnterior->sig = nuevoNodo;
+  nuevoNodo->sig = aux;
+
+  return lista;
+}
+
+SList slist_elimina(SList lista, int pos){
+  if(lista == NULL) return NULL;
+  if(pos < 1) {
+    SNodo *nodoSegundo = lista->sig;
+    free(lista);
+    return nodoSegundo;
+  }
+
+  SNodo *nodoAnterior = lista;
+  for(int i = 0 ; i < (pos - 1) && nodoAnterior->sig != NULL ; i++, nodoAnterior = nodoAnterior->sig);
+  
+  if(nodoAnterior->sig == NULL) return lista;
+  SNodo *nodoEliminar = nodoAnterior->sig;
+  nodoAnterior->sig = nodoEliminar->sig;
+  free(nodoEliminar);
+  
+  return lista;
+}
+  
