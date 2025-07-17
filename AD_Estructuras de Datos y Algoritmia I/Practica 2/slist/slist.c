@@ -99,4 +99,61 @@ SList slist_elimina(SList lista, int pos){
   
   return lista;
 }
+
+int slist_contiene(SList lista, int dato){
+  for(;lista != NULL && lista->dato != dato ; lista = lista->sig);
+  return lista != NULL;
+}
+
+
+int slist_indice(SList lista, int dato){
+  int pos = -1;
+  if(lista == NULL) return pos;
   
+  int flag = 1;
+  for(int i = 0; lista != NULL && flag; lista = lista->sig, i++){
+    if(lista->dato == dato){
+      flag = 0;
+      pos = i;
+    }
+  }
+  return pos;
+}
+ 
+SList slist_intersecar(SList lista1, SList lista2){
+  SList listaIntersecada = NULL;
+  while(lista1 != NULL){
+    if(!slist_contiene(lista2,lista1->dato)){
+      listaIntersecada = slist_agregar_inicio(listaIntersecada,lista1->dato);
+    }
+    lista1 = lista1->sig;
+  }
+  while(lista2 != NULL){
+    if(!slist_contiene(lista1,lista2->dato)){
+      listaIntersecada = slist_agregar_inicio(listaIntersecada,lista2->dato);
+    }
+    lista2 = lista2->sig;
+  }  
+  return listaIntersecada;
+}
+
+
+
+
+
+
+
+SList slist_intercalar(SList lista1, SList lista2){
+  SList listaIntercalada = NULL;
+  while(lista1 != NULL || lista2 != NULL){
+    if(lista1 != NULL){
+      listaIntercalada = slist_agregar_final(listaIntercalada,lista1->dato);
+      lista1 = lista1->sig;
+    }
+    if(lista2 != NULL){
+      listaIntercalada = slist_agregar_final(listaIntercalada,lista2->dato);
+      lista2 = lista2->sig;
+    }
+  }
+  return listaIntercalada;
+}
