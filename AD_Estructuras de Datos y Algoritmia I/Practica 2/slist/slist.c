@@ -199,3 +199,18 @@ SList slist_intercalar(SList lista1, SList lista2){
 }
 
 // k
+SList slist_partir(SList lista){
+  int lenLista1 = slist_longitud(lista);
+  if(lenLista1 <= 1) return NULL;
+  if(lenLista1 % 2 == 0) lenLista1 = (lenLista1 / 2) - 1;
+  else lenLista1 = (lenLista1 / 2);
+
+  SNodo *listaPartida = lista;
+  for(int i = 0 ; i < lenLista1 ; i++ , listaPartida = listaPartida->sig);
+
+  SNodo *aux = listaPartida;
+  listaPartida = listaPartida->sig;
+  aux->sig = NULL;
+
+  return listaPartida;
+}
