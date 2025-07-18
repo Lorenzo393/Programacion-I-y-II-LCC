@@ -1,6 +1,5 @@
 #include "slist.h"
 
-
 SList slist_crear() {
   return NULL;
 }
@@ -213,4 +212,52 @@ SList slist_partir(SList lista){
   aux->sig = NULL;
 
   return listaPartida;
+}
+
+// 3
+// a
+SListF *slistf_crear(){
+    SListF *lista = malloc(sizeof(SListF));
+    lista->primero = NULL;
+    lista->ultimo = NULL;
+    return lista;
+}
+
+// b
+void slistf_agregar_final(SListF *lista, int dato){
+    SNodo *nuevoNodo = malloc(sizeof(SNodo));
+    nuevoNodo->dato = dato;
+    nuevoNodo->sig = NULL;
+
+    if(lista->primero == NULL){
+        lista->primero = nuevoNodo;
+        lista->ultimo = nuevoNodo;
+    }
+    else {
+        lista->ultimo->sig = nuevoNodo;
+        lista->ultimo = nuevoNodo;
+    }
+}
+
+// c
+void slistf_agregar_inicio(SListF *lista, int dato){
+  SNodo *nuevoNodo = malloc(sizeof(SNodo));
+  nuevoNodo->dato = dato;
+  
+  if(lista->primero == NULL){
+    nuevoNodo->sig = NULL;
+    lista->primero = nuevoNodo;
+    lista->ultimo = nuevoNodo;
+  }
+  else{
+    nuevoNodo->sig = lista->primero;
+    lista->primero = nuevoNodo;
+  }
+}
+
+// d
+void slistf_recorrer(SListF *lista, FuncionVisitante f){
+  for(SNodo *recorrer = lista->primero ; recorrer != NULL ; recorrer = recorrer->sig){
+    f(recorrer->dato);
+  }
 }

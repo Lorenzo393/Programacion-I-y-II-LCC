@@ -1,4 +1,5 @@
 #include "slist.h"
+//#include "slist.h"
 
  void imprimir_entero(int dato) {
   printf("%d ", dato);
@@ -175,6 +176,20 @@ int main(int argc, char *argv[]) {
   // slist_recorrer(listaMitadFinal,imprimir_entero);
   // printf("\n");
 
+  // 3
+  // a
+  // SList *lista = slist_crear();
+
+  // b, c y d
+  // SListF *listaf = slistf_crear();
+  // slistf_agregar_inicio(listaf,2);
+  // slistf_agregar_final(listaf,5);
+  // slistf_agregar_inicio(listaf,6);
+  // slistf_agregar_final(listaf,7);
+  // slistf_agregar_inicio(listaf,8);
+  // slistf_agregar_inicio(listaf,9);
+  // slistf_agregar_final(listaf,1);
+  // slistf_recorrer(listaf,imprimir_entero);
 
   return 0;
 }

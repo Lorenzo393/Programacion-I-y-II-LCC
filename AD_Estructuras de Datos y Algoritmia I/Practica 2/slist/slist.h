@@ -17,6 +17,11 @@ typedef struct _SNodo {
 
 typedef SNodo *SList;
 
+typedef struct SListF {
+SNodo *primero;
+SNodo *ultimo;
+} SListF;
+
 /**
  * Devuelve una lista vacía.
  */
@@ -104,4 +109,25 @@ SList slist_intercalar(SList lista1, SList lista2);
  * Divide una lista a la mitad
  */
 SList slist_partir(SList lista);
+
+/**
+ * Devuelve una listaf vacía.
+ */
+SListF *slistf_crear();
+
+/**
+ * Agrega un elemento al final de la listaf.
+ */
+void slistf_agregar_final(SListF *lista, int dato);
+
+/**
+ * Agrega un elemento al comienzo de la listaf.
+ */
+void slistf_agregar_inicio(SListF *lista, int dato);
+
+/**
+ * Recorre la lista f y aplica una funcion a los elementos.
+ */
+void slistf_recorrer(SListF *lista, FuncionVisitante f);
+
 #endif /* __SLIST_H__ */
