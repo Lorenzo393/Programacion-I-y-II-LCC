@@ -46,6 +46,8 @@ void slist_recorrer(SList lista, FuncionVisitante visit) {
     visit(nodo->dato);
 }
 
+// 2
+// a
 int slist_longitud(SList lista){
   int len = 0;
   while(lista != NULL){
@@ -55,6 +57,7 @@ int slist_longitud(SList lista){
   return len; 
 }
 
+// b
 void slist_concatenar(SList lista1, SList lista2){
   while(lista2 != NULL){
     lista1 = slist_agregar_final(lista1, lista2->dato);
@@ -62,6 +65,7 @@ void slist_concatenar(SList lista1, SList lista2){
   }
 }
 
+// c
 SList slist_insertar(SList lista, int pos, int dato){
   if(pos < 1) return slist_agregar_inicio(lista,dato);
 
@@ -81,6 +85,7 @@ SList slist_insertar(SList lista, int pos, int dato){
   return lista;
 }
 
+// d
 SList slist_elimina(SList lista, int pos){
   if(lista == NULL) return NULL;
   if(pos < 1) {
@@ -100,12 +105,13 @@ SList slist_elimina(SList lista, int pos){
   return lista;
 }
 
+// e
 int slist_contiene(SList lista, int dato){
   for(;lista != NULL && lista->dato != dato ; lista = lista->sig);
   return lista != NULL;
 }
 
-
+// f
 int slist_indice(SList lista, int dato){
   int pos = -1;
   if(lista == NULL) return pos;
@@ -120,6 +126,7 @@ int slist_indice(SList lista, int dato){
   return pos;
 }
  
+// g
 SList slist_intersecar(SList lista1, SList lista2){
   SList listaIntersecada = NULL;
   while(lista1 != NULL){
@@ -137,12 +144,45 @@ SList slist_intersecar(SList lista1, SList lista2){
   return listaIntersecada;
 }
 
+// h
+SList slist_ordenar(SList lista, FuncionComparadora f){
+  for(SNodo *nodoBase = lista ; nodoBase != NULL ; nodoBase = nodoBase->sig){
+    for(SNodo *nodoComp = nodoBase->sig ; nodoComp != NULL; nodoComp = nodoComp->sig){
+      if(f(nodoBase->dato,nodoComp->dato)){
+        int aux = nodoBase->dato;
+        nodoBase->dato = nodoComp->dato;
+        nodoComp->dato = aux;
+      }
+    }
+  }
+  return lista;
+}
 
+// i
+SList slist_reverso(SList lista){
+  SNodo *nodoUltimo = NULL;
+  int flagPrincipal = 1;
+  for(SNodo *nodoBase = lista ; flagPrincipal ; nodoBase = nodoBase->sig){
+    int flagSecundaria = 1;
+    for(SNodo * recorrer = nodoBase ; flagSecundaria && recorrer != NULL ; recorrer = recorrer->sig){
+      if(recorrer->sig == nodoUltimo){
+        nodoUltimo = recorrer;
+        flagSecundaria = 0;
+      }
+    }
+    if(nodoBase == nodoUltimo){
+      flagPrincipal = 0;
+    }
+    else{
+      int aux = nodoBase->dato;
+      nodoBase->dato = nodoUltimo->dato;
+      nodoUltimo->dato = aux;
+    }
+  }
+  return lista;
+}
 
-
-
-
-
+// j
 SList slist_intercalar(SList lista1, SList lista2){
   SList listaIntercalada = NULL;
   while(lista1 != NULL || lista2 != NULL){
@@ -157,3 +197,5 @@ SList slist_intercalar(SList lista1, SList lista2){
   }
   return listaIntercalada;
 }
+
+// k

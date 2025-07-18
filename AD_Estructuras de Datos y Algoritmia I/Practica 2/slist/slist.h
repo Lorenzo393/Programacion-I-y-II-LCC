@@ -8,6 +8,7 @@
 #include <time.h>
 
 typedef void (*FuncionVisitante) (int dato);
+typedef int (*FuncionComparadora) (int a, int b);
 
 typedef struct _SNodo {
   int dato;
@@ -87,10 +88,10 @@ SList slist_intersecar(SList lista1, SList lista2);
  * Ordena una lista de acuerdo a al criterio dado por una funcion de comparacion,
  * que usa los mismos valores de retorno que strcmp()
  */
-//SList slist_ordenar(SList lista, funcion);
+SList slist_ordenar(SList lista, FuncionComparadora f);
 
 /**
- * Devuelve el reverso de la list 
+ * Devuelve el reverso de la lista
  */
 SList slist_reverso(SList lista);
 
@@ -102,5 +103,5 @@ SList slist_intercalar(SList lista1, SList lista2);
 /**
  * Divide una lista a la mitad
  */
-//slist_partir();
+SList slist_partir(SList lista);
 #endif /* __SLIST_H__ */
