@@ -1,5 +1,5 @@
 #include "slist.h"
-//#include "slist.h"
+#include "dlist.h"
 
  void imprimir_entero(int dato) {
   printf("%d ", dato);
@@ -176,20 +176,32 @@ int main(int argc, char *argv[]) {
   // slist_recorrer(listaMitadFinal,imprimir_entero);
   // printf("\n");
 
-  // 3
-  // a
-  // SList *lista = slist_crear();
+  // EJ 3
+  // a, b, c y d
+  // SListF *listaF = slistf_crear();
+  // slistf_agregar_inicio(listaF,2);
+  // slistf_agregar_final(listaF,5);
+  // slistf_agregar_inicio(listaF,6);
+  // slistf_agregar_final(listaF,7);
+  // slistf_agregar_inicio(listaF,8);
+  // slistf_agregar_inicio(listaF,9);
+  // slistf_agregar_final(listaF,1);
+  // slistf_recorrer(listaF,imprimir_entero);
 
-  // b, c y d
-  // SListF *listaf = slistf_crear();
-  // slistf_agregar_inicio(listaf,2);
-  // slistf_agregar_final(listaf,5);
-  // slistf_agregar_inicio(listaf,6);
-  // slistf_agregar_final(listaf,7);
-  // slistf_agregar_inicio(listaf,8);
-  // slistf_agregar_inicio(listaf,9);
-  // slistf_agregar_final(listaf,1);
-  // slistf_recorrer(listaf,imprimir_entero);
+  // EJ 4
+  // a, b, c y d
+  DList *listaD = dlist_crear();
+  dlist_agregar_inicio(listaD,2);
+  dlist_agregar_final(listaD,5);
+  dlist_agregar_inicio(listaD,6);
+  dlist_agregar_final(listaD,7);
+  dlist_agregar_inicio(listaD,8);
+  dlist_agregar_inicio(listaD,9);
+  dlist_agregar_final(listaD,1);
+  dlist_recorrer(listaD,imprimir_entero,DLIST_RECORRIDO_HACIA_ADELANTE);
+  printf("\n");
+  dlist_recorrer(listaD,imprimir_entero,DLIST_RECORRIDO_HACIA_ATRAS);
+  dlist_recorrer(listaD,imprimir_entero,PINDONGA);
 
   return 0;
 }

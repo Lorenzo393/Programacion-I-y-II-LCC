@@ -45,7 +45,7 @@ void slist_recorrer(SList lista, FuncionVisitante visit) {
     visit(nodo->dato);
 }
 
-// 2
+// EJ 2
 // a
 int slist_longitud(SList lista){
   int len = 0;
@@ -214,7 +214,7 @@ SList slist_partir(SList lista){
   return listaPartida;
 }
 
-// 3
+// EJ 3
 // a
 SListF *slistf_crear(){
     SListF *lista = malloc(sizeof(SListF));
