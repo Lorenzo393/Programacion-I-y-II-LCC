@@ -1,3 +1,4 @@
+#include "cdlist.h"
 #include "slist.h"
 #include "dlist.h"
 
@@ -190,18 +191,34 @@ int main(int argc, char *argv[]) {
 
   // EJ 4
   // a, b, c y d
-  DList *listaD = dlist_crear();
-  dlist_agregar_inicio(listaD,2);
-  dlist_agregar_final(listaD,5);
-  dlist_agregar_inicio(listaD,6);
-  dlist_agregar_final(listaD,7);
-  dlist_agregar_inicio(listaD,8);
-  dlist_agregar_inicio(listaD,9);
-  dlist_agregar_final(listaD,1);
-  dlist_recorrer(listaD,imprimir_entero,DLIST_RECORRIDO_HACIA_ADELANTE);
-  printf("\n");
-  dlist_recorrer(listaD,imprimir_entero,DLIST_RECORRIDO_HACIA_ATRAS);
-  dlist_recorrer(listaD,imprimir_entero,PINDONGA);
+  // DList *listaD = dlist_crear();
+  // dlist_agregar_inicio(listaD,2);
+  // dlist_agregar_final(listaD,5);
+  // dlist_agregar_inicio(listaD,6);
+  // dlist_agregar_final(listaD,7);
+  // dlist_agregar_inicio(listaD,8);
+  // dlist_agregar_inicio(listaD,9);
+  // dlist_agregar_final(listaD,1);
+  // dlist_recorrer(listaD,imprimir_entero,DLIST_RECORRIDO_HACIA_ADELANTE);
+  // printf("\n");
+  // dlist_recorrer(listaD,imprimir_entero,DLIST_RECORRIDO_HACIA_ATRAS);
+  // dlist_recorrer(listaD,imprimir_entero,PINDONGA);
+
+  // EJ 5
+  // a, b, c y d
+  // CDList lista = cdlist_crear();
+  // lista = cdlist_agregar_inicio(lista,2);
+  // lista = cdlist_agregar_final(lista,5);
+  // lista = cdlist_agregar_inicio(lista,6);
+  // lista = cdlist_agregar_final(lista,7);
+  // lista = cdlist_agregar_inicio(lista,8);
+  // lista = cdlist_agregar_inicio(lista,9);
+  // lista = cdlist_agregar_final(lista,1);
+  // cdlist_recorrer(lista,imprimir_entero,CDLIST_RECORRIDO_HACIA_ADELANTE);
+  // printf("\n");
+  // cdlist_recorrer(lista,imprimir_entero,CDLIST_RECORRIDO_HACIA_ATRAS);
+  // cdlist_recorrer(lista,imprimir_entero,HOMERO);
+
 
   return 0;
 }
