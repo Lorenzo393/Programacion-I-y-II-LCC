@@ -43,6 +43,11 @@ int slist_vacia(SList lista);
 SList slist_agregar_final(SList lista, int dato);
 
 /**
+ * Agrega un elemento al final de la lista con una funcion recursiva.
+ */
+SList slist_agregar_final_recursivo(SList lista, int dato);
+
+/**
  * Agrega un elemento al inicio de la lista.
  */
 SList slist_agregar_inicio(SList lista, int dato);
@@ -53,14 +58,29 @@ SList slist_agregar_inicio(SList lista, int dato);
 void slist_recorrer(SList lista, FuncionVisitante visit);
 
 /**
- * Devuelve la longitud de una lista
+ * Recorrido de la lista, utilizando la funcion pasada de manera recursiva.
+ */
+void slist_recorrer_recursivo(SList lista, FuncionVisitante visit);
+
+/**
+ * Devuelve la longitud de una lista.
  */
 int slist_longitud(SList lista);
 
 /**
- * Devuelve la concatenacion de dos listas, modificando la primera
+ * Devuelve la longitud de una lista de manera recursiva.
+ */
+int slist_longitud_recursivo(SList lista);
+
+/**
+ * Devuelve la concatenacion de dos listas, modificando la primera.
  */
 void slist_concatenar(SList lista1, SList lista2);
+
+/**
+ * Devuelve la concatenacion de dos listas, modificando la primera de manera recursiva.
+ */
+void slist_concatenar_recursivo(SList lista1, SList lista2);
 
 /**
  * Inserta un dato en una lista en una posicion arbitraria

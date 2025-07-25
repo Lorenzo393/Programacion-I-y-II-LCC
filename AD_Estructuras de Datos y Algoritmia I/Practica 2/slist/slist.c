@@ -33,6 +33,19 @@ SList slist_agregar_final(SList lista, int dato) {
   return lista;
 }
 
+SList slist_agregar_final_recursivo(SList lista, int dato){
+  if(lista == NULL){
+    SNodo *nuevoNodo = malloc(sizeof(SNodo));
+    nuevoNodo->sig = NULL;
+    nuevoNodo->dato = dato;
+    return nuevoNodo;
+  }
+
+  lista->sig = slist_agregar_final_recursivo(lista->sig, dato);
+
+  return lista;
+}
+
 SList slist_agregar_inicio(SList lista, int dato) {
   SNodo *nuevoNodo = malloc(sizeof(SNodo));
   nuevoNodo->dato = dato;
@@ -45,24 +58,46 @@ void slist_recorrer(SList lista, FuncionVisitante visit) {
     visit(nodo->dato);
 }
 
+void slist_recorrer_recursivo(SList lista, FuncionVisitante visit){
+  if(lista != NULL){
+    visit(lista->dato);
+    slist_recorrer_recursivo(lista->sig,visit);
+  }
+}
+
 // EJ 2
 // a
 int slist_longitud(SList lista){
   int len = 0;
-  while(lista != NULL){
-    lista = lista->sig;
+  for(SNodo *recorre = lista ; recorre != NULL ; recorre = recorre->sig){
     len++;
   }
   return len; 
 }
 
+int slist_longitud_recursivo(SList lista){
+  if(lista == NULL) return 0;
+  return 1 + slist_longitud_recursivo(lista->sig);
+}
+
 // b
 void slist_concatenar(SList lista1, SList lista2){
+  SNodo *nodoFinal = lista1;
+  while(nodoFinal != NULL) {
+    printf("%i-",nodoFinal->dato);
+    nodoFinal = nodoFinal->sig;
+  }
   while(lista2 != NULL){
-    lista1 = slist_agregar_final(lista1, lista2->dato);
+    SNodo *nuevoNodo = malloc(sizeof(SNodo));
+    nuevoNodo->dato = lista2->dato;
+    nuevoNodo->sig = NULL;
+    nodoFinal = nuevoNodo;
+    nodoFinal = nodoFinal->sig;
     lista2 = lista2->sig;
   }
 }
+
+//void slist_concatenar_recursivo(SList lista1, SList lista2){}
 
 // c
 SList slist_insertar(SList lista, int pos, int dato){

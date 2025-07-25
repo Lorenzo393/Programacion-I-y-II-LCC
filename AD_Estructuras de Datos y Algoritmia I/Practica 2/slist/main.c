@@ -219,6 +219,33 @@ int main(int argc, char *argv[]) {
   // cdlist_recorrer(lista,imprimir_entero,CDLIST_RECORRIDO_HACIA_ATRAS);
   // cdlist_recorrer(lista,imprimir_entero,HOMERO);
 
+  // FUNCIONES RECURSIVAS PARTE 1
+  SList lista = slist_crear();
+  lista = slist_agregar_final(lista,5);
+  lista = slist_agregar_final(lista,4);
+  lista = slist_agregar_final(lista,3);
+  lista = slist_agregar_final(lista,2);
+  slist_recorrer_recursivo(lista,imprimir_entero);
+  printf("\n");
+  lista = slist_agregar_final_recursivo(lista,1);
+  slist_recorrer_recursivo(lista,imprimir_entero);
+  printf("\n");
+  printf("%i",slist_longitud_recursivo(lista));
+  printf("\n");
+
+  SList lista2 = slist_crear();
+  lista2 = slist_agregar_final(lista2,9);
+  lista2 = slist_agregar_final(lista2,8);
+  lista2 = slist_agregar_final(lista2,7);
+  lista2 = slist_agregar_final(lista2,6);
+  slist_recorrer_recursivo(lista2,imprimir_entero);
+  printf("\n");
+  slist_concatenar(lista,lista2);
+  printf("\n");
+  slist_recorrer_recursivo(lista,imprimir_entero);
+  printf("\n");
+  slist_recorrer_recursivo(lista2,imprimir_entero);
+
 
   return 0;
 }
