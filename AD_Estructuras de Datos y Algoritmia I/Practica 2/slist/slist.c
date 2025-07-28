@@ -83,21 +83,34 @@ int slist_longitud_recursivo(SList lista){
 // b
 void slist_concatenar(SList lista1, SList lista2){
   SNodo *nodoFinal = lista1;
-  while(nodoFinal != NULL) {
-    printf("%i-",nodoFinal->dato);
+  while(nodoFinal->sig != NULL) {
     nodoFinal = nodoFinal->sig;
   }
+
   while(lista2 != NULL){
     SNodo *nuevoNodo = malloc(sizeof(SNodo));
     nuevoNodo->dato = lista2->dato;
     nuevoNodo->sig = NULL;
-    nodoFinal = nuevoNodo;
+    nodoFinal->sig = nuevoNodo;
+
     nodoFinal = nodoFinal->sig;
     lista2 = lista2->sig;
   }
 }
 
-//void slist_concatenar_recursivo(SList lista1, SList lista2){}
+SList slist_concatenar_recursivo(SList lista1, SList lista2){
+  if(lista2 == NULL) 
+    return NULL;
+  if(lista1 == NULL){
+    SNodo *nuevoNodo = malloc(sizeof(SNodo));
+    nuevoNodo->dato = lista2->dato;
+    nuevoNodo->sig = slist_concatenar_recursivo(NULL, lista2->sig);
+    return nuevoNodo;
+  }
+  else lista1->sig = slist_concatenar_recursivo(lista1->sig, lista2);
+
+  return lista1;
+}
 
 // c
 SList slist_insertar(SList lista, int pos, int dato){
@@ -109,15 +122,15 @@ SList slist_insertar(SList lista, int pos, int dato){
   
   if(lista == NULL) return nuevoNodo;
 
-  SNodo *nodoAnterior = lista;
-  for(int i = 0 ; i < (pos - 1) && nodoAnterior->sig != NULL ; nodoAnterior = nodoAnterior->sig , i++);
+  SNodo *recorrer = lista;
+  for(int i = 0 ; i < (pos - 1) && recorrer->sig != NULL ; recorrer = recorrer->sig , i++);
 
-  SNodo *aux = nodoAnterior->sig;
-  nodoAnterior->sig = nuevoNodo;
-  nuevoNodo->sig = aux;
+  recorrer->sig = nuevoNodo;
 
   return lista;
 }
+
+//SList slist_insertar_recursivo(SList lista, int pos, int dato){}
 
 // d
 SList slist_elimina(SList lista, int pos){

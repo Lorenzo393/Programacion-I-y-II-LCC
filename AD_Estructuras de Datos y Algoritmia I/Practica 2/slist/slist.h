@@ -80,12 +80,17 @@ void slist_concatenar(SList lista1, SList lista2);
 /**
  * Devuelve la concatenacion de dos listas, modificando la primera de manera recursiva.
  */
-void slist_concatenar_recursivo(SList lista1, SList lista2);
+SList slist_concatenar_recursivo(SList lista1, SList lista2);
 
 /**
  * Inserta un dato en una lista en una posicion arbitraria
  */
 SList slist_insertar(SList lista, int pos, int dato);
+
+/**
+ * Inserta un dato en una lista en una posicion arbitraria
+ */
+SList slist_insertar_recursivo(SList lista, int pos, int dato);
 
 /**
  * Borra de una lista un dato apuntado en una posicion arbitraria

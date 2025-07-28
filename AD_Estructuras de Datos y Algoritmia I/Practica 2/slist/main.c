@@ -227,9 +227,11 @@ int main(int argc, char *argv[]) {
   lista = slist_agregar_final(lista,2);
   slist_recorrer_recursivo(lista,imprimir_entero);
   printf("\n");
+
   lista = slist_agregar_final_recursivo(lista,1);
   slist_recorrer_recursivo(lista,imprimir_entero);
   printf("\n");
+
   printf("%i",slist_longitud_recursivo(lista));
   printf("\n");
 
@@ -240,11 +242,22 @@ int main(int argc, char *argv[]) {
   lista2 = slist_agregar_final(lista2,6);
   slist_recorrer_recursivo(lista2,imprimir_entero);
   printf("\n");
-  slist_concatenar(lista,lista2);
-  printf("\n");
+
+  lista = slist_concatenar_recursivo(lista,lista2);
   slist_recorrer_recursivo(lista,imprimir_entero);
   printf("\n");
   slist_recorrer_recursivo(lista2,imprimir_entero);
+  printf("\n");
+  // lista = slist_insertar(lista,0,19);
+  // printf("\n");
+  // slist_recorrer_recursivo(lista,imprimir_entero);
+  SNodo *recorre = lista;
+  for(int i = 0 ; i < 7 ; i++, recorre = recorre->sig);
+  recorre->dato = 999;
+  slist_recorrer_recursivo(lista,imprimir_entero);
+  printf("\n");
+  slist_recorrer_recursivo(lista2,imprimir_entero);
+
 
 
   return 0;
