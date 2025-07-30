@@ -52,3 +52,10 @@ void contacto_destruir(Contacto *contacto) {
 void contacto_imprimir(Contacto *contacto) {
   printf("%s, %s, %d.\n", contacto->nombre, contacto->tel, contacto->edad);
 }
+
+/**
+ * Devuelve 1 si la edad del contacto es mayor a 60 y 0 en caso contrario
+ */
+int contacto_edad_mayor_60(Contacto *contacto){
+  return (contacto->edad > 60);
+}

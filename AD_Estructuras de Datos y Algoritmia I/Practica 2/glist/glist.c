@@ -1,6 +1,7 @@
 #include "glist.h"
 #include <assert.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * Devuelve una lista vacía.
@@ -47,7 +48,17 @@ void glist_recorrer(GList list, FuncionVisitante visit) {
 }
 
 // EJ 7
-GList glist_filtrar(GList lista, FuncionCopia c, Predicado p){
-  
+GList glist_filtrar(GList lista, FuncionCopia copy, Predicado filtro){
+  GNode *nuevaLista = malloc(sizeof(GNode));
+  nuevaLista = NULL;
+
+  while(lista != NULL){
+    if(filtro(lista->data)){
+      nuevaLista = glist_agregar_inicio(nuevaLista, lista->data, copy);
+    }
+    lista = lista->next;
+  }
+
+  return nuevaLista;
 }
 
