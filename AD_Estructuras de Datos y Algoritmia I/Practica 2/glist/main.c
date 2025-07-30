@@ -3,14 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int *funcion(int *dato){
+int *funcion(void *dato){
   int *copia = malloc(sizeof(int));
-  *copia = dato[0];
+  *copia = *(int*)dato;
   return copia;
 }
 
-void imprimir_entero(int *dato){
-  printf("%i ",(*dato));
+void imprimir_entero(void *dato){
+  printf("%i ",*(int *)dato);
 }
 
 
@@ -48,7 +48,6 @@ int main() {
 
   glist_destruir(lista, (FuncionDestructora)contacto_destruir);
   
-
   
 
   return 0;

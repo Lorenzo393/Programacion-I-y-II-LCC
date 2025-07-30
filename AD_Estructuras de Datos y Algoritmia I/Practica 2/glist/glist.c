@@ -45,3 +45,9 @@ void glist_recorrer(GList list, FuncionVisitante visit) {
   for (GNode *node = list; node != NULL; node = node->next)
     visit(node->data);
 }
+
+// EJ 7
+GList glist_filtrar(GList lista, FuncionCopia c, Predicado p){
+  
+}
+
