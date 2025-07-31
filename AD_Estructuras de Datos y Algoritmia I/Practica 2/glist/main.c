@@ -6,19 +6,23 @@
 #include "sglist.h"
 #include "glist.h"
 
-int *funcion(void *dato){
+int *copia_entero(void *dato){
   int *copia = malloc(sizeof(int));
   *copia = *(int*)dato;
   return copia;
 }
 
-void imprimir_entero(void *dato){
-  printf("%i ",*(int *)dato);
+void imprimir_entero(int *dato){
+  printf("%i ",*dato);
 }
 
-int predicado_mas_de_60(void *dato){
-  return ((*(int *)dato) > 5);
-}
+int predicado_mas_de_60(void *dato) { return ((*(int *)dato) > 5); }
+
+int comp_x_mayor_y(int *x, int *y) { return ((*x) > (*y)); }
+
+int comp_x_menor_y(int *x, int *y) { return ((*x) < (*y)); }
+
+int comp_x_igual_y(int *x, int *y) { return ((*x) == (*y)); }
 
 
 int main() {
@@ -31,7 +35,7 @@ int main() {
   // arr[4] = 5;
 
   // for (int i = 0 ; i < 5 ; ++i) {
-  //   lista = glist_agregar_inicio(lista, &arr[i], (FuncionCopia)funcion);
+  //   lista = glist_agregar_inicio(lista, &arr[i], (FuncionCopia)copia_entero);
   // }
   // free(arr);
   // glist_recorrer(lista,(FuncionVisitante)imprimir_entero);
@@ -62,6 +66,46 @@ int main() {
   // glist_destruir(lista, (FuncionDestructora)contacto_destruir);
   
   // EJ 8
+  SGList lista = sglist_crear();
+
+  //printf("%i ",sglist_vacia(lista));
+
+  int *arr = malloc(sizeof(int) * 8);
+  arr[0] = 1;
+  arr[1] = 2;
+  arr[2] = 3;
+  arr[3] = 9;
+  arr[4] = 5;
+  arr[5] = 4;
+  arr[6] = 0;
+  arr[7] = 14;
+
+  void **array = malloc(sizeof(void *) * 8);
+  for(int i = 0 ; i < 8 ; i++){
+    array[i] = &arr[i];
+  }
+
+  // for (int i = 0 ; i < 8 ; ++i) {
+  //   lista = sglist_insertar(lista, array[i], (FuncionCopia)copia_entero, (FuncionComparadora)comp_x_menor_y);
+  // }
+
+  // sglist_recorrer(lista, (FuncionVisitante)imprimir_entero);
+
+  // int *x = malloc(sizeof(int));
+  // *x = -1;
+  // printf("\n");
+  // if (sglist_buscar(lista, x, (FuncionComparadora)comp_x_igual_y)){
+  //   printf("El valor %i esta en la lista",*x);
+  // } 
+  // else {
+  //   printf("El valor %i no esta en la lista",*x);
+  // }
+
+  lista = sglist_arr(array, 8, (FuncionCopia)copia_entero, (FuncionComparadora)comp_x_menor_y);
+
+  sglist_recorrer(lista, (FuncionVisitante)imprimir_entero);
+
+  //sglist_destruir(lista, (FuncionDestructora)contacto_destruir);
 
   return 0;
 }

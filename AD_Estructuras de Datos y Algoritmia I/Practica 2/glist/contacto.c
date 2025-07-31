@@ -53,9 +53,8 @@ void contacto_imprimir(Contacto *contacto) {
   printf("%s, %s, %d.\n", contacto->nombre, contacto->tel, contacto->edad);
 }
 
-/**
- * Devuelve 1 si la edad del contacto es mayor a 60 y 0 en caso contrario
- */
+// EJ 7
+// b
 int contacto_edad_mayor_60(Contacto *contacto){
   return (contacto->edad > 60);
 }

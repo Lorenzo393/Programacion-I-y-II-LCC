@@ -13,10 +13,10 @@ GList glist_crear() { return NULL; }
  * destroy es una función que libera el dato almacenado.
  */
 void glist_destruir(GList list, FuncionDestructora destroy) {
-  GNode *nodeToDelete;
   while (list != NULL) {
-    nodeToDelete = list;
+    GNode *nodeToDelete = list;
     list = list->next;
+
     destroy(nodeToDelete->data);
     free(nodeToDelete);
   }
@@ -48,9 +48,9 @@ void glist_recorrer(GList list, FuncionVisitante visit) {
 }
 
 // EJ 7
+// a
 GList glist_filtrar(GList lista, FuncionCopia copy, Predicado filtro){
-  GNode *nuevaLista = malloc(sizeof(GNode));
-  nuevaLista = NULL;
+  GNode *nuevaLista = glist_crear();
 
   while(lista != NULL){
     if(filtro(lista->data)){

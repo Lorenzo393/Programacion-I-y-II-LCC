@@ -13,7 +13,7 @@ typedef struct {
 /**
  * Crea un nuevo contacto.
  */
-Contacto *contacto_crear();
+Contacto *contacto_crear(char *nombre, char *telefono, unsigned int edad);
 
 /**
  * Crea una copia física del contacto.

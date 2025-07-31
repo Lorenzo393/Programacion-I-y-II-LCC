@@ -37,16 +37,16 @@ void sglist_recorrer(SGList lista, FuncionVisitante visit);
 /**
  * Inserta un nuevo dato en la lista ordenada.
  */
-SGList sglist_insertar(SGList lista, void *data, FuncionCopia copy, FuncionComparadora comp);
+SGList sglist_insertar(SGList lista, void *data, FuncionCopia copy, FuncionComparadora compare);
 
 /**
  * Busca un entero en la lista ordenada y retorna 1 si lo encuentra y 0 en caso contrario.
  */
-int sglist_buscar(SGList lista, void *data, FuncionComparadora comp);
+int sglist_buscar(SGList lista, void *data, FuncionComparadora compare);
 
 /**
  * Contruye una lista ordenada a partir de un arreglo de elementos y su longitud.
  */
-SGList sglist_arr(void **arr, int len, FuncionCopia copy);
+SGList sglist_arr(void **arr, int len, FuncionCopia copy, FuncionComparadora compare);
 
 #endif /* __SGLIST_H__ */
