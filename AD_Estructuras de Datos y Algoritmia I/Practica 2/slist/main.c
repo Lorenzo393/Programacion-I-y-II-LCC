@@ -258,7 +258,11 @@ int main(int argc, char *argv[]) {
   printf("\n");
   slist_recorrer_recursivo(lista2,imprimir_entero);
 
-
+  lista2 = slist_insertar_recursivo(lista2, 1 , 10);
+  lista2 = slist_insertar_recursivo(lista2, 4 , 11);
+  lista2 = slist_insertar_recursivo(lista2, 10 , 12);
+  printf("\n");
+  slist_recorrer_recursivo(lista2,imprimir_entero);
 
   return 0;
 }

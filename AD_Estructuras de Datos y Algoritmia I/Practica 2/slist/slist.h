@@ -98,6 +98,11 @@ SList slist_insertar_recursivo(SList lista, int pos, int dato);
 SList slist_elimina(SList lista, int pos);
 
 /**
+ * Borra de una lista un dato apuntado en una posicion arbitraria de manera recursiva
+ */
+SList slist_elimina_recursivo(SList lista, int pos);
+
+/**
  * Determina si un elemento esta o no en la lista
  */
 int slist_contiene(SList lista, int dato);

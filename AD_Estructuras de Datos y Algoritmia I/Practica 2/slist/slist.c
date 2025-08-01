@@ -130,7 +130,19 @@ SList slist_insertar(SList lista, int pos, int dato){
   return lista;
 }
 
-//SList slist_insertar_recursivo(SList lista, int pos, int dato){}
+SList slist_insertar_recursivo(SList lista, int pos, int dato){
+  if(lista == NULL || pos <= 0){
+    SNodo *nuevoNodo = malloc(sizeof(SNodo));
+    nuevoNodo->sig = lista;
+    nuevoNodo->dato = dato;
+
+    return nuevoNodo;
+  }
+
+  lista->sig = slist_insertar_recursivo(lista->sig, pos-1, dato);
+
+  return lista;
+}
 
 // d
 SList slist_elimina(SList lista, int pos){
@@ -149,6 +161,22 @@ SList slist_elimina(SList lista, int pos){
   nodoAnterior->sig = nodoEliminar->sig;
   free(nodoEliminar);
   
+  return lista;
+}
+
+SList slist_elimina_recursivo(SList lista, int pos){
+
+  if(lista == NULL)
+    return NULL;
+
+  if(pos <= 1){
+    SNodo *nodoAEliminar = lista->sig;
+    lista->sig = slist_elimina_recursivo(nodoAEliminar->sig,);
+
+  }
+
+  lista->sig = slist_elimina_recursivo(lista->sig, pos-1);
+
   return lista;
 }
 
