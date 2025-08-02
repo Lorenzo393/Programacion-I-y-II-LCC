@@ -44,4 +44,4 @@ ArregloEnteros *arreglo_enteros_insertar_elemento(ArregloEnteros *arregloEnteros
  */
 void arreglo_enteros_imprimir_posicion(ArregloEnteros *arregloEnteros, int pos);
 
-#endif
+#endif /* __ARREGLOENTEROS_H__ */

@@ -34,7 +34,7 @@ int pila_tope(Pila pila);
 
 /**
  * Inserta un elemento en el tope de la pila, si esta se encuentra llena su capacidad
- * aumenta al doble. (arreglo_enteros_ajustar).
+ * aumenta al doble.
  */
 void pila_apilar(Pila pila, int dato);
 
@@ -48,4 +48,4 @@ void pila_desapilar(Pila pila);
  */
 void pila_imprimir(Pila pila);
 
-#endif
+#endif /* __PILAENTEROS_H__ */
