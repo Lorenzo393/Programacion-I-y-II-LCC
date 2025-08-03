@@ -1,18 +1,9 @@
 #ifndef __PILASGENERALES_H__
 #define __PILASGENERALES_H__
 
-typedef struct _GNode{
-    void *data;
-    struct _GNode *next;
-} GNode;
-
-typedef GNode *GList;
+#include "glist.h"
 
 typedef GList Pila;
-
-typedef void (*FuncionDestructora)(void *dato);
-typedef void (*FuncionVisitante)(void *dato);
-typedef void *(*FuncionCopia)(void *dato);
 
 /**
  * Crea una nueva pila vacia.

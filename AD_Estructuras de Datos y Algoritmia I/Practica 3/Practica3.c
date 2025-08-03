@@ -1,5 +1,6 @@
 #include "pilasgenerales.h"
 // #include "pilaenteros.h"
+#include "glist.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,6 +17,21 @@ int *copiar_entero(void *dato){
     int *copia = malloc(sizeof(int));
     *copia = *(int *)dato;
     return copia;
+}
+
+// EJ 3 Creo que no es correcto retornar la pila
+GList glist_invertir_lista(GList lista, FuncionCopia copy, FuncionDestructora destroy){
+    Pila pila = pila_crear();
+    while(lista != NULL){
+        GNode *nodoADestruir = lista;
+        lista = lista->next;
+
+        pila = pila_apilar(pila, nodoADestruir->data, copy);
+        destroy(nodoADestruir->data);
+        free(nodoADestruir);
+    }
+
+    return pila;
 }
 
 int main(){
@@ -68,9 +84,25 @@ int main(){
 
     pila_imprimir(pila, (FuncionVisitante)imprimir_entero);
 
-    if(pila_es_vacia(pila)) printf("La pila esta vacia");
-    else printf("La pila no esta vacia");
+    if(pila_es_vacia(pila)) printf("La pila esta vacia\n");
+    else printf("La pila no esta vacia\n");
 
+    GList lista = NULL;
+    lista = glist_agregar_inicio(lista, &arr[0], (FuncionCopia)copiar_entero);
+    lista = glist_agregar_inicio(lista, &arr[1], (FuncionCopia)copiar_entero);
+    lista = glist_agregar_inicio(lista, &arr[2], (FuncionCopia)copiar_entero);
+    lista = glist_agregar_inicio(lista, &arr[3], (FuncionCopia)copiar_entero);
+    lista = glist_agregar_inicio(lista, &arr[4], (FuncionCopia)copiar_entero);
+
+    printf("Lista normal:\n");
+    glist_recorrer(lista, (FuncionVisitante)imprimir_entero);
+    printf("\n");
+    
+    lista = glist_invertir_lista(lista, (FuncionCopia)copiar_entero, (FuncionDestructora)destruir_dato);
+    
+    printf("Lista invertida:\n");
+    glist_recorrer(lista, (FuncionVisitante)imprimir_entero);
+    printf("\n");
 
     pila_destruir(pila, (FuncionDestructora)destruir_dato);
 
