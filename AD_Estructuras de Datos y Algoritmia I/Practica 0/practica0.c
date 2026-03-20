@@ -65,6 +65,21 @@ void recorre(VisitorFunc f, int arr[], int len){
         f(arr[i]);
     }
 }
+// EJ 12
+struct _Cords2D{
+    float x;
+    float y;
+};
+
+struct _Cords2D punto_medio(struct _Cords2D cord1, struct _Cords2D cord2){
+    struct _Cords2D cordMedia;
+    cordMedia.x = (cord1.x + cord2.x) / 2;
+    cordMedia.y = (cord1.y + cord2.y) / 2;
+    return cordMedia;
+}
+void mostrar_cord(struct _Cords2D cord){
+    printf("(%f,%f)\n",cord.x, cord.y);
+}
 
 int main(){
     // EJ 1
@@ -132,6 +147,65 @@ int main(){
     // int arr[] = {1,2,3,4,5};
     // int len = 5;
     // recorre(imprimir, arr, len);
+
+    // EJ 9 a
+    // 4 5
+
+    // EJ 9 b
+    // 5 4
+
+    // EJ 9 c
+    // 9 2 3 4 5
+
+    // EJ 9 d
+    // 1 9 7 11 5
+
+    // EJ 9 e
+    // 5 15 15
+
+    // EJ 9 f
+    // Warning: retorna la direccion de una variable local
+
+    // EJ 9 g
+    // Copia el texto b en el texto a
+
+    // EJ 10
+    // No esta copiando la cadena. Reserva la misma cantidad de memoria y luego hace que otro puntero
+    // apunte al primer elemento de la misma cadena. No la esta copiando en un espacio de memoria separado
+    // solo esta haciendo que otro puntero apunte a la misma direccion de memoria
+
+    // EJ 11 a
+    // 123 123
+
+    // EJ 11 b
+    // No llega al printf, falla antes
+
+    // EJ 12
+    // struct _Cords2D cord1;
+    // cord1.x = 5;
+    // cord1.y = 6;
+
+    // struct _Cords2D cord2;
+    // cord2.x = 10;
+    // cord2.y = 12;
+
+    // struct _Cords2D cordMedia = punto_medio(cord1, cord2);
+    // mostrar_cord(cord1);
+    // mostrar_cord(cord2);
+    // mostrar_cord(cordMedia);
+
+    // EJ 13
+
+
+
+
+
+
+
+
+
+
+
 
     return 0;
 }
