@@ -1,8 +1,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <time.h>
 
 #define AUMENTADOR 10
+#define CANT_CARTAS 48
 
 // EJ 2
 void set_first(int *arr){
@@ -80,8 +82,76 @@ struct _Cords2D punto_medio(struct _Cords2D cord1, struct _Cords2D cord2){
 void mostrar_cord(struct _Cords2D cord){
     printf("(%f,%f)\n",cord.x, cord.y);
 }
+// EJ 13
+enum Palo{
+    basto,
+    espada,
+    oro,
+    copa
+};
+struct _Carta{
+    enum Palo palo;
+    int numero;
+};
+typedef struct _Carta Mazo[CANT_CARTAS];
+
+void llenar_Mazo(Mazo *mazo){
+    for(int i = 0 ; i < CANT_CARTAS ; i++){
+        struct _Carta carta;
+        if(i < 12){
+            carta.palo = espada;
+            carta.numero = i + 1;
+        }
+        else if(i < 24){
+            carta.palo = basto;
+            carta.numero = (i + 1) - 12;
+        }
+        else if(i < 36){
+            carta.palo = copa;
+            carta.numero = (i + 1) - 24;
+        }
+        else{
+            carta.palo = oro;
+            carta.numero = (i + 1) - 36;
+        }
+
+        mazo[0][i] = carta;
+        
+    }
+}
+void mostrar_carta(struct _Carta carta){
+    switch (carta.palo){
+        case basto:
+            printf("Basto - ");
+            break;
+        case espada:
+            printf("Espada - ");
+            break;
+        case oro:
+            printf("Oro - ");
+            break;
+        case copa:
+            printf("Copa - ");
+            break;
+        default:
+            break;
+    }
+    printf("%i",carta.numero);
+    printf("\n");
+}
+void mostrar_mazo(Mazo mazo){
+    printf("\n");
+    for(int i = 0 ; i < 48 ; i++){
+        mostrar_carta(mazo[i]);
+    }
+}
+struct _Carta azar(Mazo mazo){
+    return mazo[rand() % CANT_CARTAS];
+}
+
 
 int main(){
+    srand(time(NULL));
     // EJ 1
     // char c[] = {'h','o','l','a','\0'};
     // printf("%p - %p - %p - %p - %p",c[0],c[1],c[2],c[3],c[4]);
@@ -195,7 +265,13 @@ int main(){
     // mostrar_cord(cordMedia);
 
     // EJ 13
+    // Mazo mazo;
+    // llenar_Mazo(&mazo);
+    // mostrar_mazo(mazo);
+    // struct _Carta carta = azar(mazo);
+    // mostrar_carta(carta);
 
+    // EJ 14
 
 
 
