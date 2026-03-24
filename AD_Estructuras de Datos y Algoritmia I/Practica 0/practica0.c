@@ -32,7 +32,7 @@ char *get_new_line(){
             line = realloc(line, sizeof(char) * size);
         }
         if(line[i] == '\n'){
-            line = realloc(line, sizeof(char) * i+1);
+            line = realloc(line, sizeof(char) * (i+1));
             line[i] = '\0';
             flag = 0;
         }
@@ -148,7 +148,91 @@ void mostrar_mazo(Mazo mazo){
 struct _Carta azar(Mazo mazo){
     return mazo[rand() % CANT_CARTAS];
 }
+// EJ 14
+typedef struct _Contacto{
+    char *nombre;
+    char *numero;
+    int edad;
+}Contacto;
 
+typedef struct _Agenda{
+    Contacto *contacto;
+    int cant;
+}Agenda;
+
+Contacto crear_contacto(){
+   Contacto contacto;
+   printf("Ingrese nombre: ");
+   contacto.nombre = get_new_line();
+   printf("Ingrese telefono: ");
+   contacto.numero = get_new_line();
+   printf("Ingrese edad: ");
+   scanf("%i",&contacto.edad);
+   getchar();
+
+   return contacto;
+}
+void actualizar_edad_void(Contacto *contacto){
+    printf("Modifique la edad: ");
+    scanf("%i",&contacto->edad);
+    getchar();
+}
+Contacto actualizar_edad_cont(Contacto contacto){
+    Contacto contactoAux;
+    contactoAux.nombre = contacto.nombre;
+    contactoAux.numero = contacto.numero;
+
+    printf("Modifique la edad: ");
+    scanf("%i",&contactoAux.edad);
+    getchar();
+
+    return contactoAux;
+}
+void alta_contacto(Agenda *agenda){
+    for(int agregar = 1, flag = 1 ; flag ; ){
+        printf("Agregar un contacto: (1-Si)(0.No)\n");
+        scanf("%i",&agregar);
+        getchar();
+        if(agregar){
+            agenda->contacto = realloc(agenda->contacto, sizeof(Contacto) * (agenda->cant + 1));
+            agenda->contacto[agenda->cant] = crear_contacto();
+            agenda->cant = (agenda->cant + 1);
+        }
+        else flag = 0;
+    }
+}
+void modificar_edad(Agenda *agenda){
+    printf("Ingrese el nombre: ");
+    char *nombre = get_new_line();
+    int flag = 1;
+
+    for(int i = 0 ; flag && i < agenda->cant ; i++){
+        if(strcmp(nombre, agenda->contacto[i].nombre) == 0){
+            int nuevaEdad;
+            printf("Ingrese la nueva edad: ");
+            scanf("%i",&nuevaEdad);
+            agenda->contacto[i].edad = nuevaEdad;
+            flag = 0;
+        }
+    }
+    if(flag) printf("Nombre no encontrado\n");
+}
+void mostrar_contacto(Contacto contacto){
+    printf("%s - %s - %i\n", contacto.nombre, contacto.numero, contacto.edad);
+}
+void mostrar_agenda(Agenda agenda){
+    printf("Cantidad de contactos: %i\n",agenda.cant);
+    for(int i = 0 ; i < agenda.cant ; i++){
+        mostrar_contacto(agenda.contacto[i]);
+    }
+}
+double prom(Agenda *agenda){
+    double promedio = 0;
+    for(int i = 0 ; i < agenda->cant ; i++){
+        promedio += agenda->contacto[i].edad;
+    }
+    return (double)(promedio / agenda->cant);
+}
 
 int main(){
     srand(time(NULL));
@@ -272,16 +356,27 @@ int main(){
     // mostrar_carta(carta);
 
     // EJ 14
+    // Contacto contacto = crear_contacto();
+    // mostrar_contacto(contacto);
 
+    // actualizar_edad_void(&contacto);
+    // mostrar_contacto(contacto);
+    // No es necesario que el argumento sea un puntero ya que podria crear un nuevo contacto igual al
+    // anterior y modificarlo para luego retornarlo y pisar el anterior
+    // Agenda *agenda = malloc(sizeof(Agenda));
+    // agenda->contacto = NULL;
+    // agenda->cant = 0;
 
+    // alta_contacto(agenda);
+    // mostrar_agenda(*agenda);
 
+    // modificar_edad(agenda);
+    // mostrar_agenda(*agenda);
 
+    // double promedio = prom(agenda);
+    // printf("Promedio edad: %lf", promedio);
 
-
-
-
-
-
-
+    // EJ 15
+    
     return 0;
 }
