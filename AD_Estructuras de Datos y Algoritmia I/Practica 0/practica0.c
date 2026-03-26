@@ -377,6 +377,19 @@ int main(){
     // printf("Promedio edad: %lf", promedio);
 
     // EJ 15
-    
-    return 0;
+    // data1.c - Si - 30
+    // dataPtr->c - Si - 30
+    // dataPtr.c - No - x
+    // data1.next->b - Si - 20
+    // dataPtr→next→b - Si - 20
+    // dataPtr.next.b - No - x
+    // dataPtr→next.b - No - x
+    // (*(dataPtr→next)).b - Si - 20
+    // data1.next→next→a - Si - 10
+    // dataPtr→next→next.a - No - x
+    // dataPtr→next→next→a - Si - 10
+    // dataPtr→next→a - No - x
+    // dataPtr→next→next→b - No - x
+
+return 0;
 }
