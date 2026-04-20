@@ -1,7 +1,9 @@
 #ifndef __MATRIZ_H__
 #define __MATRIZ_H__
 
+#include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct Matriz_ Matriz;
 
@@ -34,5 +36,20 @@ size_t matriz_num_filas(Matriz* matriz);
 ** Obtiene número de columnas de la matriz
 */
 size_t matriz_num_columnas(Matriz* matriz);
+
+/*
+** Muestra la matriz completa
+*/
+void mostrar_matriz(Matriz *matriz);
+
+/*
+** Intercambia filas de la matriz
+*/
+void matriz_intercambiar_filas(Matriz *matriz, int fila1, int fila2);
+
+/*
+** Agrega una nueva fila en la posicion dada
+*/
+void matriz_insertar_fila(Matriz *matriz, int posFila);
 
 #endif /* __MATRIZ_H__ */
