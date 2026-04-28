@@ -171,7 +171,7 @@ SList slist_elimina_recursivo(SList lista, int pos){
 
   if(pos <= 1){
     SNodo *nodoAEliminar = lista->sig;
-    lista->sig = slist_elimina_recursivo(nodoAEliminar->sig,);
+    lista->sig = slist_elimina_recursivo(nodoAEliminar->sig, pos);
 
   }
 
