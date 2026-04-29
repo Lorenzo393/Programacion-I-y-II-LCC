@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 typedef void (*FuncionVisitante) (int dato);
-typedef int (*FuncionComparadora)(int dato1, int dato2);
+typedef int (*FuncionComparadora) (int dato1, int dato2);
 
 typedef struct _SNodo {
   int dato;

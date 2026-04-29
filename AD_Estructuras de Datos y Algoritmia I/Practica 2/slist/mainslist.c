@@ -1,4 +1,4 @@
-#include "slist/slist.h"
+#include "slist.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -46,18 +46,18 @@ int main(){
     // printf("%i",slist_contiene(lista2,5));
     // printf("%i",slist_indice(lista2,1));
 
-    // SList lista3 = slist_crear();
-    // lista3 = slist_agregar_final(lista3,0);
-    // lista3 = slist_agregar_final(lista3,1);
-    // lista3 = slist_agregar_final(lista3,3);
-    // lista3 = slist_agregar_final(lista3,5);
-    // lista3 = slist_agregar_final(lista3,6);
-    // SList lista4 = slist_crear();
-    // lista4 = slist_agregar_final(lista4,9);
-    // lista4 = slist_agregar_final(lista4,0);
-    // lista4 = slist_agregar_final(lista4,6);
-    // lista4 = slist_agregar_final(lista4,2);
-    // lista4 = slist_agregar_final(lista4,4);
+    SList lista3 = slist_crear();
+    lista3 = slist_agregar_final(lista3,0);
+    lista3 = slist_agregar_final(lista3,1);
+    lista3 = slist_agregar_final(lista3,3);
+    lista3 = slist_agregar_final(lista3,5);
+    lista3 = slist_agregar_final(lista3,6);
+    SList lista4 = slist_crear();
+    lista4 = slist_agregar_final(lista4,9);
+    lista4 = slist_agregar_final(lista4,0);
+    lista4 = slist_agregar_final(lista4,6);
+    lista4 = slist_agregar_final(lista4,2);
+    lista4 = slist_agregar_final(lista4,4);
 
     // SList listaIntersecada = slist_intersecar(lista3,lista4);
     // SList listaIntersecada = slist_intersecar_custom(lista3,lista4,funcion_comparadora);
@@ -68,11 +68,13 @@ int main(){
     // slist_recorrer(lista4, funcion_visitante);
     // lista3 = slist_reverso(lista3);
     // lista4 = slist_reverso(lista4);
-    // slist_recorrer(lista3, funcion_visitante);
-    // slist_recorrer(lista4, funcion_visitante);
-    // SList listaIntercalada = slist_intercalar(lista3, lista4);
-    // slist_recorrer(listaIntercalada, funcion_visitante);
+    slist_recorrer(lista3, funcion_visitante);
+    slist_recorrer(lista4, funcion_visitante);
+    SList listaIntercalada = slist_intercalar(lista3, lista4);
+    slist_recorrer(listaIntercalada, funcion_visitante);
     // SList listaPartida = slist_partir(lista3);
     // slist_recorrer(lista3, funcion_visitante);
     // slist_recorrer(listaPartida, funcion_visitante);
+
+    return 0;
 }
