@@ -52,23 +52,23 @@ DList dlist_agregar_final(DList lista, int dato){
 
 void dlist_recorrer(DList lista, DListOrdenDeRecorrido orden){
     switch (orden){
-    case DLIST_RECORRIDO_HACIA_ADELANTE:
-        while(lista.primero != NULL){
-            printf("%i ", lista.primero->dato);
-            lista.primero = lista.primero->sig;
-        }
-        break;
-    
-    case DLIST_RECORRIDO_HACIA_ATRAS:
-        while(lista.ultimo != NULL){
-            printf("%i ", lista.ultimo->dato);
-            lista.ultimo = lista.ultimo->ant;
-        }
-        break;
-    
-    default:
-        printf("Error");
-        break;
+        case DLIST_RECORRIDO_HACIA_ADELANTE:
+            while(lista.primero != NULL){
+                printf("%i ", lista.primero->dato);
+                lista.primero = lista.primero->sig;
+            }
+            break;
+        
+        case DLIST_RECORRIDO_HACIA_ATRAS:
+            while(lista.ultimo != NULL){
+                printf("%i ", lista.ultimo->dato);
+                lista.ultimo = lista.ultimo->ant;
+            }
+            break;
+        
+        default:
+            printf("Error");
+            break;
     }
     printf("\n");
 }
