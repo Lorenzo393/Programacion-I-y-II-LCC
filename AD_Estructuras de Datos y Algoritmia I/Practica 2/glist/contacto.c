@@ -24,8 +24,7 @@ Contacto *contacto_crear(char *nombre, char *telefono, unsigned int edad) {
  * Crea una copia física del contacto.
  */
 Contacto *contacto_copia(Contacto *contacto) {
-  Contacto *copia =
-      contacto_crear(contacto->nombre, contacto->tel, contacto->edad);
+  Contacto *copia = contacto_crear(contacto->nombre, contacto->tel, contacto->edad);
   return copia;
 }
 

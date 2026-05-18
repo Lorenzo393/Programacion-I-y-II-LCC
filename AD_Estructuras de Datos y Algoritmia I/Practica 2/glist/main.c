@@ -3,27 +3,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int mayor_x(int dato, int x){
+	return dato > x;
+}
+int mayor_60(void *dato){
+	Contacto *contacto = ((Contacto *) dato);
+	return (contacto->edad) > 60;
+}
+
 int main() {
 
-  GList lista = glist_crear();
-  Contacto *contactos[6];
-  contactos[0] = contacto_crear("Pepe Argento", "3412695452", 61);
-  contactos[1] = contacto_crear("Moni Argento", "3412684759", 60);
-  contactos[2] = contacto_crear("Coqui Argento", "3415694286", 32);
-  contactos[3] = contacto_crear("Paola Argento", "3416259862", 29);
-  contactos[4] = contacto_crear("Maria Elena Fuseneco", "3416874594", 59);
-  contactos[5] = contacto_crear("Dardo Fuseneco", "3416894526", 64);
+	
 
-  for (int i = 0; i < 6; ++i) {
-    lista =
-        glist_agregar_inicio(lista, contactos[i], (FuncionCopia)contacto_copia);
-    contacto_destruir(contactos[i]);
-  }
+	GList lista = glist_crear();
+	Contacto *contactos[6];
+	contactos[0] = contacto_crear("Pepe Argento", "3412695452", 61);
+	contactos[1] = contacto_crear("Moni Argento", "3412684759", 60);
+	contactos[2] = contacto_crear("Coqui Argento", "3415694286", 32);
+	contactos[3] = contacto_crear("Paola Argento", "3416259862", 29);
+	contactos[4] = contacto_crear("Maria Elena Fuseneco", "3416874594", 59);
+	contactos[5] = contacto_crear("Dardo Fuseneco", "3416894526", 64);
 
-  printf("Lista:\n");
-  glist_recorrer(lista, (FuncionVisitante)contacto_imprimir);
+	for (int i = 0; i < 6; ++i) {
+		lista = glist_agregar_inicio(lista, contactos[i], (FuncionCopia)contacto_copia);
+		contacto_destruir(contactos[i]);
+	}
 
-  glist_destruir(lista, (FuncionDestructora)contacto_destruir);
+	printf("Lista:\n");
+	glist_recorrer(lista, (FuncionVisitante)contacto_imprimir);
 
-  return 0;
+	GList listaFiltrada = glist_filtrar(lista, (FuncionCopia)contacto_copia, (Predicado)mayor_60);
+
+	printf("Lista filtrada:\n");
+	glist_recorrer(listaFiltrada, (FuncionVisitante)contacto_imprimir);
+	
+	glist_destruir(lista, (FuncionDestructora)contacto_destruir);
+	glist_destruir(listaFiltrada, (FuncionDestructora)contacto_destruir);
+	return 0;
 }
