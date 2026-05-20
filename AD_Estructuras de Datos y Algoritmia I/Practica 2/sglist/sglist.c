@@ -25,10 +25,45 @@ void sglist_recorrer(GList lista, FuncionVisitante visit){
 }
 
 // e
-SGList sglist_insertar(SGList lista, void *dato, FuncionCopia copy, FuncionComparadora comp);
+SGList sglist_insertar(SGList lista, void *dato, FuncionCopia copy, FuncionComparadora comp){
+    GNode *nuevoNodo = malloc(sizeof(GNode));
+    nuevoNodo->data = copy(dato);
+    nuevoNodo->next = NULL;
+
+    if(lista == NULL)
+        return nuevoNodo;
+    
+    if(comp(nuevoNodo->data, lista->data) > 0){
+        nuevoNodo->next = lista;
+        return nuevoNodo;
+    }
+
+    GNode *it = lista;
+    while(it->next != NULL && comp(nuevoNodo->data, it->next->data) < 0)
+        it = it->next;
+    
+    nuevoNodo->next = it->next;
+    it->next = nuevoNodo;
+    return lista;
+}
 
 // f
-int sglist_buscar(GList lista, void *dato, FuncionComparadora comp);
+int sglist_buscar(GList lista, void *dato, FuncionComparadora comp){
+    int esta = 0, flag = 1;
+    for(GNode *it = lista ; it != NULL && flag ; it = it->next){
+        if(comp(it->data, dato) == 0){
+            flag = 0;
+            esta = 1;
+        }
+    }
+    return esta;
+}
 
 // g
-SGList sglist_arr(void **arr, int long, FuncionCopia copy, FuncionComparadora comp); 
+SGList sglist_arr(void **arr, int len, FuncionCopia copy, FuncionComparadora comp){
+    SGList lista = sglist_crear();
+    for(int i = 0 ; i < len ; i++){
+        lista = sglist_insertar(lista, arr[i], (FuncionCopia)copy, (FuncionComparadora)comp);
+    }
+    return lista;
+}

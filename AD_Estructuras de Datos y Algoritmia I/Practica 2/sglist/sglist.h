@@ -1,5 +1,5 @@
 #ifndef __SGLIST_H__
-#define _SGLIST_H__
+#define __SGLIST_H__
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -56,6 +56,6 @@ int sglist_buscar(GList lista, void *dato, FuncionComparadora comp);
 /**
  * Construye una lista ordenada a partir de un arreglo de elementos y su longitud.
  */
-SGList sglist_arr(void **arr, int long, FuncionCopia copy, FuncionComparadora comp); 
+SGList sglist_arr(void **arr, int len, FuncionCopia copy, FuncionComparadora comp); 
 
 #endif
