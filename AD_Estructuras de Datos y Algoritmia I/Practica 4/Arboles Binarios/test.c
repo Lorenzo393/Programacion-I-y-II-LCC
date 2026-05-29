@@ -3,6 +3,9 @@
 static void imprimir_entero(int data) {
   	printf("%d ", data);
 }
+void imprimir_entero_extra_string(int dato, void *extra){
+	printf("|%s: %i |", (char *) extra, dato);
+}
 
 int main() {
 	BTree ll = btree_unir(1, btree_crear(), btree_crear());
@@ -23,8 +26,16 @@ int main() {
 	printf("El nodo se encuentra en la profundidad: %i\n", btree_profundidad(copia, 1));
 	printf("La suma de los datos: %i\n", btree_sumar(copia));
 
-	
-	btree_destruir(arbol);
+	printf("\n");
+	char *str = malloc(sizeof(char) * (strlen("Nodo") + 1));
+	strcpy(str, "Nodo");
+	btree_recorrer_extra(copia, BTREE_RECORRIDO_POST, (FuncionVisitanteExtra)imprimir_entero_extra_string, str);
 
+	
+
+	
+
+	btree_destruir(arbol);
+	btree_destruir(copia);
   	return 0;
 }

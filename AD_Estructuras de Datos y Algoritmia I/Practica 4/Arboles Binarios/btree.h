@@ -2,10 +2,14 @@
 #define __BTREE_H__
 
 #include <stdlib.h>
+#include <string.h>
 #include <assert.h>
 #include <stdio.h>
 
+typedef void (*FuncionVisitanteExtra) (int dato, void *extra);
 typedef void (*FuncionVisitante)(int dato);
+typedef void (*FuncionDestructora) (void *dato);
+typedef void * (*FuncionCopia) (void * dato);
 
 typedef enum {
     BTREE_RECORRIDO_IN,
@@ -75,5 +79,10 @@ int btree_profundidad(BTree arbol, int dato);
  * Retorna la suma total de los datos del arbol
  */
 int btree_sumar(BTree arbol);
+
+/**
+ * Recorre el arbol usando una funcion visitante con un dato extra
+ */
+void btree_recorrer_extra(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitanteExtra visit, void *extra);
 
 #endif

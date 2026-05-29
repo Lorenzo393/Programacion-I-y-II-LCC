@@ -1,4 +1,6 @@
+#include "pilageneral.h"
 #include "btree.h"
+
 
 struct _BTNodo {
   	int dato;
@@ -97,6 +99,12 @@ void btree_recorrer(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitante v
 	}
 	printf("\n");
 }
+// c
+
+
+
+
+
 
 // EJ 3
 // a
@@ -167,4 +175,51 @@ int btree_sumar(BTree arbol){
 	if(arbol == NULL)
 		return 0;
 	return arbol->dato + btree_sumar(arbol->left) + btree_sumar(arbol->right);
+}
+
+// EJ 4
+void btree_recorrido_inorder_extra(BTree arbol, FuncionVisitanteExtra visit, void *extra){
+	if(arbol->left != NULL)
+		btree_recorrido_inorder_extra(arbol->left, visit, extra);
+	if(arbol != NULL)
+		visit(arbol->dato, extra);
+	if(arbol->right != NULL)
+		btree_recorrido_inorder_extra(arbol->right, visit, extra);
+}
+void btree_recorrido_preorder_extra(BTree arbol, FuncionVisitanteExtra visit, void *extra){
+	if(arbol != NULL)
+		visit(arbol->dato, extra);
+	if(arbol->left != NULL)
+		btree_recorrido_preorder_extra(arbol->left, visit, extra);
+	if(arbol->right != NULL)
+		btree_recorrido_preorder_extra(arbol->right, visit, extra);
+}
+void btree_recorrido_postorder_extra(BTree arbol, FuncionVisitanteExtra visit, void *extra){
+	if(arbol->left != NULL)
+		btree_recorrido_postorder_extra(arbol->left, visit, extra);
+	if(arbol->right != NULL)
+		btree_recorrido_postorder_extra(arbol->right, visit, extra);
+	if(arbol != NULL)
+		visit(arbol->dato, extra);
+}
+
+void btree_recorrer_extra(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitanteExtra visit, void *extra){
+	if(arbol == NULL)
+		return ;
+
+	switch(orden){
+		case BTREE_RECORRIDO_IN:
+			btree_recorrido_inorder_extra(arbol, visit, extra);
+			break;
+		case BTREE_RECORRIDO_PRE:
+			btree_recorrido_preorder_extra(arbol, visit, extra);
+			break;
+		case BTREE_RECORRIDO_POST:
+			btree_recorrido_postorder_extra(arbol, visit, extra);
+			break;
+		default:
+			printf("error");
+			break;
+	}
+	printf("\n");
 }

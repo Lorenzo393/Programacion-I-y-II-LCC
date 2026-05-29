@@ -1,13 +1,7 @@
 #ifndef __PILAGENERAL_H__
 #define __PILAGENERAL_H__
 
-#include <stdlib.h>
-#include <stdio.h> 
-
-typedef void (*FuncionDestructora) (void *dato);
-typedef void (*FuncionVisitante) (void *dato);
-typedef void * (*FuncionCopia) (void * dato);
-
+#include "btree.h"
 
 typedef struct _GNode{
     void *data;
