@@ -1,6 +1,7 @@
 #ifndef __BTREE_H__
 #define __BTREE_H__
 
+#include "pilageneral.h"
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
@@ -17,7 +18,13 @@ typedef enum {
     BTREE_RECORRIDO_POST
 } BTreeOrdenDeRecorrido;
 
-typedef struct _BTNodo *BTree;
+typedef struct _BTNodo {
+  	int dato;
+  	struct _BTNodo *left;
+  	struct _BTNodo *right;
+} BTNodo;
+
+typedef BTNodo *BTree;
 
 /**
  * Devuelve un arbol vacío.
@@ -46,14 +53,29 @@ BTree btree_unir(int dato, BTree left, BTree right);
 void btree_recorrer(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitante visit);
 
 /**
+ * Recorrido del arbol, utilizando la funcion pasada. Iterativa
+ */
+void btree_recorrer_it(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitante visit, FuncionCopia no_copia, FuncionDestructora no_destruir);
+
+/**
  * Retorna el numero de nodos del arbol
  */
 int btree_nnodos(BTree arbol);
 
 /**
+ * Retorna el numero de nodos del arbol. Iterativa
+ */
+int btree_nnodos_it(BTree arbol, FuncionCopia no_copy, FuncionDestructora no_destroy);
+
+/**
  * Retorna 1 si el dato esta en el arbol y 0 en caso contrario
  */
 int btree_buscar(BTree arbol, int dato);
+
+/**
+ * Retorna 1 si el dato esta en el arbol y 0 en caso contrario. Iterativa
+ */
+int btree_buscar_it(BTree arbol, int dato, FuncionCopia no_copy, FuncionDestructora no_destroy);
 
 /**
  * Retorna un nuevo arbol que es una copia del dado

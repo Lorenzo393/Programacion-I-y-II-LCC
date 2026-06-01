@@ -1,0 +1,56 @@
+#include "pilageneral.h"
+#include "btree.h"
+
+
+static void imprimir_entero(int data) {
+  	printf("%d ", data);
+}
+void imprimir_entero_2(void *data){
+	printf("%i ",(*(int *) data));
+}
+void imprimir_entero_extra_string(int dato, void *extra){
+	printf("|%s: %i |", (char *) extra, dato);
+}
+void *nodo_no_copia(void *nodo){
+	return ((GNode *) nodo);
+}
+void no_destruir(void *dato){
+	return ;
+}
+
+int main() {
+	BTree ll = btree_unir(1, btree_crear(), btree_crear());
+	BTree l = btree_unir(2, ll, btree_crear());
+	BTree r = btree_unir(3, btree_crear(), btree_crear());
+	BTree arbol = btree_unir(4, l, r);
+
+  	// btree_recorrer(arbol, BTREE_RECORRIDO_POST, imprimir_entero);
+  	
+	// printf("Cantidad de nodos: %i\n", btree_nnodos(arbol));
+	// printf("El dato esta en el arbol: %i\n", btree_buscar(arbol, 2));
+
+	// BTree copia = btree_copiar(arbol);
+	// printf("\n");
+	// btree_recorrer(copia, BTREE_RECORRIDO_POST, imprimir_entero);
+	// printf("La altura del arbol: %i\n", btree_altura(copia));
+	// printf("Cantidad de nodos a la altura: %i \n", btree_nnodos_profundidad(copia, 1));
+	// printf("El nodo se encuentra en la profundidad: %i\n", btree_profundidad(copia, 1));
+	// printf("La suma de los datos: %i\n", btree_sumar(copia));
+
+	// printf("\n");
+	// char *str = malloc(sizeof(char) * (strlen("Nodo") + 1));
+	// strcpy(str, "Nodo");
+	// btree_recorrer_extra(copia, BTREE_RECORRIDO_POST, (FuncionVisitanteExtra)imprimir_entero_extra_string, str);
+	// printf("\n");
+
+	printf("Funciones iterativas: ");
+	btree_recorrer_it(arbol, BTREE_RECORRIDO_POST, (FuncionVisitante)imprimir_entero, (FuncionCopia)nodo_no_copia, (FuncionDestructora)no_destruir);
+	printf("Cantidad de nodos del arbol: %i\n", btree_nnodos_it(arbol, (FuncionCopia)nodo_no_copia, (FuncionDestructora)no_destruir));
+	printf("EL dato esta en el arbol: %i\n", btree_buscar_it(arbol, 5, (FuncionCopia)nodo_no_copia, (FuncionDestructora)no_destruir));
+
+	
+
+	btree_destruir(arbol);
+	// btree_destruir(copia);
+  	return 0;
+}

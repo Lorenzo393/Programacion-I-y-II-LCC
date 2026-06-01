@@ -1,17 +1,4 @@
 #include "bstree.h"
-#include <assert.h>
-#include <stdlib.h>
-
-/**
- * Estructura del nodo del arbol de busqueda binaria.
- * Tiene un puntero al dato (dato),
- * un puntero al nodo raiz del subarbol izquierdo (izq),
- * y un puntero al nodo raiz del subarbol derecho (der).
- */
-struct _BST_Nodo {
-    void *dato;
-    struct _BST_Nodo *izq, *der;
-};
 
 /**
  * bstee_crear: Retorna un arbol de busqueda binaria vacio

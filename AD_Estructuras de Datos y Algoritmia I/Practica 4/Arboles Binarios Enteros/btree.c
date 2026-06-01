@@ -2,11 +2,7 @@
 #include "btree.h"
 
 
-struct _BTNodo {
-  	int dato;
-  	struct _BTNodo *left;
-  	struct _BTNodo *right;
-};
+
 
 /**
  * Devuelve un arbol vacío.
@@ -100,10 +96,69 @@ void btree_recorrer(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitante v
 	printf("\n");
 }
 // c
+void btree_recorrer_pre_it(BTree arbol, FuncionVisitante visit, FuncionCopia no_copia, FuncionDestructora no_destruir) {
+	Pila pilaNodos = pila_crear();
+	pilaNodos = pila_apilar(pilaNodos, arbol, no_copia);
 
+  	while(!pila_es_vacia(pilaNodos)) {
+		BTree nodo_actual = pila_tope(pilaNodos);
+		
+		visit(nodo_actual->dato);
 
+		pilaNodos = pila_desapilar(pilaNodos, no_destruir);
 
+		if (!btree_empty(nodo_actual->right))
+		pilaNodos = pila_apilar(pilaNodos, nodo_actual->right, no_copia);
 
+		if (!btree_empty(nodo_actual->left))
+		pilaNodos = pila_apilar(pilaNodos, nodo_actual->left, no_copia);
+  	}
+
+  	pila_destruir(pilaNodos, no_destruir);
+}
+
+void btree_recorrer_post_it(BTree arbol, FuncionVisitante visit, FuncionCopia no_copia, FuncionDestructora no_destruir) {
+	Pila pilaNodos = pila_crear();
+	pilaNodos = pila_apilar(pilaNodos, arbol, no_copia);
+
+  	while(!pila_es_vacia(pilaNodos)) {
+		BTree nodo_actual = pila_tope(pilaNodos);
+		visit(nodo_actual->dato);
+		pilaNodos = pila_desapilar(pilaNodos, no_destruir);
+
+		if (!btree_empty(nodo_actual->right))
+		pilaNodos = pila_apilar(pilaNodos, nodo_actual->right, no_copia);
+
+		if (!btree_empty(nodo_actual->left))
+		pilaNodos = pila_apilar(pilaNodos, nodo_actual->left, no_copia);
+
+			
+		
+  	}
+
+  	pila_destruir(pilaNodos, no_destruir);
+}
+
+void btree_recorrer_it(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitante visit, FuncionCopia no_copia, FuncionDestructora no_destruir){
+	if(arbol == NULL)
+		return;
+
+	switch(orden){
+		case BTREE_RECORRIDO_IN:
+			//btree_recorrer_in_it(arbol, visit, no_copia, no_destruir);
+			break;
+		case BTREE_RECORRIDO_PRE:
+			btree_recorrer_pre_it(arbol, visit, no_copia, no_destruir);
+			break;
+		case BTREE_RECORRIDO_POST:
+			btree_recorrer_post_it(arbol, visit, no_copia, no_destruir);
+			break;
+		default:
+			printf("error");
+			break;
+	}
+	printf("\n");
+}
 
 
 // EJ 3
@@ -112,6 +167,27 @@ int btree_nnodos(BTree arbol){
 	if(arbol == NULL)
 		return 0;
 	return btree_nnodos(arbol->left) + btree_nnodos(arbol->right) + 1;
+}
+
+int btree_nnodos_it(BTree arbol, FuncionCopia no_copy, FuncionDestructora no_destroy){
+	Pila pila = pila_crear();
+	pila = pila_apilar(pila, arbol, no_copy);
+	int cant = 0;
+
+	while(!pila_es_vacia(pila)){
+		BTNodo *nodo = pila_tope(pila);
+		pila = pila_desapilar(pila, no_destroy);
+
+		cant++;
+
+		if(nodo->right != NULL)
+			pila = pila_apilar(pila, nodo->right, no_copy);
+		if(nodo->left != NULL)
+			pila = pila_apilar(pila, nodo->left, no_copy);
+	}
+
+	pila_destruir(pila, no_destroy);
+	return cant;
 }
 
 // b
@@ -123,12 +199,35 @@ int btree_buscar(BTree arbol, int dato){
 	return btree_buscar(arbol->left, dato) + btree_buscar(arbol->right, dato);
 }
 
+int btree_buscar_it(BTree arbol, int dato, FuncionCopia no_copy, FuncionDestructora no_destroy){
+	Pila pila = pila_crear();
+	pila = pila_apilar(pila, arbol, no_copy);
+	int flag = 1;
+
+	while(!pila_es_vacia(pila) && flag){
+		BTNodo *nodo = pila_tope(pila);
+		pila = pila_desapilar(pila, no_destroy);
+
+		if(nodo->dato == dato)
+			flag = 0;
+		if(nodo->right != NULL)
+			pila = pila_apilar(pila, nodo->right, no_copy);
+		if(nodo->left != NULL)
+			pila = pila_apilar(pila, nodo->left, no_copy);
+	}
+
+	pila_destruir(pila, no_destroy);
+	return flag == 0? 1 : 0;
+}
+
 // c
 BTree btree_copiar(BTree arbol){
 	if(arbol == NULL)
 		return NULL;
 	return btree_unir(arbol->dato, btree_copiar(arbol->left), btree_copiar(arbol->right));
 }
+
+BTree btree_copiar_it(BTree arbol, FuncionCopia copy, FuncionCopia no_copy, FuncionDestructora no_destroy);
 
 // d
 int btree_altura(BTree arbol){

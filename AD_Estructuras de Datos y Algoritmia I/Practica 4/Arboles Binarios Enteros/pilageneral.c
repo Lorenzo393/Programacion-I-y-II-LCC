@@ -37,11 +37,11 @@ Pila pila_desapilar(Pila pila, FuncionDestructora destroy){
 }
 
 // vii
-void pila_imprimir(Pila pila, FuncionVisitante visit){
-    for(GNode *it = pila ; it != NULL ; it = it->next)
-        visit(it->data);
-    printf("\n");
-}
+// void pila_imprimir(Pila pila, FuncionVisitante visit){
+//     for(GNode *it = pila ; it != NULL ; it = it->next)
+//         visit(it->data);
+//     printf("\n");
+// }
 
 // EJ 3
 GList lista_invertir(GList lista, FuncionCopia copy, FuncionDestructora destroy){
@@ -57,8 +57,8 @@ GList lista_invertir(GList lista, FuncionCopia copy, FuncionDestructora destroy)
     return lista;
 }
 
-void lista_imprimir(GList lista, FuncionVisitante visit){
-    for(GNode *it = lista ; it != NULL ; it = it->next)
-        visit(it->data);
-    printf("\n");
-}
+// void lista_imprimir(GList lista, FuncionVisitante visit){
+//     for(GNode *it = lista ; it != NULL ; it = it->next)
+//         visit(it->data);
+//     printf("\n");
+// }
